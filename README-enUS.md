@@ -69,7 +69,7 @@ Translations of the guide are available in the following languages:
 * [Chinese Simplified](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [Chinese Traditional](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [French](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
-* [German](https://github.com/arbox/ruby-style-guide/blob/master/README-deDE.md)
+* [German](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
 * [Japanese](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 * [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [Portuguese](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
@@ -634,6 +634,49 @@ Translations of the guide are available in the following languages:
      # body omitted
    end
    ```
+
+* <a name="parallel-assignment"></a>
+    Avoid the use of parallel assignment for defining variables. Parallel
+    assignment is allowed when it is the return of a method call, used with
+    the splat operator, or when used to swap variable assignment. Parallel
+    assignment is less readable than separate assignment. It is also slightly
+    slower than separate assignment.
+<sup>[[link](#parallel-assignment)]</sup>
+
+  ```Ruby
+  # bad
+  a, b, c, d = 'foo', 'bar', 'baz', 'foobar'
+
+  # good
+  a = 'foo'
+  b = 'bar'
+  c = 'baz'
+  d = 'foobar'
+
+  # good - swapping variable assignment
+  # Swapping variable assignment is a special case because it will allow you to
+  # swap the values that are assigned to each variable.
+  a = 'foo'
+  b = 'bar'
+
+  a, b = b, a
+  puts a # => 'bar'
+  puts b # => 'foo'
+
+  # good - method return
+  def multi_return
+    [1, 2]
+  end
+
+  first, second = multi_return
+
+  # good - use with splat
+  first, *list = [1,2,3,4]
+
+  hello_array = *"Hello"
+
+  a = *(1..3)
+  ```
 
 * <a name="no-for-loops"></a>
     Do not use `for`, unless you know exactly why. Most of the time iterators
@@ -1462,6 +1505,19 @@ condition](#safe-assignment-in-condition).
     tmp = a * 7
     tmp * b / 50
   end
+  ```
+
+* <a name="stabby-lambda-no-args"></a>
+Omit the parameter parentheses when defining a stabby lambda with
+no parameters.
+<sup>[[link](#stabby-lambda-no-args)]</sup>
+
+  ```Ruby
+  # bad
+  l = ->() { something }
+
+  # good
+  l = -> { something }
   ```
 
 * <a name="proc"></a>
@@ -2462,10 +2518,10 @@ condition](#safe-assignment-in-condition).
   end
   ```
 
-* <a name="def-self-singletons"></a>
-  Use `def self.method` to define singleton methods. This makes the code
+* <a name="def-self-class-methods"></a>
+  Use `def self.method` to define class methods. This makes the code
   easier to refactor since the class name is not repeated.
-<sup>[[link](#def-self-singletons)]</sup>
+<sup>[[link](#def-self-class-methods)]</sup>
 
   ```Ruby
   class TestClass
@@ -2480,7 +2536,7 @@ condition](#safe-assignment-in-condition).
     end
 
     # Also possible and convenient when you
-    # have to define many singleton methods.
+    # have to define many class methods.
     class << self
       def first_method
         # body omitted
@@ -2992,18 +3048,19 @@ resource cleanup when possible.
   ```
 
 * <a name="use-hash-blocks"></a>
-  Prefer the use of the block instead of the default value in `Hash#fetch` if the code that has to be evaluated may have side effects or be expensive.
-<sup>[[link](#use-hash-blocks)]</sup>
+  Prefer the use of the block instead of the default value in `Hash#fetch`
+  if the code that has to be evaluated may have side effects or be expensive.
+  <sup>[[link](#use-hash-blocks)]</sup>
 
   ```Ruby
   batman = { name: 'Bruce Wayne' }
 
   # bad - if we use the default value, we eager evaluate it
   # so it can slow the program down if done multiple times
-  batman.fetch(:powers, get_batman_powers) # get_batman_powers is an expensive call
+  batman.fetch(:powers, obtain_batman_powers) # obtain_batman_powers is an expensive call
 
   # good - blocks are lazy evaluated, so only triggered in case of KeyError exception
-  batman.fetch(:powers) { get_batman_powers }
+  batman.fetch(:powers) { obtain_batman_powers }
   ```
 
 * <a name="hash-values-at"></a>
@@ -3084,7 +3141,7 @@ resource cleanup when possible.
 
 * <a name="string-interpolation"></a>
   With interpolated expressions, there should be no padded-spacing inside the braces.
-<sup>[[link](#pad-string-interpolation)]</sup>
+<sup>[[link](#string-interpolation)]</sup>
 
   ```Ruby
   # bad

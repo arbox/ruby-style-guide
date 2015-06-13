@@ -1459,17 +1459,15 @@
   end
   ```
 
-<!--- @TODO -->
 * <a name="stabby-lambda-no-args"></a>
-  Omit the parameter parentheses when defining a stabby lambda with
-  no parameters.
+  Не используйте скобки при определении `lambda` без аргументов.
   <sup>[[link](#stabby-lambda-no-args)]</sup>
 
   ```Ruby
-  # bad
+  # плохо
   l = ->() { something }
 
-  # good
+  # хорошо
   l = -> { something }
   ```
 

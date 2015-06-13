@@ -624,28 +624,28 @@
      # некоторый код
    end
    ```
-<!--- @TODO -->
+
 * <a name="parallel-assignment"></a>
-    Avoid the use of parallel assignment for defining variables. Parallel
-    assignment is allowed when it is the return of a method call, used with
-    the splat operator, or when used to swap variable assignment. Parallel
-    assignment is less readable than separate assignment. It is also slightly
-    slower than separate assignment.
-    <sup>[[link](#parallel-assignment)]</sup>
+  Избегайте параллельного присвоения значений переменным. Параллельное
+  присвоение разрешается тогда, когда присваивается возвращаемое методом
+  значение совместно с оператором разобщения или значения переменных
+  взаимно переопределяются. Параллельное присвоение сложнее воспринимается, чем
+  обычная его форма записи, кроме этого оно еще и несколько медленнее.
+  <sup>[[link](#parallel-assignment)]</sup>
 
   ```Ruby
-  # bad
+  # плохо
   a, b, c, d = 'foo', 'bar', 'baz', 'foobar'
 
-  # good
+  # хорошо
   a = 'foo'
   b = 'bar'
   c = 'baz'
   d = 'foobar'
 
-  # good - swapping variable assignment
-  # Swapping variable assignment is a special case because it will allow you to
-  # swap the values that are assigned to each variable.
+  # хорошо (взаимное переопределение)
+  # Взаимное переопределение явлается особым случаем, так как помогает заместить
+  # оба задействованных значения.
   a = 'foo'
   b = 'bar'
 
@@ -653,14 +653,14 @@
   puts a # => 'bar'
   puts b # => 'foo'
 
-  # good - method return
+  # хорошо (возвращаемое значение)
   def multi_return
     [1, 2]
   end
 
   first, second = multi_return
 
-  # good - use with splat
+  # хорошо (применение оператора разобщения)
   first, *list = [1,2,3,4]
 
   hello_array = *"Hello"

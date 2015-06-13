@@ -73,7 +73,7 @@
 * [китайский традиционный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [китайский упрощенный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [корейский](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
-* [немецкий](https://github.com/arbox/ruby-style-guide/blob/master/README-deDE.md)
+* [немецкий](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
 * [французский](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
 * [португальский](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [русский (данный документ)](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
@@ -624,6 +624,49 @@
      # некоторый код
    end
    ```
+<!--- @TODO -->
+* <a name="parallel-assignment"></a>
+    Avoid the use of parallel assignment for defining variables. Parallel
+    assignment is allowed when it is the return of a method call, used with
+    the splat operator, or when used to swap variable assignment. Parallel
+    assignment is less readable than separate assignment. It is also slightly
+    slower than separate assignment.
+    <sup>[[link](#parallel-assignment)]</sup>
+
+  ```Ruby
+  # bad
+  a, b, c, d = 'foo', 'bar', 'baz', 'foobar'
+
+  # good
+  a = 'foo'
+  b = 'bar'
+  c = 'baz'
+  d = 'foobar'
+
+  # good - swapping variable assignment
+  # Swapping variable assignment is a special case because it will allow you to
+  # swap the values that are assigned to each variable.
+  a = 'foo'
+  b = 'bar'
+
+  a, b = b, a
+  puts a # => 'bar'
+  puts b # => 'foo'
+
+  # good - method return
+  def multi_return
+    [1, 2]
+  end
+
+  first, second = multi_return
+
+  # good - use with splat
+  first, *list = [1,2,3,4]
+
+  hello_array = *"Hello"
+
+  a = *(1..3)
+  ```
 
 * <a name="no-for-loops"></a> Используйте оператор `for` только в случаях, когда
   вы точно знаете, зачем вы это делаете. В подавляющем большинстве остальных случаев
@@ -1414,6 +1457,20 @@
     tmp = a * 7
     tmp * b / 50
   end
+  ```
+
+<!--- @TODO -->
+* <a name="stabby-lambda-no-args"></a>
+  Omit the parameter parentheses when defining a stabby lambda with
+  no parameters.
+  <sup>[[link](#stabby-lambda-no-args)]</sup>
+
+  ```Ruby
+  # bad
+  l = ->() { something }
+
+  # good
+  l = -> { something }
   ```
 
 * <a name="proc"></a>
@@ -2401,10 +2458,10 @@
   end
   ```
 
-* <a name="def-self-singletons"></a>
-  Для определения синглетных методов используйте `def self.method`. Это упростит
+* <a name="def-self-class-methods"></a>
+  Для определения методов класса используйте `def self.method`. Это упростит
   рефакторинг, так как имя класса будет использоваться только один раз.
-  <sup>[[ссылка](#def-self-singletons)]</sup>
+  <sup>[[ссылка](#def-self-class-methods)]</sup>
 
   ```Ruby
   class TestClass
@@ -2419,7 +2476,7 @@
     end
 
     # Также допускается и будет удобным, когда
-    # нужно определить много синглетных методов.
+    # нужно определить много методов класса.
     class << self
       def first_method
         # некоторый код
@@ -2922,10 +2979,11 @@
   # плохо (при использовании значения по умолчанию метод его расчета будет
   # вызываться каждый раз, сильно замедляя выполнение программы при
   # многократных вызовах)
-    batman.fetch(:powers, get_batman_powers) # get_batman_powers - нагруженный метод
+  # obtain_batman_powers - нагруженный метод
+    batman.fetch(:powers, obtain_batman_powers)
 
-  # хорошо (блоки оцениваются лишь по необходимости, когда вызывается KeyError)
-  batman.fetch(:powers) { get_batman_powers }
+  # хорошо (блоки исчисляются лишь по необходимости, когда вызывается KeyError)
+  batman.fetch(:powers) { obtain_batman_powers }
   ```
 
 * <a name="hash-values-at"></a>

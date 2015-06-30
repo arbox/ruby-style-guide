@@ -1807,13 +1807,21 @@
     ...
   end
 
+  class XmlSomething
+  ...
+  end
+
   # хорошо
   class SomeClass
     ...
   end
 
   class SomeXML
-    ...
+  ...
+  end
+
+  class XMLSomething
+  ...
   end
   ```
 

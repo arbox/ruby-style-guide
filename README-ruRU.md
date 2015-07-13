@@ -2102,7 +2102,7 @@
     include AnotherModule
 
     # вложенные классы
-    CustomErrorKlass = Class.new(StandardError)
+    CustomErrorClass = Class.new(StandardError)
 
     # после этого константы
     SOME_CONSTANT = 20
@@ -3078,7 +3078,7 @@
   "#{ user.last_name }, #{ user.first_name }"
   ```
 
-* <a name="consistent-string-literals"></a> Постарайтесь внедрить единообразных
+* <a name="consistent-string-literals"></a> Постарайтесь внедрить единообразный
   стиль кавычек для строчных литералов. В среде программистов на Руби есть два
   популярных стиля, оба из них считаются приемлемыми. Стиль **А** подразумевает
   одинарные кавычки по умолчанию, а стиль **B** двойные кавычки.

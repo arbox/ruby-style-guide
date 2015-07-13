@@ -2102,7 +2102,7 @@
     include AnotherModule
 
     # вложенные классы
-    CustomErrorClass = Class.new(StandardError)
+    CustomErrorKlass = Class.new(StandardError)
 
     # после этого константы
     SOME_CONSTANT = 20

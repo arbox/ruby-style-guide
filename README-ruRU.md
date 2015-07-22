@@ -1458,7 +1458,17 @@
     tmp * b / 50
   end
   ```
+* <a name="stabby-lambda-with-args"></a>
+  Используйте скобки при определении `lambda` с аргументами.
+  <sup>[[link](#stabby-lambda-with-args)]</sup>
 
+  ```Ruby
+  # плохо
+  l = ->x, y { something(x, y) }
+
+  # хорошо
+  l = ->(x, y) { something(x, y) }
+  ```
 * <a name="stabby-lambda-no-args"></a>
   Не используйте скобки при определении `lambda` без аргументов.
   <sup>[[link](#stabby-lambda-no-args)]</sup>

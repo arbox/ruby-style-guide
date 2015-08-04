@@ -248,6 +248,11 @@
   `]`, `)`.<sup>[[ссылка](#no-spaces-braces)]</sup>
 
   ```Ruby
+  # плохо
+  some( arg ).other
+  [ 1, 2, 3 ].size
+
+  # хорошо
   some(arg).other
   [1, 2, 3].size
   ```
@@ -624,6 +629,32 @@
      # некоторый код
    end
    ```
+
+* <a name="optional-arguments"></a>
+  Определяйте необязательные аргументы в конце списка аргументов.
+  Способ, каким Руби обрабатывает необязательные аргументы при вызове метода,
+  может показаться вам неоднозначным, если они заданы в начале списка.
+  <sup>[[link](#optional-arguments)]</sup>
+
+  ```Ruby
+  # плохо
+  def some_method(a = 1, b = 2, c, d)
+    puts "#{a}, #{b}, #{c}, #{d}"
+  end
+
+  some_method('w', 'x') # => '1, 2, w, x'
+  some_method('w', 'x', 'y') # => 'w, 2, x, y'
+  some_method('w', 'x', 'y', 'z') # => 'w, x, y, z'
+
+  # хорошо
+  def some_method(c, d, a = 1, b = 2)
+    puts "#{a}, #{b}, #{c}, #{d}"
+  end
+
+  some_method('w', 'x') # => 'w, x, 1, 2'
+  some_method('w', 'x', 'y') # => 'w, x, y, 2'
+  some_method('w', 'x', 'y', 'z') # => 'w, x, y, z'
+  ```
 
 * <a name="parallel-assignment"></a>
   Избегайте параллельного присвоения значений переменным. Параллельное

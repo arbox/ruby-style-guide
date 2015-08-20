@@ -661,7 +661,7 @@
   присвоение разрешается тогда, когда присваивается возвращаемое методом
   значение совместно с оператором разобщения или значения переменных
   взаимно переопределяются. Параллельное присвоение сложнее воспринимается, чем
-  обычная его форма записи, кроме этого оно еще и несколько медленнее.
+  обычная его форма записи.
   <sup>[[ссылка](#parallel-assignment)]</sup>
 
   ```Ruby
@@ -2799,18 +2799,18 @@
   # плохо
   begin
     # код с ошибкой
-  rescue Exception => e
-    # некоторое действие
   rescue StandardError => e
+    # некоторое действие
+  rescue IOError => e
     # некоторое действие
   end
 
   # хорошо
   begin
     # код с ошибкой
-  rescue StandardError => e
+  rescue IOError => e
     # некоторое действие
-  rescue Exception => e
+  rescue StandardError => e
     # некоторое действие
   end
   ```
@@ -3213,7 +3213,15 @@
   <sup>[[ссылка](#concat-strings)]</sup>
 
   ```Ruby
-  # хорошо и быстро
+  # плохо
+  html = ''
+  html += '<h1>Page title</h1>'
+
+  paragraphs.each do |paragraph|
+    html += "<p>#{paragraph}</p>"
+  end
+
+  # хорошо и к тому же быстро
   html = ''
   html << '<h1>Page title</h1>'
 
@@ -3285,8 +3293,11 @@
   <sup>[[ссылка](#non-capturing-regexp)]</sup>
 
   ```Ruby
-  /(first|second)/   # плохо
-  /(?:first|second)/ # хорошо
+  # плохо
+  /(first|second)/
+
+  # хорошо
+  /(?:first|second)/
   ```
 
 * <a name="no-perl-regexp-last-matchers"></a> Откажитесь от использования наследия
@@ -3353,9 +3364,16 @@
   /x
   ```
 
-* <a name="gsub-blocks"></a> В случае сложных замен либо подстановок `sub`/`gsub`
-  можно использовать с блоком или хешем параметров.
+* <a name="gsub-blocks"></a>
+  В случае сложных замен либо подстановок можно использовать `sub`/`gsub`
+  с блоком или хешем параметров.
   <sup>[[ссылка](#gsub-blocks)]</sup>
+
+  ```Ruby
+  words = 'foo bar'
+  words.sub(/f/, 'f' => 'F') # => 'Foo bar'
+  words.gsub(/\w+/) { |word| word.capitalize } # => 'Foo Bar'
+  ```
 
 ## Процентные литералы
 
@@ -3397,6 +3415,7 @@
   name = 'Bruce Wayne'
   time = "8 o'clock"
   question = '"What did you say?"'
+  quote = %q(<p class='quote'>"What did you say?"</p>)
   ```
 
 * <a name="percent-r"></a>

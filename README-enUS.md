@@ -670,8 +670,7 @@ Translations of the guide are available in the following languages:
     Avoid the use of parallel assignment for defining variables. Parallel
     assignment is allowed when it is the return of a method call, used with
     the splat operator, or when used to swap variable assignment. Parallel
-    assignment is less readable than separate assignment. It is also slightly
-    slower than separate assignment.
+    assignment is less readable than separate assignment.
 <sup>[[link](#parallel-assignment)]</sup>
 
   ```Ruby
@@ -2857,7 +2856,6 @@ no parameters.
   # also good
   begin
     # an exception occurs here
-
   rescue StandardError => e
     # exception handling
   end
@@ -2872,18 +2870,18 @@ no parameters.
   # bad
   begin
     # some code
-  rescue Exception => e
-    # some handling
   rescue StandardError => e
+    # some handling
+  rescue IOError => e
     # some handling that will never be executed
   end
 
   # good
   begin
     # some code
-  rescue StandardError => e
+  rescue IOError => e
     # some handling
-  rescue Exception => e
+  rescue StandardError => e
     # some handling
   end
   ```
@@ -3302,6 +3300,14 @@ resource cleanup when possible.
 <sup>[[link](#concat-strings)]</sup>
 
   ```Ruby
+  # bad
+  html = ''
+  html += '<h1>Page title</h1>'
+
+  paragraphs.each do |paragraph|
+    html += "<p>#{paragraph}</p>"
+  end
+
   # good and also fast
   html = ''
   html << '<h1>Page title</h1>'
@@ -3366,12 +3372,15 @@ resource cleanup when possible.
   ```
 
 * <a name="non-capturing-regexp"></a>
-  Use non-capturing groups when you don't use captured result of parentheses.
+  Use non-capturing groups when you don't use the captured result.
 <sup>[[link](#non-capturing-regexp)]</sup>
 
   ```Ruby
-  /(first|second)/   # bad
-  /(?:first|second)/ # good
+  # bad
+  /(first|second)/
+
+  # good
+  /(?:first|second)/
   ```
 
 * <a name="no-perl-regexp-last-matchers"></a>
@@ -3440,8 +3449,14 @@ resource cleanup when possible.
   ```
 
 * <a name="gsub-blocks"></a>
-  For complex replacements `sub`/`gsub` can be used with block or hash.
+  For complex replacements `sub`/`gsub` can be used with a block or a hash.
 <sup>[[link](#gsub-blocks)]</sup>
+
+  ```Ruby
+  words = 'foo bar'
+  words.sub(/f/, 'f' => 'F') # => 'Foo bar'
+  words.gsub(/\w+/) { |word| word.capitalize } # => 'Foo Bar'
+  ```
 
 ## Percent Literals
 
@@ -3484,6 +3499,7 @@ resource cleanup when possible.
   name = 'Bruce Wayne'
   time = "8 o'clock"
   question = '"What did you say?"'
+  quote = %q(<p class='quote'>"What did you say?"</p>)
   ```
 
 * <a name="percent-r"></a>

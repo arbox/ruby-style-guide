@@ -1232,8 +1232,8 @@
   ```
 
 * <a name="no-self-unless-required"></a> Избегайте ключевого слова `self` везде,
-  где оно не требуется.  Оно необходимо только при вызове методов доступа
-  (`attr_reader`, `attr_writer`, `attr_accessor`).
+  где оно не требуется.  Оно необходимо только при вызове сеттера
+  (`attr_writer`).
   <sup>[[ссылка](#no-self-unless-required)]</sup>
 
   ```Ruby

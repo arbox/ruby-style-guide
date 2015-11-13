@@ -68,7 +68,7 @@ Translations of the guide are available in the following languages:
 
 * [Chinese Simplified](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [Chinese Traditional](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
-* [French](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
+* [French](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
 * [German](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
 * [Japanese](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 * [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
@@ -84,7 +84,7 @@ Translations of the guide are available in the following languages:
 * [Naming](#naming)
 * [Comments](#comments)
   * [Comment Annotations](#comment-annotations)
-* [Classes](#classes--modules)
+* [Classes & Modules](#classes--modules)
 * [Exceptions](#exceptions)
 * [Collections](#collections)
 * [Strings](#strings)
@@ -284,9 +284,8 @@ Translations of the guide are available in the following languages:
     ```
 
 * <a name="indent-when-to-case"></a>
-  Indent `when` as deep as `case`. I know that many would disagree
-  with this one, but it's the style established in both "The Ruby
-  Programming Language" and "Programming Ruby".
+  Indent `when` as deep as `case`. This is the style established in both
+  "The Ruby Programming Language" and "Programming Ruby".
 <sup>[[link](#indent-when-to-case)]</sup>
 
   ```Ruby
@@ -373,7 +372,7 @@ Translations of the guide are available in the following languages:
   ```
 
 * <a name="empty-lines-between-methods"></a>
-  Use empty lines between method definitions and also to break up a method
+  Use empty lines between method definitions and also to break up methods
   into logical paragraphs internally.
 <sup>[[link](#empty-lines-between-methods)]</sup>
 
@@ -708,6 +707,28 @@ Translations of the guide are available in the following languages:
   a = *(1..3)
   ```
 
+* <a name="trailing-underscore-variables"></a>
+  Avoid the use of unnecessary trailing underscore variables during
+  parallel assignment. Trailing underscore variables are necessary
+  when there is a splat variable defined on the left side of the assignment,
+  and the splat variable is not an underscore.
+<sup>[[link]](#trailing-underscore-variables)</sup>
+
+  ```Ruby
+  # bad
+  a, b, _ = *foo
+  a, _, _ = *foo
+  a, *_ = *foo
+
+  # good
+  *a, _ = *foo
+  *a, b, _ = *foo
+  a, = *foo
+  a, b, = *foo
+  a, _b = *foo
+  a, _b, = *foo
+  ```
+
 * <a name="no-for-loops"></a>
     Do not use `for`, unless you know exactly why. Most of the time iterators
     should be used instead. `for` is implemented in terms of `each` (so
@@ -944,6 +965,19 @@ Translations of the guide are available in the following languages:
       # multi-line body omitted
     end
   end
+  ```
+
+* <a name="no-nested-modifiers"></a>
+  Avoid nested modifier `if/unless/while/until` usage. Favor `&&/||` if
+  appropriate.
+<sup>[[link](#no-nested-modifiers)]</sup>
+
+  ```Ruby
+  # bad
+  do_something if other_condition if some_condition
+
+  # good
+  do_something if some_condition && other_condition
   ```
 
 * <a name="unless-for-negatives"></a>
@@ -2098,7 +2132,7 @@ no parameters.
 
 * <a name="english-syntax"></a>
   Comments longer than a word are capitalized and use punctuation. Use [one
-  space](http://en.wikipedia.org/wiki/Sentence_spacing) after periods.
+  space](https://en.wikipedia.org/wiki/Sentence_spacing) after periods.
 <sup>[[link](#english-syntax)]</sup>
 
 * <a name="no-superfluous-comments"></a>
@@ -2348,12 +2382,12 @@ no parameters.
 * <a name="liskov"></a>
   When designing class hierarchies make sure that they conform to the [Liskov
   Substitution
-  Principle](http://en.wikipedia.org/wiki/Liskov_substitution_principle).
+  Principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle).
 <sup>[[link](#liskov)]</sup>
 
 * <a name="solid-design"></a>
   Try to make your classes as
-  [SOLID](http://en.wikipedia.org/wiki/SOLID_\(object-oriented_design\)) as
+  [SOLID](https://en.wikipedia.org/wiki/SOLID_\(object-oriented_design\)) as
   possible.
 <sup>[[link](#solid-design)]</sup>
 
@@ -2473,7 +2507,7 @@ no parameters.
   ```
 
 * <a name="duck-typing"></a>
-  Prefer [duck-typing](http://en.wikipedia.org/wiki/Duck_typing) over
+  Prefer [duck-typing](https://en.wikipedia.org/wiki/Duck_typing) over
   inheritance.
 <sup>[[link](#duck-typing)]</sup>
 
@@ -3638,6 +3672,59 @@ resource cleanup when possible.
   Prefer `public_send` over `send` so as not to circumvent `private`/`protected` visibility.
 <sup>[[link](#prefer-public-send)]</sup>
 
+  ```ruby
+  # We have  an ActiveModel Organization that includes concern Activatable
+  module Activatable
+    extend ActiveSupport::Concern
+
+    included do
+      before_create :create_token
+    end
+
+    private
+
+    def reset_token
+      ...
+    end
+
+    def create_token
+      ...
+    end
+
+    def activate!
+      ...
+    end
+  end
+
+  class Organization < ActiveRecord::Base
+    include Activatable
+  end
+
+  linux_organization = Organization.find(...)
+  # BAD - violates privacy
+  linux_organization.send(:reset_token)
+  # GOOD - should throw an exception
+  linux_organization.public_send(:reset_token)
+  ```
+
+* <a name="prefer-__send__"></a>
+  Prefer `__send__` over `send`, as `send` may overlap with existing methods.
+<sup>[[link](#prefer-__send__)]</sup>
+
+  ```ruby
+  require 'socket'
+
+  u1 = UDPSocket.new
+  u1.bind('127.0.0.1', 4913)
+  u2 = UDPSocket.new
+  u2.connect('127.0.0.1', 4913)
+  # Won't send a message to the receiver obj.
+  # Instead it will send a message via UDP socket.
+  u2.send :sleep, 0
+  # Will actually send a message to the receiver obj.
+  u2.__send__ ...
+  ```
+
 ## Misc
 
 * <a name="always-warn"></a>
@@ -3746,9 +3833,9 @@ Feel free to open tickets or send pull requests with improvements. Thanks in
 advance for your help!
 
 You can also support the project (and RuboCop) with financial
-contributions via [gittip](https://www.gittip.com/bbatsov).
+contributions via [Gratipay](https://gratipay.com/~bbatsov/).
 
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/~bbatsov/)
 
 ## How to Contribute?
 
@@ -3770,9 +3857,9 @@ best possible guide, don't we?
 Cheers,<br>
 [Bozhidar](https://twitter.com/bbatsov)
 
-[PEP-8]: http://www.python.org/dev/peps/pep-0008/
+[PEP-8]: https://www.python.org/dev/peps/pep-0008/
 [rails-style-guide]: https://github.com/bbatsov/rails-style-guide
-[pickaxe]: http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
+[pickaxe]: https://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
 [trpl]: http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
-[transmuter]: https://github.com/TechnoGate/transmuter
+[transmuter]: https://github.com/kalbasit/transmuter
 [RuboCop]: https://github.com/bbatsov/rubocop

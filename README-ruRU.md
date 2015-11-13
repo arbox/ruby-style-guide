@@ -74,7 +74,7 @@
 * [китайский упрощенный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [корейский](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [немецкий](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
-* [французский](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
+* [французский](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
 * [португальский](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [русский (данный документ)](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [японский](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
@@ -280,8 +280,8 @@
     'a'...'z'
     ```
 
-* <a name="indent-when-to-case"></a> Делайте отступ для `when` таким же, как и
-  для `case`. Я знаю, что многие не согласятся  с этим, но этот стиль
+* <a name="indent-when-to-case"></a>
+  Делайте отступ для `when` таким же, как и для `case`. Этот стиль
   предписывается как "Языком программирования Ruby", так и "Programming Ruby".
   <sup>[[ссылка](#indent-when-to-case)]</sup>
 
@@ -367,9 +367,10 @@
     end
   ```
 
-* <a name="empty-lines-between-methods"></a> Используйте пустые строки для
-  разделения определений методов и выделения логических частей определений
-  внутри них.<sup>[[ссылка](#empty-lines-between-methods)]</sup>
+* <a name="empty-lines-between-methods"></a>
+  Используйте пустые строки для разделения определений методов и выделения
+  логических частей определений внутри них.
+  <sup>[[ссылка](#empty-lines-between-methods)]</sup>
 
   ```Ruby
   def some_method
@@ -698,6 +699,29 @@
 
   a = *(1..3)
   ```
+<!--- FIXME --->
+* <a name="trailing-underscore-variables"></a>
+
+  Avoid the use of unnecessary trailing underscore variables during
+  parallel assignment. Trailing underscore variables are necessary
+  when there is a splat variable defined on the left side of the assignment,
+  and the splat variable is not an underscore.
+  <sup>[[link]](#trailing-underscore-variables)</sup>
+
+  ```Ruby
+  # плохо
+  a, b, _ = *foo
+  a, _, _ = *foo
+  a, *_ = *foo
+
+  # хорошо
+  *a, _ = *foo
+  *a, b, _ = *foo
+  a, = *foo
+  a, b, = *foo
+  a, _b = *foo
+  a, _b, = *foo
+  ```
 
 * <a name="no-for-loops"></a> Используйте оператор `for` только в случаях, когда
   вы точно знаете, зачем вы это делаете. В подавляющем большинстве остальных случаев
@@ -932,6 +956,18 @@
   end
   ```
 
+* <a name="no-nested-modifiers"></a>
+  Избегайте вложенных модификаторов `if/unless/while/until`. Используйте `&&/||`
+  по необходимости.
+  <sup>[[link](#no-nested-modifiers)]</sup>
+
+  ```Ruby
+  # плохо
+  do_something if other_condition if some_condition
+
+  # хорошо
+  do_something if some_condition && other_condition
+  ```
 * <a name="unless-for-negatives"></a> Используйте `unless` вместо `if`
   для отрицательных условий (или `||` для управления потоком исполнения).
   <sup>[[ссылка](#unless-for-negatives)]</sup>
@@ -2040,10 +2076,10 @@
   комментария.
   <sup>[[ссылка](#hash-space)]</sup>
 
-* <a name="english-syntax"></a> Комментарии длиной больше одного слова должны
-  оформляться в виде законченных предложений (с большой буквы и со знаками
-  препинания).
-  Разделяйте предложения [одним пробелом](http://en.wikipedia.org/wiki/Sentence_spacing).
+* <a name="english-sntax"></a>
+  Комментарии длиной больше одного слова должны оформляться в виде законченных
+  предложений (с большой буквы и со знаками препинания).
+  Разделяйте предложения [одним пробелом](https://en.wikipedia.org/wiki/Sentence_spacing).
   <sup>[[ссылка](#english-syntax)]</sup>
 
 * <a name="no-superfluous-comments"></a> Избегайте избыточного комментирования.
@@ -3548,7 +3584,64 @@
     # Самым лучшим будет все же использование `#define_method`,
     # так как каждый видимый аргумент будет определен.
     ```
+<!--- FIXME --->
+* <a name="prefer-public-send"></a>
+  Prefer `public_send` over `send` so as not to circumvent `private`/`protected` visibility.
+  <sup>[[link](#prefer-public-send)]</sup>
 
+```ruby
+  # We have  an ActiveModel Organization that includes concern Activatable
+  module Activatable
+    extend ActiveSupport::Concern
+
+    included do
+      before_create :create_token
+    end
+
+    private
+
+    def reset_token
+      ...
+    end
+
+    def create_token
+      ...
+    end
+
+    def activate!
+      ...
+    end
+  end
+
+  class Organization < ActiveRecord::Base
+    include Activatable
+  end
+
+  linux_organization = Organization.find(...)
+  # BAD - violates privacy
+  linux_organization.send(:reset_token)
+  # GOOD - should throw an exception
+  linux_organization.public_send(:reset_token)
+  ```
+
+<!--- FIXME --->
+* <a name="prefer-__send__"></a>
+  Prefer `__send__` over `send`, as `send` may overlap with existing methods.
+<sup>[[link](#prefer-__send__)]</sup>
+
+  ```ruby
+  require 'socket'
+
+  u1 = UDPSocket.new
+  u1.bind('127.0.0.1', 4913)
+  u2 = UDPSocket.new
+  u2.connect('127.0.0.1', 4913)
+  # Won't send a message to the receiver obj.
+  # Instead it will send a message via UDP socket.
+  u2.send :sleep, 0
+  # Will actually send a message to the receiver obj.
+  u2.__send__ ...
+  ```
 ## Разное
 
 * <a name="always-warn"></a> Пишите код, не дающий предупреждений при вызове
@@ -3642,9 +3735,9 @@
 вашего кода. И заранее большое спасибо за вашу помощь!
 
 Вы можете поддержать проект (и РубоКоп) денежным взносом при помощи
-[gittip](https://www.gittip.com/bbatsov).
+[Gratipay](https://gratipay.com/~bbatsov/).
 
-[![Дай Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/~bbatsov/)
 
 ## Как сотрудничать в проекте?
 
@@ -3669,12 +3762,12 @@
 [Божидар](https://twitter.com/bbatsov)
 
 <!--- Links -->
-[PEP-8]: http://www.python.org/dev/peps/pep-0008/
+[PEP-8]: https://www.python.org/dev/peps/pep-0008/
 [rails-style-guide]: https://github.com/arbox/rails-style-guide/blob/master/README-ruRU.md
-[pickaxe]: http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
+[pickaxe]: https://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
 [trpl]: http://www.ozon.ru/context/detail/id/5704300/
 [entrpl]: http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
-[transmuter]: https://github.com/TechnoGate/transmuter
+[transmuter]: https://github.com/kalbasit/transmuter
 [RuboCop]: https://github.com/bbatsov/rubocop
 [Liskov]: https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8_%D0%91%D0%B0%D1%80%D0%B1%D0%B0%D1%80%D1%8B_%D0%9B%D0%B8%D1%81%D0%BA%D0%BE%D0%B2
 [duck-typing]: https://ru.wikipedia.org/wiki/%D0%A3%D1%82%D0%B8%D0%BD%D0%B0%D1%8F_%D1%82%D0%B8%D0%BF%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F

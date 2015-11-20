@@ -706,7 +706,7 @@
   parallel assignment. Trailing underscore variables are necessary
   when there is a splat variable defined on the left side of the assignment,
   and the splat variable is not an underscore.
-  <sup>[[link]](#trailing-underscore-variables)</sup>
+  <sup>[[ссылка]](#trailing-underscore-variables)</sup>
 
   ```Ruby
   # плохо
@@ -3626,8 +3626,9 @@
 
 <!--- FIXME --->
 * <a name="prefer-__send__"></a>
-  Prefer `__send__` over `send`, as `send` may overlap with existing methods.
-<sup>[[link](#prefer-__send__)]</sup>
+  Используйте преимущественно `__send__` вместо `send`, так как `send` может
+  быть уже переопределен локально.
+  <sup>[[ссылка](#prefer-__send__)]</sup>
 
   ```ruby
   require 'socket'

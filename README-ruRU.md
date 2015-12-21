@@ -45,7 +45,7 @@
 собственном обширном профессиональном опыте в качестве разработчика ПО, отзывах
 и предложениях других членов сообщества программистов на Руби и различных
 общепризнанных источниках по программированию на Руби, например,
-["Programming Ruby 1.9"][pickaxe] и ["Язык программирования Ruby"][trpl]
+["Programming Ruby"][pickaxe] и ["Язык программирования Ruby"][trpl]
 (в оригинале ["The Ruby Programming Language"][entrpl]).
 
 Во многих областях до сих пор нет единого мнения в среде разработчиков на Руби
@@ -693,34 +693,45 @@
   first, second = multi_return
 
   # хорошо (применение оператора разобщения)
-  first, *list = [1,2,3,4]
+  first, *list = [1, 2, 3, 4]
 
-  hello_array = *"Hello"
+  hello_array = *'Hello'
 
   a = *(1..3)
   ```
 <!--- FIXME --->
 * <a name="trailing-underscore-variables"></a>
-
   Avoid the use of unnecessary trailing underscore variables during
-  parallel assignment. Trailing underscore variables are necessary
-  when there is a splat variable defined on the left side of the assignment,
-  and the splat variable is not an underscore.
-  <sup>[[ссылка]](#trailing-underscore-variables)</sup>
+  parallel assignment. Named underscore variables are to be preferred over
+  underscore variables because of the context that they provide.
+  Trailing underscore variables are necessary when there is a splat variable
+  defined on the left side of the assignment, and the splat variable is
+  not an underscore.
+  <sup>[[link]](#trailing-underscore-variables)</sup>
 
   ```Ruby
   # плохо
-  a, b, _ = *foo
-  a, _, _ = *foo
-  a, *_ = *foo
+  foo = 'one,two,three,four,five'
+  # Ненужное присваивание, не несущее к тому же полезной информации.
+  first, second, _ = foo.split(',')
+  first, _, _ = foo.split(',')
+  first, *_ = foo.split(',')
+
 
   # хорошо
-  *a, _ = *foo
-  *a, b, _ = *foo
-  a, = *foo
-  a, b, = *foo
-  a, _b = *foo
-  a, _b, = *foo
+  foo = 'one,two,three,four,five'
+  # Нижнее подчеркивание нужно, чтобы показать, что нам нужны все элементы
+  # кроме некоторого количества последних элементов.
+  *beginning, _ = foo.split(',')
+  *beginning, something, _ = foo.split(',')
+
+  a, = foo.split(',')
+  a, b, = foo.split(',')
+  # Ненужное присваивание значения неиспользуемой переменной, но это
+  # присваивание дает нам полезную информацию о данных.
+  first, _second = foo.split(',')
+  first, _second, = foo.split(',')
+  first, *_ending = foo.split(',')
   ```
 
 * <a name="no-for-loops"></a> Используйте оператор `for` только в случаях, когда
@@ -1386,8 +1397,8 @@
   # плохо
   name = 'Bozhidar' unless name
 
-  # хорошо (присвоить переменной name значение Bozhidar, только если ее значение
-  # nil или false
+  # хорошо (присвоить переменной `name` значение 'Bozhidar', только если ее
+  # значение `nil` или `false`)
   name ||= 'Bozhidar'
   ```
 
@@ -1455,10 +1466,10 @@
 
   ```Ruby
   # плохо (`eql?` работает для строк, как и  `==`)
-  "ruby".eql? some_str
+  'ruby'.eql? some_str
 
   # хорошо
-  "ruby" == some_str
+  'ruby' == some_str
   1.0.eql? x # здесь `eql?` имеет смысл, если вы хотите различать классы числа: `Fixnum` vs. `Float`
   ```
 
@@ -2396,9 +2407,9 @@
   attr_reader :one, :two, :three
   ```
 
-* <a name="struct-new"></a> Подумайте об использовании `Struct.new`, эта
-  конструкция даст вам сразу простейшие методы доступа к состоянию,
-  метод инициализации и методы сравнения.
+* <a name="struct-new"></a>
+  Подумайте об использовании `Struct.new`, эта конструкция даст вам сразу
+  простейшие методы доступа к объекту, метод инициализации и методы сравнения.
   <sup>[[ссылка](#struct-new)]</sup>
 
   ```Ruby
@@ -2415,12 +2426,12 @@
   # лучше
   Person = Struct.new(:first_name, :last_name) do
   end
-  ````
+  ```
 <!--- @FIXME -->
 * <a name="no-extend-struct-new"></a>
   Не дополняйте `Struct.new` при помощи `#extend`. В этом случае уже создается
   новый класс. При дополнении вы создадите избыточный уровень абстракции, это
-  может привезти к странным ошибкам при многократной загрузке кода из файла.
+  может привести к странным ошибкам при многократной загрузке кода из файла.
   <sup>[[ссылка](#no-extend-struct-new)]</sup>
 
   ```Ruby
@@ -2503,7 +2514,7 @@
     @@class_var = 'child'
   end
 
-  Parent.print_class_var # => вернет "child"
+  Parent.print_class_var # => выведет 'child'
   ```
 
   Как вы видите, все классы в иерархии фактически делят одну и ту же
@@ -2641,55 +2652,57 @@
 
 ## Исключения
 
-* <a name="fail-method"></a> Вызывайте исключения при помощи ключевого слова `fail`.
-  Используйте `raise` только при перехвате исключения и вызове его же заново.
-  В этом случае вы не вызываете исключение, а лишь намеренно передаете его дальше
-  по стеку.<sup>[[ссылка](#fail-method)]</sup>
+* <a name="prefer-raise-over-fail"></a>
+  Используйте `raise` вместо `fail` при вызове исключений.
+  <sup>[[ссылка](#prefer-raise-over-fail)]</sup>
 
   ```Ruby
-  begin
-    fail 'Oops'
-  rescue => error
-    raise if error.message != 'Oops'
-  end
+  # плохо
+  fail SomeException, 'message'
+
+  # хорошо
+  raise SomeException, 'message'
   ```
 
-* <a name="no-explicit-runtimeerror"></a> Нет нужды задавать `RuntimeError` явно
-  в качестве аргумента при вызове `fail/raise` с двумя аргументами.
+* <a name="no-explicit-runtimeerror"></a>
+  Нет нужды задавать `RuntimeError` явно в качестве аргумента при вызове `raise`
+  с двумя аргументами.
   <sup>[[ссылка](#no-explicit-runtimeerror)]</sup>
 
   ```Ruby
   # плохо
-  fail RuntimeError, 'message'
+  raise RuntimeError, 'message'
 
-  # хорошо - вызывает `RuntimeError` по умолчанию
-  fail 'message'
+  # хорошо (вызывает `RuntimeError` по умолчанию)
+  raise 'message'
   ```
 
-* <a name="exception-class-messages"></a> Передавайте класс исключения и сообщение
-  в форме двух аргументов для `fail/raise` вместо экземпляра класса исключения.
+* <a name="exception-class-messages"></a>
+  Передавайте класс исключения и сообщение в форме двух аргументов для `raise`
+  вместо экземпляра класса исключения.
   <sup>[[ссылка](#exception-class-messages)]</sup>
 
   ```Ruby
   # плохо
   fail SomeException.new('message')
   # Обратите внимание, что нет возможности вызвать
-  # `fail SomeException.new('message'), backtrace`.
+  # `raise SomeException.new('message'), backtrace`.
 
   # хорошо
-  fail SomeException, 'message'
-  # Работает с `fail SomeException, 'message', backtrace`.
+  raise SomeException, 'message'
+  # Работает с `raise SomeException, 'message', backtrace`.
   ```
 
-* <a name="no-return-ensure"></a> Не возвращайте значений в блоке `ensure`.
-  Если вы явным образом возвращаете значение из блока `ensure`, то возвращение
-  будет обрабатываться сначала и метод вернет значение, как если бы исключения
-  не было вовсе. По итогу исключение будет просто тихо проигнорировано.
+* <a name="no-return-ensure"></a>
+  Не возвращайте значений в блоке `ensure`. Если вы явным образом возвращаете
+  значение из блока `ensure`, то возвращение будет обрабатываться сначала
+  и метод вернет значение, как если бы исключения не было вовсе. По итогу
+  исключение будет просто тихо проигнорировано.
   <sup>[[ссылка](#no-return-ensure)]</sup>
 
   ```Ruby
   def foo
-    fail
+    raise
   ensure
     return 'very bad idea'
   end
@@ -3029,7 +3042,7 @@
   ```Ruby
   heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
   # плохо (закравшуюся ошибку можно и не заметить сразу)
-  heroes[:batman] # => "Bruce Wayne"
+  heroes[:batman] # => 'Bruce Wayne'
   heroes[:supermann] # => nil
 
   # хорошо (`Hash#fetch` вызывает `KeyError` и явно указывает на проблему)
@@ -3142,9 +3155,9 @@
   email_with_name = format('%s <%s>', user.name, user.email)
   ```
 
-* <a name="string-interpolation"></a>
+* <a name="pad-string-interpolation"></a>
   Избегайте пробелов внутри скобок вокруг интерполируемых выражений в строках.
-  <sup>[[ссылка](#string-interpolation)]</sup>
+  <sup>[[ссылка](#pad-string-interpolation)]</sup>
 
   ```Ruby
   # плохо
@@ -3276,12 +3289,12 @@
     str = 'lisp-case-rules'
 
     # плохо
-    url.gsub("http://", "https://")
-    str.gsub("-", "_")
+    url.gsub('http://', 'https://')
+    str.gsub('-', '_')
 
     # хорошо
-    url.sub("http://", "https://")
-    str.tr("-", "_")
+    url.sub('http://', 'https://')
+    str.tr('-', '_')
     ```
 
 
@@ -3514,10 +3527,12 @@
   при написании библиотек (не используйте "monkey patching").
   <sup>[[ссылка](#no-monkey-patching)]</sup>
 
-* <a name="block-class-eval"></a> Используйте `#class_eval` с блоком вместо
-  интерполяции значений в строке. Если вы используете интерполяцию, то всегда
-  указывайте дополнительно `__FILE__` и `__LINE__`, чтобы информация о стеке
-  вызова была осмысленной:<sup>[[ссылка](#block-class-eval)]</sup>
+* <a name="block-class-eval"></a>
+  Используйте `#class_eval` с блоком вместо интерполяции значений в строке.
+  <sup>[[ссылка](#block-class-eval)]</sup>
+
+  - eсли вы используете интерполяцию, то всегда указывайте дополнительно
+  `__FILE__` и `__LINE__`, чтобы информация о стеке вызова была осмысленной:
 
   ```Ruby
   class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__

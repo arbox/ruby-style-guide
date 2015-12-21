@@ -41,7 +41,7 @@ I didn't come up with all the rules out of nowhere - they are mostly
 based on my extensive career as a professional software engineer,
 feedback and suggestions from members of the Ruby community and
 various highly regarded Ruby programming resources, such as
-["Programming Ruby 1.9"][pickaxe] and
+["Programming Ruby"][pickaxe] and
 ["The Ruby Programming Language"][trpl].
 
 There are some areas in which there is no clear consensus in the Ruby community
@@ -700,33 +700,45 @@ Translations of the guide are available in the following languages:
   first, second = multi_return
 
   # good - use with splat
-  first, *list = [1,2,3,4]
+  first, *list = [1, 2, 3, 4]
 
-  hello_array = *"Hello"
+  hello_array = *'Hello'
 
   a = *(1..3)
   ```
 
 * <a name="trailing-underscore-variables"></a>
   Avoid the use of unnecessary trailing underscore variables during
-  parallel assignment. Trailing underscore variables are necessary
-  when there is a splat variable defined on the left side of the assignment,
-  and the splat variable is not an underscore.
+  parallel assignment. Named underscore variables are to be preferred over
+  underscore variables because of the context that they provide.
+  Trailing underscore variables are necessary when there is a splat variable
+  defined on the left side of the assignment, and the splat variable is
+  not an underscore.
 <sup>[[link]](#trailing-underscore-variables)</sup>
 
   ```Ruby
   # bad
-  a, b, _ = *foo
-  a, _, _ = *foo
-  a, *_ = *foo
+  foo = 'one,two,three,four,five'
+  # Unnecessary assignment that does not provide useful information
+  first, second, _ = foo.split(',')
+  first, _, _ = foo.split(',')
+  first, *_ = foo.split(',')
+
 
   # good
-  *a, _ = *foo
-  *a, b, _ = *foo
-  a, = *foo
-  a, b, = *foo
-  a, _b = *foo
-  a, _b, = *foo
+  foo = 'one,two,three,four,five'
+  # The underscores is needed to show that you want all elements
+  # except for the last number of underscore elements
+  *beginning, _ = foo.split(',')
+  *beginning, something, _ = foo.split(',')
+
+  a, = foo.split(',')
+  a, b, = foo.split(',')
+  # Unnecessary assignment to an unused variable, but the assignment
+  # provides us with useful inforation.
+  first, _second = foo.split(',')
+  first, _second, = foo.split(',')
+  first, *_ending = foo.split(',')
   ```
 
 * <a name="no-for-loops"></a>
@@ -1401,7 +1413,7 @@ condition](#safe-assignment-in-condition).
   # bad
   name = 'Bozhidar' unless name
 
-  # good - set name to Bozhidar, only if it's nil or false
+  # good - set name to 'Bozhidar', only if it's nil or false
   name ||= 'Bozhidar'
   ```
 
@@ -1468,10 +1480,10 @@ condition](#safe-assignment-in-condition).
 
   ```Ruby
   # bad - eql? is the same as == for strings
-  "ruby".eql? some_str
+  'ruby'.eql? some_str
 
   # good
-  "ruby" == some_str
+  'ruby' == some_str
   1.0.eql? x # eql? makes sense here if want to differentiate between Fixnum and Float 1
   ```
 
@@ -1701,8 +1713,8 @@ no parameters.
 
 * <a name="array-join"></a>
   Favor the use of `Array#join` over the fairly cryptic `Array#*` with
-<sup>[[link](#array-join)]</sup>
   a string argument.
+<sup>[[link](#array-join)]</sup>
 
   ```Ruby
   # bad
@@ -2476,7 +2488,7 @@ no parameters.
   # better
   Person = Struct.new(:first_name, :last_name) do
   end
-  ````
+  ```
 
 * <a name="no-extend-struct-new"></a>
   Don't extend an instance initialized by `Struct.new`. Extending it introduces
@@ -2491,7 +2503,7 @@ no parameters.
 
   # good
   Person = Struct.new(:first_name, :last_name)
-  ````
+  ```
 
 * <a name="factory-methods"></a>
   Consider adding factory methods to provide additional sensible ways to
@@ -2565,7 +2577,7 @@ no parameters.
     @@class_var = 'child'
   end
 
-  Parent.print_class_var # => will print "child"
+  Parent.print_class_var # => will print 'child'
   ```
 
   As you can see all the classes in a class hierarchy actually share one
@@ -2702,46 +2714,44 @@ no parameters.
 
 ## Exceptions
 
-* <a name="fail-method"></a>
-  Signal exceptions using the `fail` method. Use `raise` only when catching an
-  exception and re-raising it (because here you're not failing, but explicitly
-  and purposefully raising an exception).
-<sup>[[link](#fail-method)]</sup>
+* <a name="prefer-raise-over-fail"></a>
+  Prefer `raise` over `fail` for exceptions.
+  <sup>[[link](#prefer-raise-over-fail)]</sup>
 
   ```Ruby
-  begin
-    fail 'Oops'
-  rescue => error
-    raise if error.message != 'Oops'
-  end
+  # bad
+  fail SomeException, 'message'
+
+  # good
+  raise SomeException, 'message'
   ```
 
 * <a name="no-explicit-runtimeerror"></a>
   Don't specify `RuntimeError` explicitly in the two argument version of
-  `fail/raise`.
+  `raise`.
 <sup>[[link](#no-explicit-runtimeerror)]</sup>
 
   ```Ruby
   # bad
-  fail RuntimeError, 'message'
+  raise RuntimeError, 'message'
 
   # good - signals a RuntimeError by default
-  fail 'message'
+  raise 'message'
   ```
 
 * <a name="exception-class-messages"></a>
   Prefer supplying an exception class and a message as two separate arguments
-  to `fail/raise`, instead of an exception instance.
+  to `raise`, instead of an exception instance.
 <sup>[[link](#exception-class-messages)]</sup>
 
   ```Ruby
   # bad
-  fail SomeException.new('message')
-  # Note that there is no way to do `fail SomeException.new('message'), backtrace`.
+  raise SomeException.new('message')
+  # Note that there is no way to do `raise SomeException.new('message'), backtrace`.
 
   # good
-  fail SomeException, 'message'
-  # Consistent with `fail SomeException, 'message', backtrace`.
+  raise SomeException, 'message'
+  # Consistent with `raise SomeException, 'message', backtrace`.
   ```
 
 * <a name="no-return-ensure"></a>
@@ -2753,7 +2763,7 @@ no parameters.
 
   ```Ruby
   def foo
-    fail
+    raise
   ensure
     return 'very bad idea'
   end
@@ -3109,7 +3119,7 @@ resource cleanup when possible.
   ```Ruby
   heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
   # bad - if we make a mistake we might not spot it right away
-  heroes[:batman] # => "Bruce Wayne"
+  heroes[:batman] # => 'Bruce Wayne'
   heroes[:supermann] # => nil
 
   # good - fetch raises a KeyError making the problem obvious
@@ -3223,9 +3233,9 @@ resource cleanup when possible.
   email_with_name = format('%s <%s>', user.name, user.email)
   ```
 
-* <a name="string-interpolation"></a>
+* <a name="pad-string-interpolation"></a>
   With interpolated expressions, there should be no padded-spacing inside the braces.
-<sup>[[link](#string-interpolation)]</sup>
+<sup>[[link](#pad-string-interpolation)]</sup>
 
   ```Ruby
   # bad
@@ -3360,12 +3370,12 @@ resource cleanup when possible.
     str = 'lisp-case-rules'
 
     # bad
-    url.gsub("http://", "https://")
-    str.gsub("-", "_")
+    url.gsub('http://', 'https://')
+    str.gsub('-', '_')
 
     # good
-    url.sub("http://", "https://")
-    str.tr("-", "_")
+    url.sub('http://', 'https://')
+    str.tr('-', '_')
     ```
 
 * <a name="heredocs"></a>
@@ -3599,13 +3609,15 @@ resource cleanup when possible.
 
 * <a name="block-class-eval"></a>
   The block form of `class_eval` is preferable to the string-interpolated
-  form.  - when you use the string-interpolated form, always supply `__FILE__`
-  and `__LINE__`, so that your backtraces make sense:
+  form.
 <sup>[[link](#block-class-eval)]</sup>
 
-  ```ruby
-  class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
-  ```
+  - when you use the string-interpolated form, always supply `__FILE__`
+  and `__LINE__`, so that your backtraces make sense:
+
+    ```ruby
+    class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
+    ```
 
   - `define_method` is preferable to `class_eval{ def ... }`
 

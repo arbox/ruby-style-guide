@@ -2287,7 +2287,7 @@ no parameters.
   ```
 
 * <a name="file-classes"></a>
-  Don't nest multi line classes within classes. Try to have such nested
+  Don't nest multi-line classes within classes. Try to have such nested
   classes each in their own file in a folder named like the containing class.
 <sup>[[link](#file-classes)]</sup>
 
@@ -3112,6 +3112,23 @@ resource cleanup when possible.
   hash.value?(value)
   ```
 
+* <a name="hash-each"></a>
+  Use `Hash#each_key` instead of `Hash#keys.each` and `Hash#each_value`
+  instead of `Hash#values.each`.
+<sup>[[link](#hash-each)]</sup>
+
+  ```Ruby
+  # bad
+  hash.keys.each { |k| p k }
+  hash.values.each { |v| p v }
+  hash.each { |k, _v| p k }
+  hash.each { |_k, v| p v }
+
+  # good
+  hash.each_key { |k| p k }
+  hash.each_value { |v| p v }
+  ```
+
 * <a name="hash-fetch"></a>
   Use `Hash#fetch` when dealing with hash keys that should be present.
 <sup>[[link](#hash-fetch)]</sup>
@@ -3392,6 +3409,36 @@ resource cleanup when possible.
     |end
   END
   # => "def test\n  some_method\n  other_method\nend\n"
+  ```
+
+* <a name="squiggly-heredocs"></a>
+  Use Ruby 2.3's squiggly heredocs for nicely indented multiline strings.
+<sup>[[link](#squiggly-heredocs)]</sup>
+
+  ```Ruby
+  # bad - using Powerpack String#strip_margin
+  code = <<-END.strip_margin('|')
+    |def test
+    |  some_method
+    |  other_method
+    |end
+  END
+
+  # also bad
+  code = <<-END
+  def test
+    some_method
+    other_method
+  end
+  END
+
+  # good
+  code = <<~END
+    def test
+      some_method
+      other_method
+    end
+  END
   ```
 
 ## Regular Expressions

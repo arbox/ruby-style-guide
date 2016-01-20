@@ -3035,12 +3035,31 @@
   hash.value?(value)
   ```
 
-* <a name="hash-fetch"></a> Для надежной работы с заданными ключами, о
-  существовании которых доподлинно известно, используйте `Hash#fetch`.
+* <a name="hash-each"></a>
+  Используйте `Hash#each_key` вместо `Hash#keys.each`
+  и `Hash#each_value` вместо `Hash#values.each`.
+  <sup>[[link](#hash-each)]</sup>
+
+  ```Ruby
+  # плохо
+  hash.keys.each { |k| p k }
+  hash.values.each { |v| p v }
+  hash.each { |k, _v| p k }
+  hash.each { |_k, v| p v }
+
+  # хорошо
+  hash.each_key { |k| p k }
+  hash.each_value { |v| p v }
+  ```
+
+* <a name="hash-fetch"></a>
+  Для надежной работы с заданными ключами, о существовании которых доподлинно
+  известно, используйте `Hash#fetch`.
   <sup>[[ссылка](#hash-fetch)]</sup>
 
   ```Ruby
   heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
+
   # плохо (закравшуюся ошибку можно и не заметить сразу)
   heroes[:batman] # => 'Bruce Wayne'
   heroes[:supermann] # => nil
@@ -3301,7 +3320,7 @@
 * <a name="heredocs"></a>
   При использовании многострочных HEREDOC не забывайте, что пробелы в начале
   строк тоже являются частью создаваемой строки. Примером хорошего стиля
-  является применение техник, основывающихся на ограничителях, для удаления
+  является применение основывающихся на ограничителях техник для удаления
   ненужных пробелов.
   <sup>[[ссылка](#heredocs)]</sup>
 
@@ -3313,6 +3332,37 @@
     |end
   END
   #=> "def test\n  some_method\n  other_method\nend\n"
+  ```
+
+* <a name="squiggly-heredocs"></a>
+  Используйте нотацию HEREDOC с тильдой, введенную в `Ruby 2.3`,
+  для задания аккуратного отступа перед несколькими строками.
+  <sup>[[link](#squiggly-heredocs)]</sup>
+
+  ```Ruby
+  # плохо (используется `String#strip_margin` из Powerpack)
+  code = <<-END.strip_margin('|')
+    |def test
+    |  some_method
+    |  other_method
+    |end
+  END
+
+  # все еще плохо
+  code = <<-END
+  def test
+    some_method
+    other_method
+  end
+  END
+
+  # хорошо
+  code = <<~END
+    def test
+      some_method
+      other_method
+    end
+  END
   ```
 
 ## Регулярные выражения

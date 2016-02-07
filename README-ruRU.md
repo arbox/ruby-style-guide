@@ -652,9 +652,9 @@
     puts "#{a}, #{b}, #{c}, #{d}"
   end
 
-  some_method('w', 'x') # => 'w, x, 1, 2'
-  some_method('w', 'x', 'y') # => 'w, x, y, 2'
-  some_method('w', 'x', 'y', 'z') # => 'w, x, y, z'
+  some_method('w', 'x') # => '1, 2, w, x'
+  some_method('w', 'x', 'y') # => 'y, 2, w, x'
+  some_method('w', 'x', 'y', 'z') # => 'y, z, w, x'
   ```
 
 * <a name="parallel-assignment"></a>

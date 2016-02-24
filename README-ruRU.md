@@ -701,12 +701,11 @@
   ```
 <!--- FIXME --->
 * <a name="trailing-underscore-variables"></a>
-  Avoid the use of unnecessary trailing underscore variables during
-  parallel assignment. Named underscore variables are to be preferred over
-  underscore variables because of the context that they provide.
-  Trailing underscore variables are necessary when there is a splat variable
-  defined on the left side of the assignment, and the splat variable is
-  not an underscore.
+  Избегайте ненужного использования "нижних подчеркиваний" как переменных в конце параллельного
+  присваивания. Именованные "нижние подчеркивания" предпочтительнее безымяных, поскольку
+  помогают понять контекст. Использовать "нижние подчеркивания" в конце параллельного
+  присваивания есть смысл, когда в начале присваивания вы используете оператор
+  разобщения в переменную и хотите исключить какие-то значения.
   <sup>[[link]](#trailing-underscore-variables)</sup>
 
   ```Ruby

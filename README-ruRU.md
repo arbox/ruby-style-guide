@@ -3601,12 +3601,12 @@
       class_eval <<-EOT, __FILE__, __LINE__ + 1
         def #{unsafe_method}(*params, &block)       # def capitalize(*params, &block)
           to_str.#{unsafe_method}(*params, &block)  #   to_str.capitalize(*params, &block)
-        end                                       # end
+        end                                         # end
 
         def #{unsafe_method}!(*params)              # def capitalize!(*params)
-          @dirty = true                           #   @dirty = true
-          super                                   #   super
-        end                                       # end
+          @dirty = true                             #   @dirty = true
+          super                                     #   super
+        end                                         # end
       EOT
     end
   end
@@ -3648,13 +3648,13 @@
     # Самым лучшим будет все же использование `#define_method`,
     # так как каждый видимый аргумент будет определен.
     ```
-<!--- FIXME --->
+
 * <a name="prefer-public-send"></a>
-  Prefer `public_send` over `send` so as not to circumvent `private`/`protected` visibility.
+  Используйте `public_send`, а не `send`, чтобы не обойти `private`/`protected` области видимости.
   <sup>[[link](#prefer-public-send)]</sup>
 
 ```ruby
-  # We have  an ActiveModel Organization that includes concern Activatable
+  # Есть модель Organization < ActiveModel, которая использует concern Activatable
   module Activatable
     extend ActiveSupport::Concern
 
@@ -3682,13 +3682,15 @@
   end
 
   linux_organization = Organization.find(...)
-  # BAD - violates privacy
+
+  # плохо - нарушает private области видимости
   linux_organization.send(:reset_token)
-  # GOOD - should throw an exception
+  # хорошо - выдаст exception
+
   linux_organization.public_send(:reset_token)
   ```
 
-<!--- FIXME --->
+
 * <a name="prefer-__send__"></a>
   Используйте преимущественно `__send__` вместо `send`, так как `send` может
   быть уже переопределен локально.
@@ -3701,10 +3703,10 @@
   u1.bind('127.0.0.1', 4913)
   u2 = UDPSocket.new
   u2.connect('127.0.0.1', 4913)
-  # Won't send a message to the receiver obj.
-  # Instead it will send a message via UDP socket.
+  # Не отправит сообщение.
+  # Вместо этого пошлет сообщение через UDP socket.
   u2.send :sleep, 0
-  # Will actually send a message to the receiver obj.
+  # А таким образом, всё-таки, отправит
   u2.__send__ ...
   ```
 ## Разное
@@ -3725,7 +3727,7 @@
   параметрами.<sup>[[ссылка](#too-many-params)]</sup>
 
 * <a name="private-global-methods"></a> Если вам действительно нужны глобальные
-  функции, включайте их в модуль Kernel и сделайте их приватными.
+  функции, включайте их в модуль `Kernel` и сделайте их приватными.
   <sup>[[ссылка](#private-global-methods)]</sup>
 
 * <a name="instance-vars"></a> Используйте переменные модулей вместо глобальных
@@ -3781,7 +3783,7 @@
 [RuboCop][] &mdash; это утилита проверки стиля
 программного кода на Руби, который основывается на этом руководстве.
 РубоКоп уже реализует большую часть этого руководства, поддерживает MRI 1.9
-и MRI 2.0 и хорошо интегрируется с редактором Емакс.
+и MRI 2.0 и хорошо интегрируется с редактором Emacs.
 
 ### RubyMine
 

@@ -28,7 +28,10 @@
 Если вы хотите оставаться в курсе актуальных изменений, следите за репозиторием
 и жмите на звездочку!
 
-Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING.md) написано,
+<a href="https://twitter.com/intent/tweet?button_hashtag=RubyStyleGuide" class="twitter-hashtag-button" data-lang="ru" data-size="large" data-related="_arbox_" data-url="https://github.com/arbox/ruby-style-guide">Tweet #RubyStyleGuide</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING-ruRU.md) написано,
 как это сделать!
 
 ## Другие руководства:

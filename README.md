@@ -1,10 +1,11 @@
 # :blue_book: Руби: руководство по стилю оформления
 
-Это руководство по оформлению кода на Руби дает передовые рекомендации. С его
-помощью обычный программист на Руби будет создавать код, который с легкостью
-смогут поддерживать и развивать другие обычные разработчики.
+Это руководство по оформлению кода на [Руби](https://www.ruby-lang.org/ru/) дает
+передовые рекомендации. С его помощью обычный программист на Руби будет создавать
+код, который с легкостью смогут поддерживать и развивать другие обычные разработчики.
 
-Хотите писать _качественный_ код на Руби? Читайте [руководство][russian] на _русском_ языке!
+Хотите писать _качественный_ код на Руби? Читайте [руководство][russian]
+на _русском_ языке!
 
 [Оригинал][english] этого руководства был составлен [Божидаром Бацовым
 ][bbatsov]. Переводы данного руководства доступны на следующих языках:
@@ -27,7 +28,8 @@
 Если вы хотите оставаться в курсе актуальных изменений, следите за репозиторием
 и жмите на звездочку!
 
-Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING.md) написано, как это сделать!
+Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING.md) написано,
+как это сделать!
 
 ## Другие руководства:
 
@@ -36,16 +38,6 @@
 * https://github.com/styleguide/ruby
 * https://github.com/airbnb/ruby
 * https://github.com/thoughtbot/guides/tree/master/style/ruby
-
-## Непрерывная интеграция:
-
-* https://houndci.com/
-
-
-## Buttons
-
-<!-- Place this tag where you want the button to render. -->
-<a data-count-api="/users/arbox#followers" data-count-href="/arbox/followers" data-style="mega" href="https://github.com/arbox" class="github-button">Follow @arbox</a>
 
 [russian]: https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md
 [english]: https://github.com/bbatsov/ruby-style-guide/blob/master/README.md

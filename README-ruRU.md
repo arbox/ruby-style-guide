@@ -3808,8 +3808,7 @@
 
 ## Как сотрудничать в проекте?
 
-Это просто! Следуйте [руководству по
-сотрудничеству](https://github.com/bbatsov/ruby-style-guide/blob/master/CONTRIBUTING.md).
+Это просто! Следуйте [руководству по сотрудничеству](CONTRIBUTING-ruRU.md).
 
 # Лицензирование
 

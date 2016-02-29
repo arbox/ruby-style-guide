@@ -2337,7 +2337,7 @@
   <sup>[[ссылка](#liskov)]</sup>
 
 * <a name="solid-design"></a> Проверяйте дизайн ваших классов на
-  соответствие принципу [SOLID](http://en.wikipedia.org/wiki/SOLID_\(object-oriented_design\)),
+  соответствие принципу [SOLID](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29),
   если такая возможность есть.
   <sup>[[ссылка](#solid-design)]</sup>
 
@@ -3802,9 +3802,9 @@
 вашего кода. И заранее большое спасибо за вашу помощь!
 
 Вы можете поддержать проект (и РубоКоп) денежным взносом при помощи
-[Gratipay](https://gratipay.com/~bbatsov/).
+[Gratipay][gratipay].
 
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/~bbatsov/)
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](gratipay)
 
 ## Как сотрудничать в проекте?
 
@@ -3812,7 +3812,7 @@
 
 # Лицензирование
 
-![Creative Commons License](http://i.creativecommons.org/l/by/3.0/88x31.png)
+![Creative Commons License](https://licensebuttons.net/l/by/3.0/88x31.png)
 Данная работа опубликована на условиях лицензии [Creative Commons Attribution
 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US)
 
@@ -3837,3 +3837,4 @@
 [RuboCop]: https://github.com/bbatsov/rubocop
 [Liskov]: https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8_%D0%91%D0%B0%D1%80%D0%B1%D0%B0%D1%80%D1%8B_%D0%9B%D0%B8%D1%81%D0%BA%D0%BE%D0%B2
 [duck-typing]: https://ru.wikipedia.org/wiki/%D0%A3%D1%82%D0%B8%D0%BD%D0%B0%D1%8F_%D1%82%D0%B8%D0%BF%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F
+[gratipay]: https://gratipay.com/~bbatsov/

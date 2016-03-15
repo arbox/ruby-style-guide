@@ -3,6 +3,8 @@
 [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?button_hashtag=RubyStyleGuide&text=%D0%9F%D0%B8%D1%88%D0%B8%20%D0%BA%D0%BE%D0%B4%20%D0%BD%D0%B0%20Ruby%20%D1%81%D0%BE%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5%D0%BC!&url=https://github.com/arbox/ruby-style-guide)
 [![Build Status](https://travis-ci.org/arbox/ruby-style-guide.svg?branch=master)](https://travis-ci.org/arbox/ruby-style-guide)
 
+<img src="assets/Ruby_Logo.jpg" width="200px" height="200px" />
+
 Это руководство по оформлению кода на [Руби](https://www.ruby-lang.org/ru/) дает
 передовые рекомендации. С его помощью обычный программист на Руби будет создавать
 код, который с легкостью смогут поддерживать и развивать другие обычные разработчики.

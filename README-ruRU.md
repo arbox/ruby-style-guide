@@ -2463,19 +2463,19 @@
   ```Ruby
   # плохо
   class Animal
-    # abstract method
+    # абстрактный метод
     def speak
     end
   end
 
-  # extend superclass
+  # расширяем метод родительского класса
   class Duck < Animal
     def speak
       puts 'Quack! Quack'
     end
   end
 
-  # extend superclass
+  # расширяем метод родительского класса
   class Dog < Animal
     def speak
       puts 'Bau! Bau!'
@@ -2735,22 +2735,22 @@
   ```Ruby
   # плохо
   begin
-    something_that_might_fail
+    # код, который может вызвать ошибку
   rescue IOError
-    # handle IOError
+    # обработка ошибки класса IOError
   end
 
   begin
-    something_else_that_might_fail
+    # код, который может вызвать ошибку
   rescue IOError
-    # handle IOError
+    # обработка ошибки класса IOError
   end
 
   # хорошо
   def with_io_error_handling
      yield
   rescue IOError
-    # handle IOError
+    # обработка ошибки класса IOError
   end
 
   with_io_error_handling { something_that_might_fail }
@@ -2870,9 +2870,9 @@
   ```Ruby
   f = File.open('testfile')
   begin
-    # .. process
+    # некоторые действия над файлом
   rescue
-    # .. handle error
+    # обработка ошибок
   ensure
     f.close unless f.nil?
   end
@@ -2886,12 +2886,12 @@
   ```Ruby
   # плохо (нужно специально закрывать ранее открытый файл)
   f = File.open('testfile')
-    # ...
+    # некоторые действия над файлом
   f.close
 
   # хорошо (открытый файл закрывается автоматически)
   File.open('testfile') do |f|
-    # ...
+    # некоторые действия над файлом
   end
   ```
 * <a name="standard-exceptions"></a>
@@ -3630,7 +3630,7 @@
     # плохо
     def method_missing?(meth, *params, &block)
       if /^find_by_(?<prop>.*)/ =~ meth
-        # ... lots of code to do a find_by
+        # много кода, чтобы сделать аналог find_by
       else
         super
       end

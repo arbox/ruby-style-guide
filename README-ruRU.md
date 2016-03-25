@@ -415,12 +415,12 @@
   ```Ruby
   # плохо
   def some_method(arg1=:default, arg2=nil, arg3=[])
-    # do something...
+    # некоторый код
   end
 
   # хорошо
   def some_method(arg1 = :default, arg2 = nil, arg3 = [])
-    # do something...
+    # некоторый код
   end
   ```
 
@@ -955,13 +955,13 @@
   ```Ruby
   # плохо
   10.times do
-    # multi-line body omitted
+    # некоторый код в несколько строк
   end if some_condition
 
   # хорошо
   if some_condition
     10.times do
-      # multi-line body omitted
+      # некоторый код в несколько строк
     end
   end
   ```
@@ -1120,14 +1120,13 @@
 * <a name="no-dsl-parens"></a> Не используйте скобки при вызове методов,
   являющихся частью таких DSL, как Rake, Rails, RSpec, методов, имеющих
   статус ключевого слова, например, `attr_reader`, `puts` и при вызове
-  аксессоров. Используйте скобки при вызове прочих методов.
+  аксессоров (`attr_accessor`). Используйте скобки при вызове прочих методов.
   <sup>[[ссылка](#no-dsl-parens)]</sup>
 
   ```Ruby
   class Person
     attr_reader :name, :age
-
-    # omitted
+    # некоторый код класса
   end
 
   temperance = Person.new('Temperance', 30)
@@ -1602,7 +1601,7 @@
 
   def something(x)
     unused_var, used_var = something_else(x)
-    # ...
+    # некоторый код
   end
 
   # хорошо
@@ -1610,7 +1609,7 @@
 
   def something(x)
     _unused_var, used_var = something_else(x)
-    # ...
+    # некоторый код
   end
 
   # хорошо
@@ -1618,7 +1617,7 @@
 
   def something(x)
     _, used_var = something_else(x)
-    # ...
+    # некоторый код
   end
   ```
 
@@ -1861,18 +1860,18 @@
   someVar = 5
 
   def someMethod
-    ...
+    # некоторый код
   end
 
   def SomeMethod
-   ...
+   # некоторый код
   end
 
   # хорошо
   :some_symbol
 
   def some_method
-    ...
+    # некоторый код
   end
   ```
 
@@ -1883,32 +1882,32 @@
   ```Ruby
   # плохо
   class Someclass
-    ...
+    # некоторый код
   end
 
   class Some_Class
-    ...
+    # некоторый код
   end
 
   class SomeXml
-    ...
+    # некоторый код
   end
 
   class XmlSomething
-  ...
+    # некоторый код
   end
 
   # хорошо
   class SomeClass
-    ...
+    # некоторый код
   end
 
   class SomeXML
-  ...
+    # некоторый код
   end
 
   class XMLSomething
-  ...
+    # некоторый код
   end
   ```
 
@@ -2523,7 +2522,7 @@
 * <a name="visibility"></a>
   Ограничивайте область видимости методов (`private`, `protected`) в зависимости
   от их планируемого применения. Не оставляйте все в области `public` (это
-  стандартное значение). В конце концов мы пишем на *Руби*, а не на *Питоне*.
+  стандартное значение). В конце концов мы пишем на *Ruby*, а не на *Python*.
   <sup>[[ссылка](#visibility)]</sup>
 
 * <a name="indent-public-private-protected"></a>
@@ -2833,7 +2832,6 @@
   # тоже хорошо
   begin
     # здесь вызывается исключение
-
   rescue StandardError => e
     # обработка ошибок
   end
@@ -3254,6 +3252,7 @@
   end
 
   $global = 0
+
   # плохо
   puts "$global = #$global"
 
@@ -3683,9 +3682,9 @@
 
   linux_organization = Organization.find(...)
 
-  # плохо - нарушает private области видимости
+  # плохо - нарушает приватные области видимости
   linux_organization.send(:reset_token)
-  # хорошо - выдаст exception
+  # хорошо - выдаст исключение
 
   linux_organization.public_send(:reset_token)
   ```

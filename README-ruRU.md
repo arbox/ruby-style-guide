@@ -270,15 +270,15 @@
 * <a name="no-space-inside-range-literals"></a>  Записывайте литералы диапазонов
   без пробелов.<sup>[[ссылка](#no-space-inside-range-literals)]</sup>
 
-    ```Ruby
-    # плохо
-    1 .. 3
-    'a' ... 'z'
+  ```Ruby
+  # плохо
+  1 .. 3
+  'a' ... 'z'
 
-    # хорошо
-    1..3
-    'a'...'z'
-    ```
+  # хорошо
+  1..3
+  'a'...'z'
+  ```
 
 * <a name="indent-when-to-case"></a>
   Делайте отступ для `when` таким же, как и для `case`. Этот стиль

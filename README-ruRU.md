@@ -415,12 +415,12 @@
   ```Ruby
   # плохо
   def some_method(arg1=:default, arg2=nil, arg3=[])
-    # do something...
+    # некоторый код
   end
 
   # хорошо
   def some_method(arg1 = :default, arg2 = nil, arg3 = [])
-    # do something...
+    # некоторый код
   end
   ```
 
@@ -455,12 +455,12 @@
   следующую строку, начинайте её с точки.
 
     ```Ruby
-    # плохо - нужно посмотреть на предыдущую строку, чтобы понять
+    # плохо (нужно посмотреть на предыдущую строку, чтобы понять
     # смысл последующей
     one.two.three.
       four
 
-    # хорошо - сразу ясно, что происходит во второй строке
+    # хорошо (сразу ясно, что происходит во второй строке)
     one.two.three
       .four
     ```
@@ -470,13 +470,13 @@
   понять, что продолжение выражения следует
 
     ```Ruby
-    # плохо - чтобы понять, что выражение не окончено, необходимо
-    # посмотреть на следующую строку.
+    # плохо (чтобы понять, что выражение не окончено, необходимо
+    # посмотреть на следующую строку)
     one.two.three
       .four
 
-    # хорошо - сразу видно, что выражение будет продолжено на
-    # следующей строке
+    # хорошо (сразу видно, что выражение будет продолжено на
+    # следующей строке)
     one.two.three.
       four
     ```
@@ -782,15 +782,13 @@
   ```Ruby
   # плохо
   if
-    some_condition
-    do_something
-    do_something_else
+    x > 1
+    # некоторые действия
   end
 
   # хорошо
-  if some_condition
-    do_something
-    do_something_else
+  if x > 1
+    # некоторые действия
   end
   ```
 
@@ -847,7 +845,7 @@
 
   ```Ruby
   # плохо
-  if condition
+  if a == 1
     result = x
   else
     result = y
@@ -855,7 +853,7 @@
 
   # хорошо
   result =
-    if condition
+    if a == 1
       x
     else
       y
@@ -955,13 +953,13 @@
   ```Ruby
   # плохо
   10.times do
-    # multi-line body omitted
+    # некоторый код в несколько строк
   end if some_condition
 
   # хорошо
   if some_condition
     10.times do
-      # multi-line body omitted
+      # некоторый код в несколько строк
     end
   end
   ```
@@ -1120,14 +1118,13 @@
 * <a name="no-dsl-parens"></a> Не используйте скобки при вызове методов,
   являющихся частью таких DSL, как Rake, Rails, RSpec, методов, имеющих
   статус ключевого слова, например, `attr_reader`, `puts` и при вызове
-  аксессоров. Используйте скобки при вызове прочих методов.
+  аксессоров (`attr_accessor`). Используйте скобки при вызове прочих методов.
   <sup>[[ссылка](#no-dsl-parens)]</sup>
 
   ```Ruby
   class Person
     attr_reader :name, :age
-
-    # omitted
+    # некоторый код класса
   end
 
   temperance = Person.new('Temperance', 30)
@@ -1602,7 +1599,7 @@
 
   def something(x)
     unused_var, used_var = something_else(x)
-    # ...
+    # некоторый код
   end
 
   # хорошо
@@ -1610,7 +1607,7 @@
 
   def something(x)
     _unused_var, used_var = something_else(x)
-    # ...
+    # некоторый код
   end
 
   # хорошо
@@ -1618,7 +1615,7 @@
 
   def something(x)
     _, used_var = something_else(x)
-    # ...
+    # некоторый код
   end
   ```
 
@@ -1861,18 +1858,18 @@
   someVar = 5
 
   def someMethod
-    ...
+    # некоторый код
   end
 
   def SomeMethod
-   ...
+   # некоторый код
   end
 
   # хорошо
   :some_symbol
 
   def some_method
-    ...
+    # некоторый код
   end
   ```
 
@@ -1883,32 +1880,32 @@
   ```Ruby
   # плохо
   class Someclass
-    ...
+    # некоторый код
   end
 
   class Some_Class
-    ...
+    # некоторый код
   end
 
   class SomeXml
-    ...
+    # некоторый код
   end
 
   class XmlSomething
-  ...
+    # некоторый код
   end
 
   # хорошо
   class SomeClass
-    ...
+    # некоторый код
   end
 
   class SomeXML
-  ...
+    # некоторый код
   end
 
   class XMLSomething
-  ...
+    # некоторый код
   end
   ```
 
@@ -2777,10 +2774,10 @@
   постмодификатора.<sup>[[ссылка](#no-rescue-modifiers)]</sup>
 
   ```Ruby
-  # плохо - это перехватывает исключения класса `StandardError` и его наследников
+  # плохо (это перехватывает исключения класса `StandardError` и его наследников)
   read_file rescue handle_error($!)
 
-  # хорошо - это перехватывает только исключения класса `Errno::ENOENT` и его наследников
+  # хорошо (это перехватывает только исключения класса `Errno::ENOENT` и его наследников)
   def foo
     read_file
   rescue Errno::ENOENT => ex
@@ -2833,7 +2830,6 @@
   # тоже хорошо
   begin
     # здесь вызывается исключение
-
   rescue StandardError => e
     # обработка ошибок
   end
@@ -3254,6 +3250,7 @@
   end
 
   $global = 0
+
   # плохо
   puts "$global = #$global"
 
@@ -3683,9 +3680,9 @@
 
   linux_organization = Organization.find(...)
 
-  # плохо - нарушает private области видимости
+  # плохо (нарушает приватные области видимости)
   linux_organization.send(:reset_token)
-  # хорошо - выдаст exception
+  # хорошо (выдаст исключение)
 
   linux_organization.public_send(:reset_token)
   ```

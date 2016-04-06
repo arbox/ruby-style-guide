@@ -1082,21 +1082,21 @@
 * <a name="infinite-loop"></a> Используйте `Kernel#loop` вместо `while/until`
   для бесконечного цикла.<sup>[[ссылка](#infinite-loop)]</sup>
 
-    ```Ruby
-    # плохо
-    while true
-      do_something
-    end
+  ```Ruby
+  # плохо
+  while true
+    do_something
+  end
 
-    until false
-      do_something
-    end
+  until false
+    do_something
+  end
 
-    # хорошо
-    loop do
-      do_something
-    end
-    ```
+  # хорошо
+  loop do
+    do_something
+  end
+  ```
 
 * <a name="loop-with-break"></a> Используйте `Kernel#loop` с `break` вместо
   `begin/end/until` или `begin/end/while` для циклов с постусловием.
@@ -1748,19 +1748,19 @@
   с логическими значениями.
   <sup>[[ссылка](#no-non-nil-checks)]</sup>
 
-    ```Ruby
-    # плохо
-    do_something if !something.nil?
-    do_something if something != nil
+  ```Ruby
+  # плохо
+  do_something if !something.nil?
+  do_something if something != nil
 
-    # хорошо
-    do_something if something
+  # хорошо
+  do_something if something
 
-    # хорошо (логическое значение)
-    def value_set?
-      !@some_boolean.nil?
-    end
-    ```
+  # хорошо (логическое значение)
+  def value_set?
+    !@some_boolean.nil?
+  end
+  ```
 
 * <a name="no-BEGIN-blocks"></a>
   Старайтесь не использовать блоки `BEGIN`.
@@ -3302,18 +3302,18 @@
   быстрый и специализированный альтернативный метод.
   <sup>[[ссылка](#dont-abuse-gsub)]</sup>
 
-    ```Ruby
-    url = 'http://example.com'
-    str = 'lisp-case-rules'
+  ```Ruby
+  url = 'http://example.com'
+  str = 'lisp-case-rules'
 
-    # плохо
-    url.gsub('http://', 'https://')
-    str.gsub('-', '_')
+  # плохо
+  url.gsub('http://', 'https://')
+  str.gsub('-', '_')
 
-    # хорошо
-    url.sub('http://', 'https://')
-    str.tr('-', '_')
-    ```
+  # хорошо
+  url.sub('http://', 'https://')
+  str.tr('-', '_')
+  ```
 
 
 * <a name="heredocs"></a>

@@ -555,7 +555,7 @@
   num = 1_000_000
   ```
 
-* <a name="rdoc-conventions"></a> Используйте устоявшиеся правила RDoc
+* <a name="rdoc-conventions"></a> Используйте устоявшиеся правила [Rdoc][rdoc]
   для описания интерфейсов. Не отделяйте блок комментария от начала определения
   метода `def` пустой строкой.<sup>[[ссылка](#rdoc-conventions)]</sup>
 
@@ -1123,19 +1123,38 @@
 
   ```Ruby
   class Person
+    # плохо
+    attr_reader(:name, :age)
+    # хорошо
     attr_reader :name, :age
+
     # некоторый код класса
   end
 
+  # плохо
+  temperance = Person.new 'Temperance', 30
+  # хорошо
   temperance = Person.new('Temperance', 30)
-  temperance.name
 
+  # плохо
+  puts(temperance.age)
+  # хорошо
   puts temperance.age
 
+  # плохо
+  x = Math.sin y
+  # хорошо
   x = Math.sin(y)
+
+  # плохо
+  array.delete e
+  # хорошо
   array.delete(e)
 
-  bowling.score.should == 0
+  # плохо
+  expect(bowling.score).to eq 0
+  # хорошо
+  expect(bowling.score).to eq(0)
   ```
 
 * <a name="no-braces-opts-hash"></a> Не используйте фигурные скобки для
@@ -3835,3 +3854,4 @@
 [Liskov]: https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8_%D0%91%D0%B0%D1%80%D0%B1%D0%B0%D1%80%D1%8B_%D0%9B%D0%B8%D1%81%D0%BA%D0%BE%D0%B2
 [duck-typing]: https://ru.wikipedia.org/wiki/%D0%A3%D1%82%D0%B8%D0%BD%D0%B0%D1%8F_%D1%82%D0%B8%D0%BF%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F
 [gratipay]: https://gratipay.com/~bbatsov/
+[rdoc]: http://rdoc.sourceforge.net/doc/

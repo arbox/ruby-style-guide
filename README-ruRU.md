@@ -60,7 +60,7 @@
 время каждое правило найдет свое объяснение, а пока просто примите их к сведению.
 
 Вы можете создать копию этого руководства в форматах PDF или HTML при помощи
-[Transmuter][].
+[Pandoc][].
 
 [RuboCop][] &mdash; это анализатор кода, основывающийся на правилах этого
 руководства по оформлению.
@@ -555,9 +555,10 @@
   num = 1_000_000
   ```
 
-* <a name="rdoc-conventions"></a> Используйте устоявшиеся правила RDoc
-  для описания интерфейсов. Не отделяйте блок комментария от начала определения
-  метода `def` пустой строкой.<sup>[[ссылка](#rdoc-conventions)]</sup>
+* <a name="rdoc-conventions"></a>
+  Используйте устоявшиеся правила [RDoc][rdoc] для описания интерфейсов.
+  Не отделяйте блок комментария от начала определения метода `def` пустой строкой.
+  <sup>[[ссылка](#rdoc-conventions)]</sup>
 
 * <a name="80-character-limits"></a> Ограничивайте длину строк 80-ю
   символами.<sup>[[ссылка](#80-character-limits)]</sup>
@@ -1123,19 +1124,38 @@
 
   ```Ruby
   class Person
+    # плохо
+    attr_reader(:name, :age)
+    # хорошо
     attr_reader :name, :age
+
     # некоторый код класса
   end
 
+  # плохо
+  temperance = Person.new 'Temperance', 30
+  # хорошо
   temperance = Person.new('Temperance', 30)
-  temperance.name
 
+  # плохо
+  puts(temperance.age)
+  # хорошо
   puts temperance.age
 
+  # плохо
+  x = Math.syn y
+  # хорошо
   x = Math.sin(y)
+
+  # плохо
+  array.delete e
+  # хорошо
   array.delete(e)
 
-  bowling.score.should == 0
+  # плохо
+  expect(bowling.score).to eq 0
+  # хорошо
+  expect(bowling.score).to eq(0)
   ```
 
 * <a name="no-braces-opts-hash"></a> Не используйте фигурные скобки для
@@ -1342,20 +1362,20 @@
   # плохо (к тому же вызывает предупреждение)
   if v = array.grep(/foo/)
     do_something(v)
-    ...
+    # некоторый код
   end
 
   # хорошо (MRI будет вызывает предупреждение, но не Рубокоп)
   if (v = array.grep(/foo/))
     do_something(v)
-    ...
+    # некоторый код
   end
 
   # хорошо
   v = array.grep(/foo/)
   if v
     do_something(v)
-    ...
+    # некоторый код
   end
   ```
 
@@ -2280,6 +2300,7 @@
     end
 
     def self.some_other_method
+      # некоторый код
     end
   end
 
@@ -2292,6 +2313,7 @@
     end
 
     def some_other_method
+      # некоторый код
     end
   end
   ```
@@ -2394,7 +2416,7 @@
   <sup>[[ссылка](#attr)]</sup>
 
   ```Ruby
-  # плохо (создает единый метод доступа атрибуту, объявлено нежелательным 1.9)
+  # плохо (создает единый метод доступа атрибуту, объявлено нежелательным в Руби >= 1.9)
   attr :something, true
   attr :one, :two, :three # ведет себя как attr_reader
 
@@ -2697,6 +2719,7 @@
   <sup>[[ссылка](#no-return-ensure)]</sup>
 
   ```Ruby
+  # плохо
   def foo
     raise
   ensure
@@ -3402,7 +3425,7 @@
 
   ```Ruby
   /(regexp)/ =~ string
-  ...
+  # некоторый код
 
   # плохо
   process $1
@@ -3418,12 +3441,12 @@
   ```Ruby
   # плохо
   /(regexp)/ =~ string
-  ...
+  # некоторый код
   process Regexp.last_match[1]
 
   # хорошо
   /(?<meaningful_var>regexp)/ =~ string
-  ...
+  # некоторый код
   process meaningful_var
   ```
 
@@ -3662,15 +3685,15 @@
     private
 
     def reset_token
-      ...
+      # некоторый код
     end
 
     def create_token
-      ...
+      # некоторый код
     end
 
     def activate!
-      ...
+      # некоторый код
     end
   end
 
@@ -3830,8 +3853,9 @@
 [pickaxe]: https://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
 [trpl]: http://www.ozon.ru/context/detail/id/5704300/
 [entrpl]: http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
-[transmuter]: https://github.com/kalbasit/transmuter
+[Pandoc]: http://pandoc.org
 [RuboCop]: https://github.com/bbatsov/rubocop
+[rdoc]: http://docs.seattlerb.org/rdoc/
 [Liskov]: https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8_%D0%91%D0%B0%D1%80%D0%B1%D0%B0%D1%80%D1%8B_%D0%9B%D0%B8%D1%81%D0%BA%D0%BE%D0%B2
 [duck-typing]: https://ru.wikipedia.org/wiki/%D0%A3%D1%82%D0%B8%D0%BD%D0%B0%D1%8F_%D1%82%D0%B8%D0%BF%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F
 [gratipay]: https://gratipay.com/~bbatsov/

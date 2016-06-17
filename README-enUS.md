@@ -87,6 +87,7 @@ Translations of the guide are available in the following languages:
 * [Classes & Modules](#classes--modules)
 * [Exceptions](#exceptions)
 * [Collections](#collections)
+* [Numbers](#numbers)
 * [Strings](#strings)
 * [Regular Expressions](#regular-expressions)
 * [Percent Literals](#percent-literals)
@@ -204,15 +205,14 @@ Translations of the guide are available in the following languages:
   ```
 
 * <a name="spaces-operators"></a>
-  Use spaces around operators, after commas, colons and semicolons, around `{`
-  and before `}`. Whitespace might be (mostly) irrelevant to the Ruby
-  interpreter, but its proper use is the key to writing easily readable code.
+  Use spaces around operators, after commas, colons and semicolons.
+  Whitespace might be (mostly) irrelevant to the Ruby interpreter,
+  but its proper use is the key to writing easily readable code.
 <sup>[[link](#spaces-operators)]</sup>
 
   ```Ruby
   sum = 1 + 2
   a, b = 1, 2
-  [1, 2, 3].each { |e| puts e }
   class FooError < StandardError; end
   ```
 
@@ -226,9 +226,29 @@ Translations of the guide are available in the following languages:
   e = M * c**2
   ```
 
+* <a name="spaces-braces"></a>
+  No spaces after `(`, `[` or before `]`, `)`.
+  Use spaces around `{` and before `}`.
+<sup>[[link](#spaces-braces)]</sup>
+
+  ```Ruby
+  # bad
+  some( arg ).other
+  [ 1, 2, 3 ].each{|e| puts e}
+
+  # good
+  some(arg).other
+  [1, 2, 3].each { |e| puts e }
+  ```
+
   `{` and `}` deserve a bit of clarification, since they are used
   for block and hash literals, as well as string interpolation.
+
   For hash literals two styles are considered acceptable.
+  The first variant is slightly more readable (and arguably more
+  popular in the Ruby community in general). The second variant has
+  the advantage of adding visual difference between block and hash
+  literals. Whichever one you pick - apply it consistently.
 
   ```Ruby
   # good - space after { and before }
@@ -238,23 +258,14 @@ Translations of the guide are available in the following languages:
   {one: 1, two: 2}
   ```
 
-  The first variant is slightly more readable (and arguably more
-  popular in the Ruby community in general). The second variant has
-  the advantage of adding visual difference between block and hash
-  literals. Whichever one you pick - apply it consistently.
-
-* <a name="no-spaces-braces"></a>
-  No spaces after `(`, `[` or before `]`, `)`.
-<sup>[[link](#no-spaces-braces)]</sup>
+  With interpolated expressions, there should be no padded-spacing inside the braces.
 
   ```Ruby
   # bad
-  some( arg ).other
-  [ 1, 2, 3 ].size
+  "From: #{ user.first_name }, #{ user.last_name }"
 
   # good
-  some(arg).other
-  [1, 2, 3].size
+  "From: #{user.first_name}, #{user.last_name}"
   ```
 
 * <a name="no-space-bang"></a>
@@ -558,6 +569,28 @@ Translations of the guide are available in the following languages:
   num = 1_000_000
   ```
 
+* <a name="numeric-literal-prefixes"></a>
+  Prefer smallcase letters for numeric literal prefixes.
+  `0o` for octal, `0x` for hexadecimal and `0b` for binary.
+  Do not use `0d` prefix for decimal literals.
+<sup>[[link](#numeric-literal-prefixes)]</sup>
+
+  ```Ruby
+  # bad
+  num = 01234
+  num = 0O1234
+  num = 0X12AB
+  num = 0B10101
+  num = 0D1234
+  num = 0d1234
+
+  # good - easier to separate digits from the prefix
+  num = 0o1234
+  num = 0x12AB
+  num = 0b10101
+  num = 1234
+  ```
+
 * <a name="rdoc-conventions"></a>
     Use [Rdoc][rdoc] and its conventions for API documentation.  Don't put an
     empty line between the comment block and the `def`.
@@ -700,11 +733,11 @@ Translations of the guide are available in the following languages:
   first, second = multi_return
 
   # good - use with splat
-  first, *list = [1, 2, 3, 4]
+  first, *list = [1, 2, 3, 4] # first => 1, list => [2, 3, 4]
 
-  hello_array = *'Hello'
+  hello_array = *'Hello' # => ["Hello"]
 
-  a = *(1..3)
+  a = *(1..3) # => [1, 2, 3]
   ```
 
 * <a name="trailing-underscore-variables"></a>
@@ -727,7 +760,7 @@ Translations of the guide are available in the following languages:
 
   # good
   foo = 'one,two,three,four,five'
-  # The underscores is needed to show that you want all elements
+  # The underscores are needed to show that you want all elements
   # except for the last number of underscore elements
   *beginning, _ = foo.split(',')
   *beginning, something, _ = foo.split(',')
@@ -1241,7 +1274,7 @@ condition](#safe-assignment-in-condition).
 
 * <a name="single-line-blocks"></a>
   Prefer `{...}` over `do...end` for single-line blocks.  Avoid using `{...}`
-  for multi-line blocks (multiline chaining is always ugly). Always use
+  for multi-line blocks (multi-line chaining is always ugly). Always use
   `do...end` for "control flow" and "method definitions" (e.g. in Rakefiles and
   certain DSLs).  Avoid `do...end` when chaining.
 <sup>[[link](#single-line-blocks)]</sup>
@@ -1266,7 +1299,7 @@ condition](#safe-assignment-in-condition).
   names.select { |name| name.start_with?('S') }.map(&:upcase)
   ```
 
-  Some will argue that multiline chaining would look OK with the use of {...},
+  Some will argue that multi-line chaining would look OK with the use of {...},
   but they should ask themselves - is this code really readable and can the
   blocks' contents be extracted into nifty methods?
 
@@ -1502,7 +1535,7 @@ condition](#safe-assignment-in-condition).
 
   # good
   'ruby' == some_str
-  1.0.eql? x # eql? makes sense here if want to differentiate between Fixnum and Float 1
+  1.0.eql? x # eql? makes sense here if want to differentiate between Integer and Float 1
   ```
 
 * <a name="no-cryptic-perlisms"></a>
@@ -1744,18 +1777,18 @@ no parameters.
   # => 'one, two, three'
   ```
 
-* <a name="splat-arrays"></a>
-  Use `[*var]` or `Array()` instead of explicit `Array` check, when dealing
+* <a name="array-coercion"></a>
+  Use `Array()` instead of explicit `Array` check or `[*var]`, when dealing
   with a variable you want to treat as an Array, but you're not certain it's an
   array.
-<sup>[[link](#splat-arrays)]</sup>
+<sup>[[link](#array-coercion)]</sup>
 
   ```Ruby
   # bad
   paths = [paths] unless paths.is_a? Array
   paths.each { |path| do_something(path) }
 
-  # good
+  # bad (always creates a new Array instance)
   [*paths].each { |path| do_something(path) }
 
   # good (and a bit more readable)
@@ -2069,6 +2102,44 @@ no parameters.
   end in a question mark.  (i.e. `Array#empty?`). Methods that don't return a
   boolean, shouldn't end in a question mark.
 <sup>[[link](#bool-methods-qmark)]</sup>
+
+* <a name="bool-methods-prefix"></a>
+  Avoid prefixing predicate methods with the auxiliary verbs such as `is`,
+  `does`, or `can`.  These words are redundant and inconsistent with the style of
+  boolean methods in the Ruby core library, such as `empty?` and `include?`.
+<sup>[[link](#bool-methods-prefix)]</sup>
+
+  ```Ruby
+  # bad
+  class Person
+    def is_tall?
+      true
+    end
+
+    def can_play_basketball?
+      false
+    end
+
+    def does_like_candy?
+      true
+    end
+  end
+
+  # good
+  class Person
+    def tall?
+      true
+    end
+
+    def basketball_player?
+      false
+    end
+
+    def likes_candy?
+      true
+    end
+  end
+  ```
 
 * <a name="dangerous-method-bang"></a>
   The names of potentially *dangerous* methods (i.e. methods that modify
@@ -2471,6 +2542,37 @@ no parameters.
     def initialize(first_name, last_name)
       @first_name = first_name
       @last_name = last_name
+    end
+  end
+  ```
+
+* <a name="accessor_mutator_method_names"></a>
+  For accessors and mutators, avoid prefixing method names with
+  `get_` and `set_`.
+  It is a Ruby convention to use attribute names for accessors (readers) and
+  `attr_name=` for mutators (writers).
+<sup>[[link](#accessor_mutator_method_names)]</sup>
+
+  ```Ruby
+  # bad
+  class Person
+    def get_name
+      "#{@first_name} #{@last_name}"
+    end
+
+    def set_name(name)
+      @first_name, @last_name = name.split(' ')
+    end
+  end
+
+  # good
+  class Person
+    def name
+      "#{@first_name} #{@last_name}"
+    end
+
+    def name=(name)
+      @first_name, @last_name = name.split(' ')
     end
   end
   ```
@@ -3252,6 +3354,23 @@ resource cleanup when possible.
     end
   end
   ```
+## Numbers
+
+* <a name="integer-type-checking"></a>
+  Use `Integer` check type of an integer number. Since `Fixnum` is platform-dependent, checking against it will
+  return different results on 32-bit and 64-bit machines.
+<sup>[[link](#integer-type-checking)]</sup>
+
+  ```Ruby
+  timestamp = Time.now.to_i
+
+  # bad
+  timestamp.is_a? Fixnum
+  timestamp.is_a? Bignum
+
+  # good
+  timestamp.is_a? Integer
+  ```
 
 ## Strings
 
@@ -3269,18 +3388,6 @@ resource cleanup when possible.
 
   # good
   email_with_name = format('%s <%s>', user.name, user.email)
-  ```
-
-* <a name="pad-string-interpolation"></a>
-  With interpolated expressions, there should be no padded-spacing inside the braces.
-<sup>[[link](#pad-string-interpolation)]</sup>
-
-  ```Ruby
-  # bad
-  "From: #{ user.first_name }, #{ user.last_name }"
-
-  # good
-  "From: #{user.first_name}, #{user.last_name}"
   ```
 
 * <a name="consistent-string-literals"></a>
@@ -3433,7 +3540,7 @@ resource cleanup when possible.
   ```
 
 * <a name="squiggly-heredocs"></a>
-  Use Ruby 2.3's squiggly heredocs for nicely indented multiline strings.
+  Use Ruby 2.3's squiggly heredocs for nicely indented multi-line strings.
 <sup>[[link](#squiggly-heredocs)]</sup>
 
   ```Ruby

@@ -3973,7 +3973,7 @@
 [rails-style-guide]: https://github.com/arbox/rails-style-guide/blob/master/README-ruRU.md
 [pickaxe]: https://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
 [trpl]: http://www.ozon.ru/context/detail/id/5704300/
-[entrpl]: http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
+[entrpl]: https://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
 [Pandoc]: http://pandoc.org
 [RuboCop]: https://github.com/bbatsov/rubocop
 [rdoc]: http://docs.seattlerb.org/rdoc/

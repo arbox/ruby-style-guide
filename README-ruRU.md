@@ -295,7 +295,7 @@
 
 * <a name="indent-when-to-case"></a>
   Делайте отступ для `when` таким же, как и для `case`. Этот стиль
-  предписывается как "Языком программирования Ruby", так и "Programming Ruby".
+  предписывается как ["Языком программирования Ruby"][trpl], так и ["Programming Ruby"][pickaxe].
   <sup>[[ссылка](#indent-when-to-case)]</sup>
 
   ```Ruby

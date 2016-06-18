@@ -229,7 +229,7 @@
 * <a name="spaces-braces"></a>
   Не используйте пробел после `(`, `[` или перед `]`, `)`. Вставляйте
   пробелы вокруг `{` и перед `}`.
-  <sup>[[link](#spaces-braces)]</sup>
+  <sup>[[ссылка](#spaces-braces)]</sup>
 
   ```Ruby
   # плохо
@@ -572,7 +572,7 @@
   Используйте прописные буквы в префиксах числовых записей: `0o` для
   восьмеричных, `0x` для шестнадцатеричных и `0b` для двоичных чисел.
   Не используйте `0d` префикс для десятичных литералов.
-  <sup>[[link](#numeric-literal-prefixes)]</sup>
+  <sup>[[ссылка](#numeric-literal-prefixes)]</sup>
 
   ```Ruby
   # плохо
@@ -745,7 +745,7 @@
   нижние подчеркивания в конце параллельного присваивания есть смысл, когда
   в начале присваивания вы используете оператор разобщения в переменную
   и хотите исключить какие-то значения.
-  <sup>[[link]](#trailing-underscore-variables)</sup>
+  <sup>[[ссылка]](#trailing-underscore-variables)</sup>
 
   ```Ruby
   # плохо
@@ -1006,7 +1006,7 @@
 * <a name="no-nested-modifiers"></a>
   Избегайте вложенных модификаторов `if/unless/while/until`. Используйте `&&/||`
   по необходимости.
-  <sup>[[link](#no-nested-modifiers)]</sup>
+  <sup>[[ссылка](#no-nested-modifiers)]</sup>
 
   ```Ruby
   # плохо
@@ -2005,7 +2005,7 @@
   `is_`, `does_` или `can_`. Такие префиксы не соответствуют
   ковенциям, принятым в стандартной библиотеке Руби (`#empty?` или
   `#include?`, например).
-  <sup>[[link](#bool-methods-prefix)]</sup>
+  <sup>[[ссылка](#bool-methods-prefix)]</sup>
 
   ```Ruby
   # плохо
@@ -2496,7 +2496,7 @@
   префиксами `get_` and `set_`. В Руби принято называть методы
   доступа по именам соответствующих переменных, а методы назначения с
   использованием `=`, например `attr_name=`.
-  <sup>[[link](#accessor_mutator_method_names)]</sup>
+  <sup>[[ссылка](#accessor_mutator_method_names)]</sup>
 
   ```Ruby
   # плохо
@@ -3168,7 +3168,7 @@
 * <a name="hash-each"></a>
   Используйте `Hash#each_key` вместо `Hash#keys.each`
   и `Hash#each_value` вместо `Hash#values.each`.
-  <sup>[[link](#hash-each)]</sup>
+  <sup>[[ссылка](#hash-each)]</sup>
 
   ```Ruby
   # плохо
@@ -3295,7 +3295,7 @@
   приведет к неоднозначным результатам на процессорах с разной
   разрядностью, так как размерность этих типов зависит от конкретной
   платформы.
-  <sup>[[link](#integer-type-checking)]</sup>
+  <sup>[[ссылка](#integer-type-checking)]</sup>
 
   ```Ruby
   timestamp = Time.now.to_i
@@ -3477,7 +3477,7 @@
 * <a name="squiggly-heredocs"></a>
   Используйте нотацию HEREDOC с тильдой, введенную в `Ruby 2.3`,
   для задания аккуратного отступа перед несколькими строками.
-  <sup>[[link](#squiggly-heredocs)]</sup>
+  <sup>[[ссылка](#squiggly-heredocs)]</sup>
 
   ```Ruby
   # плохо (используется `String#strip_margin` из Powerpack)
@@ -3792,7 +3792,7 @@
 
 * <a name="prefer-public-send"></a>
   Используйте `public_send`, а не `send`, чтобы не обойти `private`/`protected` области видимости.
-  <sup>[[link](#prefer-public-send)]</sup>
+  <sup>[[ссылка](#prefer-public-send)]</sup>
 
 ```ruby
   # Есть модель Organization < ActiveModel, которая использует concern Activatable

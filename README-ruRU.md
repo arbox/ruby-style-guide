@@ -1094,7 +1094,7 @@
   end
   ```
 
-* <a name="while-as-a-modifier"></a> Используйте `while/until` для однострочный
+* <a name="while-as-a-modifier"></a> Используйте `while/until` для однострочных
   выражений.<sup>[[ссылка](#while-as-a-modifier)]</sup>
 
   ```Ruby

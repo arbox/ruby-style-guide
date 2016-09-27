@@ -68,7 +68,7 @@
 Переводы данного руководства доступны на следующих языках:
 
 * [английский (исходная версия)](https://github.com/bbatsov/ruby-style-guide/blob/master/README.md)
-* [вьетнамский](https://github.com/CQBihn/ruby-style-guide/blob/master/README-viVN.md)
+* [вьетнамский](https://github.com/CQBinh/ruby-style-guide/blob/master/README-viVN.md)
 * [испанский](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [китайский традиционный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [китайский упрощенный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)

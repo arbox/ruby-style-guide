@@ -4,4 +4,4 @@ rvm:
 before_script:
   - gem install awesome_bot
 script:
-  - awesome_bot README-ruRU.md
+  - awesome_bot README-ruRU.md README.md

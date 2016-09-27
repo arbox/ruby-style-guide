@@ -68,7 +68,7 @@
 Переводы данного руководства доступны на следующих языках:
 
 * [английский (исходная версия)](https://github.com/bbatsov/ruby-style-guide/blob/master/README.md)
-* [вьетнамский](https://github.com/scrum2b/ruby-style-guide/blob/master/README-viVN.md)
+* [вьетнамский](https://github.com/CQBihn/ruby-style-guide/blob/master/README-viVN.md)
 * [испанский](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [китайский традиционный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [китайский упрощенный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
@@ -91,6 +91,7 @@
 * [Коллекции](#Коллекции)
 * [Числа](#Числа)
 * [Строки](#Строки)
+* [Даты и время](#Даты-и-время)
 * [Регулярные выражения](#Регулярные-выражения)
 * [Процентные литералы](#Процентные-литералы)
 * [Метапрограммирование](#Метапрограммирование)
@@ -123,7 +124,7 @@
   ```
 
 * <a name="crlf"></a> Используйте стиль Unix для строк (пользователи
-  *BSD/Solaris/Linux/OS X используют их по умолчанию,  пользователям Windows
+  \*BSD/Solaris/Linux/OS X используют их по умолчанию,  пользователям Windows
   нужно обратить особое внимание).<sup>[[ссылка](#crlf)]</sup>
 
   * Если вы используете Git, вы можете добавить следующие настройки
@@ -666,6 +667,74 @@
      # некоторый код
    end
    ```
+<!--- @FIXME --->
+* <a name="method-invocation-parens"></a>
+  Use parentheses around the arguments of method invocations,
+  especially if the first argument begins with an open parenthesis `(`,
+  as in `f((3 + 2) + 1)`.
+<sup>[[link](#method-invocation-parens)]</sup>
+
+  ```Ruby
+  # bad
+  x = Math.sin y
+  # good
+  x = Math.sin(y)
+
+  # bad
+  array.delete e
+  # good
+  array.delete(e)
+
+  # bad
+  temperance = Person.new 'Temperance', 30
+  # good
+  temperance = Person.new('Temperance', 30)
+  ```
+
+  Only omit parentheses for
+
+  * Method calls with no arguments:
+
+    ```Ruby
+    # bad
+    Kernel.exit!()
+    2.even?()
+    fork()
+    'test'.upcase()
+
+    # good
+    Kernel.exit!
+    2.even?
+    fork
+    'test'.upcase
+    ```
+
+  * Methods that are part of an internal DSL (e.g., Rake, Rails, RSpec):
+
+    ```Ruby
+    # bad
+    expect(bowling.score).to eq 0
+    # good
+    expect(bowling.score).to eq(0)
+    ```
+
+  * Methods that have "keyword" status in Ruby:
+
+    ```Ruby
+    class Person
+      # bad
+      attr_reader(:name, :age)
+      # good
+      attr_reader :name, :age
+
+      # body omitted
+    end
+
+    # bad
+    puts(temperance.age)
+    # good
+    puts temperance.age
+    ```
 
 * <a name="optional-arguments"></a>
   Определяйте необязательные аргументы в конце списка аргументов.
@@ -798,8 +867,10 @@
   elem #=> NameError: undefined local variable or method `elem'
   ```
 
-* <a name="no-then"></a> Не используйте `then` для условий `if/unless`,
-  объявленных на нескольких строках.<sup>[[ссылка](#no-then)]</sup>
+* <a name="no-then"></a>
+  Не используйте `then` для условий `if`/`unless`,
+  объявленных на нескольких строках.
+  <sup>[[ссылка](#no-then)]</sup>
 
   ```Ruby
   # плохо
@@ -920,6 +991,12 @@
 * <a name="no-bang-bang"></a> Не используйте `!!`.
   <sup>[[ссылка](#no-bang-bang)]</sup>
 
+<!--- @FIXME --->
+  `!!` converts a value to boolean, but you don't need this explicit 
+  conversion in the condition of a control expression; using it only
+  obscures your intention. If you want to do a `nil` check, use `nil?`
+  instead.
+
   ```Ruby
   # плохо
   x = 'test'
@@ -927,10 +1004,6 @@
   if !!x
     # некоторое выражение
   end
-
-  x = false
-  # двойное отрицание бессмысленно для булевых значений
-  !!x # => false
 
   # хорошо
   x = 'test'
@@ -963,13 +1036,15 @@
   document.saved? || document.save!
   ```
 
-* <a name="no-multiline-ternary"></a> Избегайте многострочных тернарных
-  операторов `? :`. Используйте вместо них `if/unless`.
+* <a name="no-multiline-ternary"></a>
+  Избегайте многострочных тернарных операторов `? :`.
+  Используйте вместо них `if`/`unless`.
   <sup>[[ссылка](#no-multiline-ternary)]</sup>
 
-* <a name="if-as-a-modifier"></a> Для однострочных выражений по возможности
-  используйте модификатор `if/unless`. Другим хорошим вариантом являются
-  операторы управления потоком исполнения `&&/||`.
+* <a name="if-as-a-modifier"></a>
+  Для однострочных выражений по возможности используйте модификатор
+  `if`/`unless`. Другим хорошим вариантом являются операторы управления
+  потоком исполнения `&&`/`||`.
   <sup>[[ссылка](#if-as-a-modifier)]</sup>
 
   ```Ruby
@@ -985,8 +1060,8 @@
   some_condition && do_something
   ```
 
-* <a name="no-multiline-if-modifiers"></a>  Избегайте `if/unless` в конце
-  нетривиального многострочного блока.
+* <a name="no-multiline-if-modifiers"></a>
+  Избегайте `if`/`unless` в конце нетривиального многострочного блока.
   <sup>[[ссылка](#no-multiline-if-modifiers)]</sup>
 
   ```Ruby
@@ -1004,8 +1079,8 @@
   ```
 
 * <a name="no-nested-modifiers"></a>
-  Избегайте вложенных модификаторов `if/unless/while/until`. Используйте `&&/||`
-  по необходимости.
+  Избегайте вложенных модификаторов `if`/`unless`/`while`/`until`.
+  Используйте `&&`/`||` по необходимости.
   <sup>[[ссылка](#no-nested-modifiers)]</sup>
 
   ```Ruby
@@ -1053,8 +1128,10 @@
   end
   ```
 
-* <a name="no-parens-if"></a> Не используйте скобки для ограничения условных
-  выражений в `if/unless/while/until`.<sup>[[ссылка](#no-parens-if)]</sup>
+* <a name="no-parens-if"></a>
+  Не используйте скобки для ограничения условных выражений
+  в `if`/`unless`/`while`/`until`.
+  <sup>[[ссылка](#no-parens-if)]</sup>
 
   ```Ruby
   # плохо
@@ -1154,48 +1231,6 @@
   end
   ```
 
-* <a name="no-dsl-parens"></a> Не используйте скобки при вызове методов,
-  являющихся частью таких DSL, как Rake, Rails, RSpec, методов, имеющих
-  статус ключевого слова, например, `attr_reader`, `puts` и при вызове
-  аксессоров (`attr_accessor`). Используйте скобки при вызове прочих методов.
-  <sup>[[ссылка](#no-dsl-parens)]</sup>
-
-  ```Ruby
-  class Person
-    # плохо
-    attr_reader(:name, :age)
-    # хорошо
-    attr_reader :name, :age
-
-    # некоторый код класса
-  end
-
-  # плохо
-  temperance = Person.new 'Temperance', 30
-  # хорошо
-  temperance = Person.new('Temperance', 30)
-
-  # плохо
-  puts(temperance.age)
-  # хорошо
-  puts temperance.age
-
-  # плохо
-  x = Math.syn y
-  # хорошо
-  x = Math.sin(y)
-
-  # плохо
-  array.delete e
-  # хорошо
-  array.delete(e)
-
-  # плохо
-  expect(bowling.score).to eq 0
-  # хорошо
-  expect(bowling.score).to eq(0)
-  ```
-
 * <a name="no-braces-opts-hash"></a> Не используйте фигурные скобки для
   ограничения хешей, передаваемых методу.
   <sup>[[ссылка](#no-braces-opts-hash)]</sup>
@@ -1222,26 +1257,7 @@
     validates :name, presence: true, length: { within: 1..10 }
   end
   ```
-
-* <a name="no-args-no-parens"></a> Опускайте скобки при вызове метода без
-  параметров.
-  <sup>[[ссылка](#no-args-no-parens)]</sup>
-
-
-  ```Ruby
-  # плохо
-  Kernel.exit!()
-  2.even?()
-  fork()
-  'test'.upcase()
-
-  # хорошо
-  Kernel.exit!
-  2.even?
-  fork
-  'test'.upcase
-  ```
-
+  
 * <a name="single-action-blocks"></a>
   Используйте краткую форму для вызова `proc`, если вызываемый метод является
   единственным в блоке.
@@ -1557,11 +1573,6 @@
   f(3 + 2) + 1
   ```
 
-* <a name="parens-as-args"></a>
-  Если первый аргумент при вызове метода начинается скобкой, то всегда
-  используйте скобки при вызове метода. Например, пишем так: `f((3 + 2) + 1)`.
-  <sup>[[ссылка](#parens-as-args)]</sup>
-
 * <a name="always-warn-at-runtime"></a>
   Всегда вызывайте интерпретатор Руби с ключом `-w`, чтобы получать напоминания о
   правилах, описанных выше, даже если вы о них забываете.
@@ -1850,7 +1861,7 @@
   # плохо
   def compute_thing(thing)
     if thing[:foo]
-      update_with_bar(thing)
+      update_with_bar(thing[:foo])
       if thing[:foo][:bar]
         partial_compute(thing)
       else
@@ -2201,11 +2212,15 @@
   Устаревший комментарий гораздо хуже отсутствующего комментария.
   <sup>[[ссылка](#comment-upkeep)]</sup>
 
+<!--- @FIXME --->
 > Хороший код подобен хорошей шутке: он не нуждается в пояснениях. <br>
 > -- Рус Ольсен (Russ Olsen)
+> &mdash; old programmers maxim, through [Russ Olsen](http://eloquentruby.com/blog/2011/03/07/good-code-and-good-jokes/)
 
-* <a name="refactor-dont-comment"></a> Не пишите комментарии для объяснения
-  плохого кода. Перепишите код, чтобы он говорил сам за себя.
+<!--- @FIXME --->
+* <a name="refactor-dont-comment"></a>
+  Не пишите комментарии для объяснения плохого кода. Перепишите код, чтобы он
+  говорил сам за себя. ("Do or do not &mdash; there is no try." Yoda)
   <sup>[[ссылка](#refactor-dont-comment)]</sup>
 
 > Делай или не делай, тут нет места попыткам. <br>
@@ -3505,6 +3520,35 @@
   END
   ```
 
+## Даты и время
+<!--- @FIXME --->
+* <a name="time-now"></a>
+  Prefer `Time.now` over `Time.new` when retrieving the current system time.
+<sup>[[link](#time-now)]</sup>
+
+* <a name="no-datetime"></a>
+  Don't use `DateTime` unless you need to account for historical calendar
+  reform -- and if you do, explicitly specify the `start` argument to
+  clearly state your intentions.
+<sup>[[link](#no-datetime)]</sup>
+
+  ```Ruby
+  # bad - uses DateTime for current time
+  DateTime.now
+  
+  # good - uses Time for current time
+  Time.now
+  
+  # bad - uses DateTime for modern date
+  DateTime.iso8601('2016-06-29')
+  
+  # good - uses Date for modern date
+  Date.iso8601('2016-06-29')
+  
+  # good - uses DateTime with start argument for historical date
+  DateTime.iso8601('1751-04-23', Date::ENGLAND)
+  ```
+
 ## Регулярные выражения
 
 > Многие люди, встречаясь с проблемой, думают:
@@ -3888,30 +3932,31 @@
   Foo.bar = 1
   ```
 
-* <a name="optionparser"></a> Используйте `OptionParser` для анализа сложных
-  аргументов командной строки и  `ruby -s` для элементарных случаев.
+* <a name="optionparser"></a>
+  Используйте `OptionParser` для анализа сложных аргументов командной строки
+  и `ruby -s` для элементарных случаев.
   <sup>[[ссылка](#optionparser)]</sup>
 
-* <a name="time-now"></a> Используйте вариант `Time.now`, а не `Time.new`,
-  когда хотите получить текущее значение системного времени.
-  <sup>[[ссылка](#time-now)]</sup>
-
-* <a name="functional-code"></a> Пишите код в функциональном стиле без изменения
-  значений, когда это подходит по смыслу.<sup>[[ссылка](#functional-code)]</sup>
+* <a name="functional-code"></a>
+  Пишите код в функциональном стиле без изменения значений, когда это подходит
+  по смыслу.
+  <sup>[[ссылка](#functional-code)]</sup>
 
 * <a name="no-param-mutations"></a>
   Не изменяйте значения параметров, если только это не есть цель метода.
   <sup>[[ссылка](#no-param-mutations)]</sup>
 
-* <a name="three-is-the-number-thou-shalt-count"></a> Старайтесь не создавать
-  вложенные структуры с уровнем вложения больше третьего.
+* <a name="three-is-the-number-thou-shalt-count"></a>
+  Старайтесь не создавать вложенные структуры с уровнем вложения больше третьего.
   <sup>[[ссылка](#three-is-the-number-thou-shalt-count)]</sup>
 
-* <a name="be-consistent"></a> Будьте последовательны. В идеальном мире
-  последовательно придерживайтесь данного руководства.
+* <a name="be-consistent"></a>
+  Будьте последовательны. В идеальном мире последовательно придерживайтесь
+  данного руководства.
   <sup>[[ссылка](#be-consistent)]</sup>
 
-* <a name="common-sense"></a> Руководствуйтесь здравым смыслом.
+* <a name="common-sense"></a>
+  Руководствуйтесь здравым смыслом.
   <sup>[[ссылка](#common-sense)]</sup>
 
 ## Инструментарий

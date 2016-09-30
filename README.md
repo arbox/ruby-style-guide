@@ -33,6 +33,8 @@
 Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING-ruRU.md) написано,
 как это сделать!
 
+Огромное спасибо [всем](CONTRIBUTORS.md), кто уже помогает!
+
 ## Другие руководства:
 
 * https://github.com/bestie/objective-ruby-style-guide

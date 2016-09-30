@@ -1,4 +1,4 @@
-* Full list of all contributors
+# Full list of all contributors
 
 Many thanks to these folks:
 

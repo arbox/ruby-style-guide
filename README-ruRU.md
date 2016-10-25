@@ -667,72 +667,72 @@
      # некоторый код
    end
    ```
-<!--- @FIXME --->
+
 * <a name="method-invocation-parens"></a>
-  Use parentheses around the arguments of method invocations,
-  especially if the first argument begins with an open parenthesis `(`,
-  as in `f((3 + 2) + 1)`.
-<sup>[[link](#method-invocation-parens)]</sup>
+  Используйте круглые скобки вокруг аргументов при вызове метода,
+  в особенности, если первый аргумент начинается с символа `(`,
+  как например тут: `f((3 + 2) + 1)`.
+<sup>[[ссылка](#method-invocation-parens)]</sup>
 
   ```Ruby
-  # bad
+  # плохо
   x = Math.sin y
-  # good
+  # хорошо
   x = Math.sin(y)
 
-  # bad
+  # плохо
   array.delete e
-  # good
+  # хорошо
   array.delete(e)
 
-  # bad
+  # плохо
   temperance = Person.new 'Temperance', 30
-  # good
+  # хорошо
   temperance = Person.new('Temperance', 30)
   ```
 
-  Only omit parentheses for
+  Скобки можно пустить только в случаях:
 
-  * Method calls with no arguments:
+  * Когда метод вызывается без аргументов:
 
     ```Ruby
-    # bad
+    # плохо
     Kernel.exit!()
     2.even?()
     fork()
     'test'.upcase()
 
-    # good
+    # хорошо
     Kernel.exit!
     2.even?
     fork
     'test'.upcase
     ```
 
-  * Methods that are part of an internal DSL (e.g., Rake, Rails, RSpec):
+  * Методы являются частью врнутреннего DSL (т.е., Rake, Rails, RSpec):
 
     ```Ruby
-    # bad
+    # плохо
     expect(bowling.score).to eq 0
-    # good
+    # хорошо
     expect(bowling.score).to eq(0)
     ```
 
-  * Methods that have "keyword" status in Ruby:
+  * Методы имеют статусы "ключевых" в Ruby:
 
     ```Ruby
     class Person
-      # bad
+      # плохо
       attr_reader(:name, :age)
-      # good
+      # хорошо
       attr_reader :name, :age
 
-      # body omitted
+      # некоторый код
     end
 
-    # bad
+    # плохо
     puts(temperance.age)
-    # good
+    # хорошо
     puts temperance.age
     ```
 
@@ -991,11 +991,10 @@
 * <a name="no-bang-bang"></a> Не используйте `!!`.
   <sup>[[ссылка](#no-bang-bang)]</sup>
 
-<!--- @FIXME --->
-  `!!` converts a value to boolean, but you don't need this explicit 
-  conversion in the condition of a control expression; using it only
-  obscures your intention. If you want to do a `nil` check, use `nil?`
-  instead.
+  `!!` преобразует значение в логическое, однако зачастую в явном
+  преобразовании просто нет необходимости в контексте управления
+  выражением; его использование делает ваше намерение неявным.
+  Если вы хотите сделать проверку на `nil`, лучше используйте `nil?`.
 
   ```Ruby
   # плохо
@@ -1258,7 +1257,7 @@
     validates :name, presence: true, length: { within: 1..10 }
   end
   ```
-  
+
 * <a name="single-action-blocks"></a>
   Используйте краткую форму для вызова `proc`, если вызываемый метод является
   единственным в блоке.
@@ -2213,15 +2212,13 @@
   Устаревший комментарий гораздо хуже отсутствующего комментария.
   <sup>[[ссылка](#comment-upkeep)]</sup>
 
-<!--- @FIXME --->
 > Хороший код подобен хорошей шутке: он не нуждается в пояснениях. <br>
 > -- Рус Ольсен (Russ Olsen)
-> &mdash; old programmers maxim, through [Russ Olsen](http://eloquentruby.com/blog/2011/03/07/good-code-and-good-jokes/)
+> &mdash; афоризм старого программиста, отсюда [Russ Olsen](http://eloquentruby.com/blog/2011/03/07/good-code-and-good-jokes/)
 
-<!--- @FIXME --->
 * <a name="refactor-dont-comment"></a>
   Не пишите комментарии для объяснения плохого кода. Перепишите код, чтобы он
-  говорил сам за себя. ("Do or do not &mdash; there is no try." Yoda)
+  говорил сам за себя.
   <sup>[[ссылка](#refactor-dont-comment)]</sup>
 
 > Делай или не делай, тут нет места попыткам. <br>
@@ -2573,7 +2570,7 @@
   Person = Struct.new(:first_name, :last_name) do
   end
   ```
-<!--- @FIXME -->
+
 * <a name="no-extend-struct-new"></a>
   Не дополняйте `Struct.new` при помощи `#extend`. В этом случае уже создается
   новый класс. При дополнении вы создадите избыточный уровень абстракции, это
@@ -3522,31 +3519,31 @@
   ```
 
 ## Даты и время
-<!--- @FIXME --->
+
 * <a name="time-now"></a>
-  Prefer `Time.now` over `Time.new` when retrieving the current system time.
-<sup>[[link](#time-now)]</sup>
+  Используйте `Time.now` вместо `Time.new` когда запрашиваете текущее системное время.
+<sup>[[ссылка](#time-now)]</sup>
 
 * <a name="no-datetime"></a>
-  Don't use `DateTime` unless you need to account for historical calendar
-  reform -- and if you do, explicitly specify the `start` argument to
-  clearly state your intentions.
-<sup>[[link](#no-datetime)]</sup>
+  Не используйте `DateTime` до тех пор пока вам не понадобится учитывать
+  исторические календарные реформы -- а если будете использовать, то
+  обязательно укажите аргумент `start` для четкого понимания ваших намерений.
+<sup>[[ссылка](#no-datetime)]</sup>
 
   ```Ruby
-  # bad - uses DateTime for current time
+  # плохо - использует DateTime для текущего значения времени
   DateTime.now
-  
-  # good - uses Time for current time
+
+  # хорошо - использует Time для текущего значения времени
   Time.now
-  
-  # bad - uses DateTime for modern date
+
+  # плохо - использует DateTime для современной даты
   DateTime.iso8601('2016-06-29')
-  
-  # good - uses Date for modern date
+
+  # хорошо - использует Date для современной даты
   Date.iso8601('2016-06-29')
-  
-  # good - uses DateTime with start argument for historical date
+
+  # хорошо - использует DateTime с аргументом 'start' для исторических дат
   DateTime.iso8601('1751-04-23', Date::ENGLAND)
   ```
 

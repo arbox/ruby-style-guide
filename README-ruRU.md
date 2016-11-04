@@ -4001,7 +4001,7 @@
 
 ![Creative Commons License](https://licensebuttons.net/l/by/3.0/88x31.png)
 Данная работа опубликована на условиях лицензии [Creative Commons Attribution
-3.0 Unported License](https://creativecommons.org/licenses/by/3.0/deed.ru)
+3.0 Unported License](https://creativecommons.org/licenses/by/3.0/deed.ru).
 
 # Расскажи другому
 

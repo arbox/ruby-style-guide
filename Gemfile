@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem 'awesome_bot', '~> 1.7.0'
+gem 'awesome_bot', '~> 1.13', '>= 1.13.9'

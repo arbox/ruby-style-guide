@@ -1,7 +1,5 @@
 language: ruby
 rvm:
-  - 2.2
-before_script:
-  - gem install awesome_bot
+  - 2.3.1
 script:
   - awesome_bot README-ruRU.md README.md

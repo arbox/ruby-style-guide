@@ -409,10 +409,10 @@ Translations of the guide are available in the following languages:
   ```Ruby
   # bad - easier to move/add/remove parameters, but still not preferred
   some_method(
-               size,
-               count,
-               color,
-             )
+    size,
+    count,
+    color,
+  )
 
   # bad
   some_method(size, count, color, )
@@ -995,7 +995,7 @@ Translations of the guide are available in the following languages:
   Avoid the use of `!!`.
 <sup>[[link](#no-bang-bang)]</sup>
 
-  `!!` converts a value to boolean, but you don't need this explicit 
+  `!!` converts a value to boolean, but you don't need this explicit
   conversion in the condition of a control expression; using it only
   obscures your intention. If you want to do a `nil` check, use `nil?`
   instead.
@@ -1132,10 +1132,9 @@ Translations of the guide are available in the following languages:
   end
   ```
 
-* <a name="no-parens-if"></a>
-  Don't use parentheses around the condition of an
-  `if`/`unless`/`while`/`until`.
-<sup>[[link](#no-parens-if)]</sup>
+* <a name="no-parens-around-condition"></a>
+  Don't use parentheses around the condition of a control expression.
+<sup>[[link](#no-parens-around-condition)]</sup>
 
   ```Ruby
   # bad
@@ -2197,11 +2196,6 @@ no parameters.
     end
   end
   ```
-
-* <a name="reduce-blocks"></a>
-  When using `reduce` with short blocks, name the arguments `|a, e|`
-  (accumulator, element).
-<sup>[[link](#reduce-blocks)]</sup>
 
 * <a name="other-arg"></a>
   When defining binary operators, name the parameter `other`(`<<` and `[]` are
@@ -3377,6 +3371,19 @@ resource cleanup when possible.
   timestamp.is_a? Integer
   ```
 
+  * <a name="random-numbers"></a>
+    Prefer to use ranges when generating random numbers instead of integers with offsets,
+    since it clearly states your intentions. Imagine simulating a role of a dice:
+  <sup>[[link](#random-numbers)]</sup>
+
+    ```Ruby
+    # bad
+    rand(6) + 1
+
+    # good
+    rand(1..6)
+    ```
+
 ## Strings
 
 * <a name="string-interpolation"></a>
@@ -3589,16 +3596,16 @@ resource cleanup when possible.
   ```Ruby
   # bad - uses DateTime for current time
   DateTime.now
-  
+
   # good - uses Time for current time
   Time.now
-  
+
   # bad - uses DateTime for modern date
   DateTime.iso8601('2016-06-29')
-  
+
   # good - uses Date for modern date
   Date.iso8601('2016-06-29')
-  
+
   # good - uses DateTime with start argument for historical date
   DateTime.iso8601('1751-04-23', Date::ENGLAND)
   ```

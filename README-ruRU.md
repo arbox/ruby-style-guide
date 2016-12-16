@@ -1917,8 +1917,8 @@
   salary = 1_000
   ```
 
-* <a name="snake-case-symbols-methods-vars"></a> Используйте `snake_case` для
-  имен символов, методов и переменных.
+* <a name="snake-case-symbols-methods-vars"></a>
+  Используйте `snake_case` при наименовании символов, методов и переменных.
   <sup>[[ссылка](#snake-case-symbols-methods-vars)]</sup>
 
   ```Ruby
@@ -1928,6 +1928,7 @@
   :someSymbol
 
   someVar = 5
+  var_10 = 10
 
   def someMethod
     # некоторый код
@@ -1940,13 +1941,41 @@
   # хорошо
   :some_symbol
 
+  some_var = 5
+  var10    = 10
+
   def some_method
     # некоторый код
   end
   ```
+<!--- @FIXME --->
+* <a name="snake-case-symbols-methods-vars-with-numbers"></a>
+  Do not separate numbers from letters on symbols, methods and variables.
+  <sup>[[link](#snake-case-symbols-methods-vars-with-numbers)]</sup>
 
-* <a name="camelcase-classes"></a> Используйте `CamelCase` для имен классов и
-  модулей. Сокращения вроде `HTTP`,  `RFC`, `XML` набирайте заглавными буквами.
+  ```Ruby
+  # bad
+  :some_sym_1
+
+  some_var_1 = 1
+
+  def some_method_1
+    # some code
+  end
+
+  # good
+  :some_sym1
+
+  some_var1 = 1
+
+  def some_method1
+    # some code
+  end
+  ```
+
+* <a name="camelcase-classes"></a>
+  Используйте `CamelCase` для имен классов и модулей. Сокращения вроде `HTTP`,
+  `RFC`, `XML` набирайте заглавными буквами.
   <sup>[[ссылка](#camelcase-classes)]</sup>
 
   ```Ruby
@@ -2295,7 +2324,7 @@
     include AnotherModule
 
     # вложенные классы
-    CustomErrorKlass = Class.new(StandardError)
+    CustomError = Class.new(StandardError)
 
     # после этого константы
     SOME_CONSTANT = 20
@@ -2787,7 +2816,35 @@
     include Mononymous
   end
   ```
+<!--- @FIXME --->
+* <a name="class-and-self"></a>
+  When class (or module) methods call other such methods, omit the use of a
+  leading `self` or own name followed by a `.` when calling other such methods.
+  This is often seen in "service classes" or other similar concepts where a
+  class is treated as though it were a function. This convention tends to reduce
+  repetitive boilerpate in such classes.
+  <sup>[[link](#class-and-self)]</sup>
 
+  ```Ruby
+  class TestClass
+    # bad -- more work when class renamed/method moved
+    def self.call(param1, param2)
+      TestClass.new(param1).call(param2)
+    end
+
+    # bad -- more verbose than necessary
+    def self.call(param1, param2)
+      self.new(param1).call(param2)
+    end
+
+    # good
+    def self.call(param1, param2)
+      new(param1).call(param2)
+    end
+
+    # ...other methods...
+  end
+  ```
 
 ## Исключения
 

@@ -1948,28 +1948,28 @@
     # некоторый код
   end
   ```
-<!--- @FIXME --->
+
 * <a name="snake-case-symbols-methods-vars-with-numbers"></a>
-  Do not separate numbers from letters on symbols, methods and variables.
+  Не разделяйте числа и буквы в именах символов, методов и переменных.
   <sup>[[link](#snake-case-symbols-methods-vars-with-numbers)]</sup>
 
   ```Ruby
-  # bad
+  # плохо
   :some_sym_1
 
   some_var_1 = 1
 
   def some_method_1
-    # some code
+    # некоторый код
   end
 
-  # good
+  # хорошо
   :some_sym1
 
   some_var1 = 1
 
   def some_method1
-    # some code
+    # некоторый код
   end
   ```
 
@@ -2816,33 +2816,33 @@
     include Mononymous
   end
   ```
-<!--- @FIXME --->
 * <a name="class-and-self"></a>
-  When class (or module) methods call other such methods, omit the use of a
-  leading `self` or own name followed by a `.` when calling other such methods.
-  This is often seen in "service classes" or other similar concepts where a
-  class is treated as though it were a function. This convention tends to reduce
-  repetitive boilerpate in such classes.
+  Если методы класса (или модуля) вызывают другие методы класса (или модуля),
+  постарайтесь не использовать начальное `self` или собственное имя класса
+  (или модуля) при записи вызова. Такие примеры можно часто найти в "сервисных
+  классах" или в схожих реализациях, когда класс воспринимается в качестве
+  функции. Данное соглашение должно уменьшить количество повторяющегося кода
+  в таких классах
   <sup>[[link](#class-and-self)]</sup>
 
   ```Ruby
   class TestClass
-    # bad -- more work when class renamed/method moved
+    # плохо (слишком много работы при рефакторинге)
     def self.call(param1, param2)
       TestClass.new(param1).call(param2)
     end
 
-    # bad -- more verbose than necessary
+    # плохо (более явно, чем необходимо)
     def self.call(param1, param2)
       self.new(param1).call(param2)
     end
 
-    # good
+    # хорошо
     def self.call(param1, param2)
       new(param1).call(param2)
     end
 
-    # ...other methods...
+    # ... другие методы ...
   end
   ```
 

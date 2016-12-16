@@ -33,10 +33,14 @@
 В дополнение к настоящему сборнику вас может заинтересовать
 :green_book: [Rails: руководство по стилю оформления](https://github.com/arbox/rails-style-guide/blob/master/README-ruRU.md).
 
+Хотите применить навыки программирования на Руби для решения задач в сфере
+[NLP][nlp]? Тогда поищите инструменты в нашем постоянно обновляемом сборнике
+[Awesome NLP with Ruby](https://github.com/arbox/nlp-with-ruby).
+
 Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING-ruRU.md) написано,
 как это сделать!
 
-Огромное спасибо [всем](CONTRIBUTORS.md), кто уже помогает!
+Огромное спасибо [всем](CONTRIBUTORS.md), кто поддерживает и развивает это руководство!
 
 ## Другие руководства:
 
@@ -50,3 +54,4 @@
 [english]: https://github.com/bbatsov/ruby-style-guide/blob/master/README.md
 [bbatsov]: https://github.com/bbatsov
 [off-page-ru]: https://www.ruby-lang.org/ru/
+[nlp]: https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D0%B5%D1%81%D1%82%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%8F%D0%B7%D1%8B%D0%BA%D0%B0

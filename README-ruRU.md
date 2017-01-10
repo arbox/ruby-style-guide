@@ -75,7 +75,7 @@
 * [корейский](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [немецкий](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
 * [французский](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
-* [португальский](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
+* [португальский (бразильский)](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [русский (данный документ)](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [японский](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 
@@ -713,9 +713,9 @@
 
     ```Ruby
     # плохо
-    expect(bowling.score).to eq 0
+    validates(:name, presence: true)
     # хорошо
-    expect(bowling.score).to eq(0)
+    validates :name, presence: true
     ```
 
   * когда методы имеют статусы ключевых слов в Руби:
@@ -1007,33 +1007,37 @@
 
   # хорошо
   x = 'test'
-  unless x.nil?
+  if x
     # некоторое выражение
   end
   ```
 
-* <a name="no-and-or-or"></a> Ключевые слова `and` и `or` следует забыть. Они
-  не несут дополнительной пользы. Всегда используйте `&&` и `||` вместо них.
+* <a name="no-and-or-or"></a>
+  Ключевые слова `and` и `or` следует забыть. Минимальное улучшение ясности
+  написанного кода достигается за счет высокой вероятности сделать
+  сложнонаходимые ошибки. Для логических выражений всегда используйте `&&` и `||`
+  вместо них. Для управления ветвлением применяйте `if` и `unless`; `&&` и `||`
+  также допустимы, хотя и менее понятны.
   <sup>[[ссылка](#no-and-or-or)]</sup>
 
   ```Ruby
   # плохо
   # булево выражение
-  if some_condition and some_other_condition
-    do_something
-  end
+  ok = got_needed_arguments and arguments_are_valid
 
-  # управление потоком исполнения
-  document.saved? or document.save!
+  # управление ветвлением
+
 
   # хорошо
   # булево выражение
-  if some_condition && some_other_condition
-    do_something
-  end
+  ok = got_needed_arguments && arguments_are_valid
 
-  # управление потоком исполнения
-  document.saved? || document.save!
+  # управление ветвлением
+  fail(RuntimeError, 'Failed to save document!')unless document.save
+
+  # сойдет
+  # управление ветвлением
+  document.save || fail(RuntimeError, 'Failed to save document!')
   ```
 
 * <a name="no-multiline-ternary"></a>
@@ -1281,7 +1285,7 @@
   <sup>[[ссылка](#single-line-blocks)]</sup>
 
   ```Ruby
-  names = %w(Bozhidar Steve Sarah)
+  names = %w[Bozhidar Steve Sarah]
 
   # плохо
   names.each do |name|
@@ -1350,9 +1354,10 @@
   end
   ```
 
-* <a name="no-self-unless-required"></a> Избегайте ключевого слова `self` везде,
-  где оно не требуется.  Оно необходимо только при вызове методов доступа
-  (`attr_reader`, `attr_writer`, `attr_accessor`).
+* <a name="no-self-unless-required"></a>
+  Избегайте ключевого слова `self` везде, где оно не требуется. Оно необходимо
+  только при вызове методов доступа для записи, методов, совпадающих с ключевыми
+  словами, и перегружаемых операторов.
   <sup>[[ссылка](#no-self-unless-required)]</sup>
 
   ```Ruby
@@ -1736,11 +1741,11 @@
 
   ```Ruby
   # плохо
-  %w(one two three) * ', '
+  %w[one two three] * ', '
   # => 'one, two, three'
 
   # хорошо
-  %w(one two three).join(', ')
+  %w[one two three].join(', ')
   # => 'one, two, three'
   ```
 
@@ -2311,6 +2316,74 @@
   Используйте персональные пометки, если это подходит по месту, но обязательно
   опишите их смысл в файле `README` (или похожем) для вашего проекта.
   <sup>[[ссылка](#document-annotations)]</sup>
+
+### Magic Comments
+
+* <a name="magic-comments-first"></a>
+  Place magic comments above all code and documentation. Magic comments should only go below shebangs if they are needed in your source file.
+<sup>[[link](#magic-comments-first)]</sup>
+
+  ```Ruby
+  # good
+  # frozen_string_literal: true
+  # Some documentation about Person
+  class Person
+  end
+
+  # bad
+  # Some documentation about Person
+  # frozen_string_literal: true
+  class Person
+  end
+  ```
+
+  ```Ruby
+  # good
+  #!/usr/bin/env ruby
+  # frozen_string_literal: true
+  App.parse(ARGV)
+
+  # bad
+  # frozen_string_literal: true
+  #!/usr/bin/env ruby
+  App.parse(ARGV)
+  ```
+
+<!--- @FIXME -->
+* <a name="one-magic-comment-per-line"></a>
+  Use one magic comment per line if you need multiple.
+  <sup>[[link](#one-magic-comment-per-line)]</sup>
+
+  ```Ruby
+  # good
+  # frozen_string_literal: true
+  # encoding: ascii-8bit
+
+  # bad
+  # -*- frozen_string_literal: true; encoding: ascii-8bit -*-
+  ```
+
+<!--- @FIXME -->
+* <a name="separate-magic-comments-from-code"></a>
+  Separate magic comments from code and documentation with a blank line.
+  <sup>[[link](#separate-magic-comments-from-code)]</sup>
+
+  ```Ruby
+  # good
+  # frozen_string_literal: true
+
+  # Some documentation for Person
+  class Person
+    # Some code
+  end
+
+  # bad
+  # frozen_string_literal: true
+  # Some documentation for Person
+  class Person
+    # Some code
+  end
+  ```
 
 ## Классы и модули
 
@@ -3123,7 +3196,7 @@
   STATES = ['draft', 'open', 'closed']
 
   # хорошо
-  STATES = %w(draft open closed)
+  STATES = %w[draft open closed]
   ```
 
 * <a name="percent-i"></a> Используйте нотацию `%i` для литералов массивов,
@@ -3136,7 +3209,7 @@
   STATES = [:draft, :open, :closed]
 
   # хорошо
-  STATES = %i(draft open closed)
+  STATES = %i[draft open closed]
   ```
 
 * <a name="no-trailing-array-commas"></a> Не ставьте запятую после последнего
@@ -3215,10 +3288,9 @@
   { :a => 1, 'b' => 2 }
   ```
 
-* <a name="hash-key"></a> Применяйте `Hash#key?` вместо `Hash#has_key?` и
-  `Hash#value?` вместо `Hash#has_value?`. Матц описывает
-  [здесь](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/43765)
-  свои планы исключить эти методы в будущем.
+* <a name="hash-key"></a>
+  Применяйте `Hash#key?` вместо `Hash#has_key?` и `Hash#value?` вместо
+  `Hash#has_value?`.
   <sup>[[ссылка](#hash-key)]</sup>
 
   ```Ruby
@@ -3725,9 +3797,10 @@
 
 ## Процентные литералы
 
-* <a name="percent-q-shorthand"></a> Используйте `%()` (это сокращение от `%Q`)
-  для строк без переносов, в которых  реализуется интерполяция и присутствуют
-  двойные кавычки. Для строк с переносами лучше используйте формат HERE Doc.
+* <a name="percent-q-shorthand"></a>
+  Используйте `%()` (это сокращение от `%Q`) для строк без переносов, в которых
+  реализуется интерполяция и присутствуют двойные кавычки. Для строк
+  с переносами лучше используйте формат HERE Doc.
   <sup>[[ссылка](#percent-q-shorthand)]</sup>
 
   ```Ruby
@@ -3748,9 +3821,10 @@
   ```
 
 * <a name="percent-q"></a>
-  Избегайте `%q`, если это не случай строки с символами кавычек  `'` и `"`
-  одновременно  Обычные строки читаются проще, и их следует использовать, если
-  нет излишне большого количества символов, которые нужно будет экранировать.
+  Избегайте `%()` или соответствующие формы `%q()` и `%Q(), если это не случай
+  строки с символами кавычек `'` и `"` одновременно  Обычные строки читаются
+  проще, и их следует использовать, если нет излишне большого количества
+  символов, которые нужно будет экранировать.
   <sup>[[ссылка](#percent-q)]</sup>
 
   ```Ruby
@@ -3799,21 +3873,41 @@
   определения символа с пробелами в имени является `:"some string"`.
   <sup>[[ссылка](#percent-s)]</sup>
 
-* <a name="percent-literal-braces"></a> Используйте `()` в качестве ограничителей
-  для всех литералов со знаком `%` кроме `%r`.  Так как круглые скобки очень
-  часто используются в самих регулярных выражениях, во многих случаях менее
-  частый символ `{` может быть лучшим выбором для ограничителя (разумеется,
-  с учетом смысла регулярного выражения).
+* <a name="percent-literal-braces"></a>
+  Используйте наиболее подходящий по смыслу вид скобок для записи каждого типа
+  литералов.
   <sup>[[ссылка](#percent-literal-braces)]</sup>
+  - `()` для строковых литералов (`%q`, `%Q`).
+  - `[]` для литералов массивов (`%w`, `%i`, `%W`, `%I`), так как это совпадает
+  с видом стандартной записи массивов.
+  - `{}` для литералов регулярных выражений (`%r`), так как круглые скобки очень
+  часто используются в самих регулярных выражениях. Поэтому во многих случаях
+  менее частый символ `{` может быть лучшим выбором для ограничителя (разумеется,
+  с учетом смысла регулярного выражения).
+  - `()` для записи оставшихся литералов, например, `%s`, `%x`.
 
   ```Ruby
   # плохо
-  %w[one two three]
   %q{"Test's king!", John said.}
 
   # хорошо
-  %w(one two three)
   %q("Test's king!", John said.)
+
+  # плохо
+  %w(one two three)
+  %i(one two three)
+
+  # хорошо
+  %w[one two three]
+  %i[one two three]
+
+  # плохо
+  %r((\w+)-(\d+))
+  %r{\w{1,2}\d{2,5}}
+
+  # хорошо
+  %r{(\w+)-(\d+)}
+  %r|\w{1,2}\d{2,5}|
   ```
 
 ## Метапрограммирование

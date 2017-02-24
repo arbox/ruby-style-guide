@@ -403,7 +403,7 @@
 
 * <a name="two-or-more-empty-lines"></a>
   Не используйте несколько пустых строк подряд.
-  <sup>[[link](#two-or-more-empty-lines)]</sup>
+  <sup>[[ссылка](#two-or-more-empty-lines)]</sup>
 
   ```Ruby
   # плохо (две пустрые строки)
@@ -420,7 +420,7 @@
 
 * <a name="empty-lines-around-access-modifier"></a>
   Отделяйте макросы доступа к данным пустой строкой.
-  <sup>[[link](#empty-lines-around-access-modifier)]</sup>
+  <sup>[[ссылка](#empty-lines-around-access-modifier)]</sup>
 
   ```Ruby
   # плохо
@@ -443,7 +443,7 @@
 
 * <a name="empty-lines-around-bodies"></a>
   Не оставляйте пустые строки вокруг тел методов, классов, модулей и блоков.
-  <sup>[[link](#empty-lines-around-bodies)]</sup>
+  <sup>[[ссылка](#empty-lines-around-bodies)]</sup>
 
   ```Ruby
   # хорошо
@@ -2039,7 +2039,7 @@
 
 * <a name="snake-case-symbols-methods-vars-with-numbers"></a>
   Не разделяйте числа и буквы в именах символов, методов и переменных.
-  <sup>[[link](#snake-case-symbols-methods-vars-with-numbers)]</sup>
+  <sup>[[ссылка](#snake-case-symbols-methods-vars-with-numbers)]</sup>
 
   ```Ruby
   # плохо
@@ -2408,7 +2408,7 @@
   Размещайте магические комментарии над всем кодом и документацией. Магический
   комментарий может располагаться только под вызовом интерпретатора (Shebang),
   если он нужен в конкретном файле.
-  <sup>[[link](#magic-comments-first)]</sup>
+  <sup>[[ссылка](#magic-comments-first)]</sup>
 
   ```Ruby
   # хорошо
@@ -2439,7 +2439,7 @@
 <!--- @FIXME -->
 * <a name="one-magic-comment-per-line"></a>
   Use one magic comment per line if you need multiple.
-  <sup>[[link](#one-magic-comment-per-line)]</sup>
+  <sup>[[ссылка](#one-magic-comment-per-line)]</sup>
 
   ```Ruby
   # хорошо
@@ -2453,7 +2453,7 @@
 <!--- @FIXME -->
 * <a name="separate-magic-comments-from-code"></a>
   Separate magic comments from code and documentation with a blank line.
-  <sup>[[link](#separate-magic-comments-from-code)]</sup>
+  <sup>[[ссылка](#separate-magic-comments-from-code)]</sup>
 
   ```Ruby
   # хорошо
@@ -2523,7 +2523,7 @@
 <!--- @FIXME -->
 * <a name="mixin-grouping"></a>
   Split multiple mixins into separate statements.
-  <sup>[[link](#mixin-grouping)]</sup>
+  <sup>[[ссылка](#mixin-grouping)]</sup>
 
   ```Ruby
   # bad
@@ -3002,7 +3002,7 @@
   классах" или в схожих реализациях, когда класс воспринимается в качестве
   функции. Данное соглашение должно уменьшить количество повторяющегося кода
   в таких классах
-  <sup>[[link](#class-and-self)]</sup>
+  <sup>[[ссылка](#class-and-self)]</sup>
 
   ```Ruby
   class TestClass
@@ -3556,7 +3556,7 @@
   При генерации случайных чисел преимущественно используйте интервалы вместо
   числа и значения сдвига, так как интервал четко указывает на ваши намерения.
   Примером может быть симуляция броска кубика.
-  <sup>[[link](#random-numbers)]</sup>
+  <sup>[[ссылка](#random-numbers)]</sup>
 
     ```Ruby
     # плохо

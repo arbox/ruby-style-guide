@@ -86,6 +86,7 @@
 * [Наименование](#Hаименование)
 * [Комментарии](#Комментарии)
   * [Пометки в комментариях](#Пометки-в-комментариях)
+  * [Magic Comments](#magic-comments)
 * [Классы и модули](#Классы-и-модули)
 * [Исключения](#Исключения)
 * [Коллекции](#Коллекции)
@@ -400,6 +401,88 @@
   end
   ```
 
+<!--- @FIXME -->
+* <a name="two-or-more-empty-lines"></a>
+  Don't use several empty lines in a row.
+  <sup>[[link](#two-or-more-empty-lines)]</sup>
+
+  ```Ruby
+  # bad - It has two empty lines.
+  some_method
+
+
+  some_method
+
+  # good
+  some_method
+
+  some_method
+  ```
+
+* <a name="empty-lines-around-access-modifier"></a>
+  Use empty lines around access modifiers.
+  <sup>[[link](#empty-lines-around-access-modifier)]</sup>
+
+  ```Ruby
+  # bad
+  class Foo
+    attr_reader :foo
+    def foo
+      # do something...
+    end
+  end
+
+  # good
+  class Foo
+    attr_reader :foo
+
+    def foo
+      # do something...
+    end
+  end
+  ```
+
+* <a name="empty-lines-around-bodies"></a>
+  Don't use empty lines around method, class, module, block bodies.
+  <sup>[[link](#empty-lines-around-bodies)]</sup>
+
+  ```Ruby
+  # bad
+  class Foo
+
+    def foo
+
+      begin
+
+        do_something do
+
+          something
+
+        end
+
+      rescue
+
+        something
+
+      end
+
+    end
+
+  end
+
+  # good
+  class Foo
+    def foo
+      begin
+        do_something do
+          something
+        end
+      rescue
+        something
+      end
+    end
+  end
+  ```
 
 * <a name="no-trailing-params-comma"></a>  Избегайте запятых после последнего
   параметра в вызове метода, особенно когда параметры расположены в отдельных
@@ -1026,14 +1109,14 @@
   ok = got_needed_arguments and arguments_are_valid
 
   # управление ветвлением
-
+  document.save or fail(RuntimeError, "Failed to save document!")
 
   # хорошо
   # булево выражение
   ok = got_needed_arguments && arguments_are_valid
 
   # управление ветвлением
-  fail(RuntimeError, 'Failed to save document!')unless document.save
+  fail(RuntimeError, 'Failed to save document!') unless document.save
 
   # сойдет
   # управление ветвлением
@@ -2430,6 +2513,25 @@
 
     def some_private_method
     end
+  end
+  ```
+
+<!--- @FIXME -->
+* <a name="mixin-grouping"></a>
+  Split multiple mixins into separate statements.
+  <sup>[[link](#mixin-grouping)]</sup>
+
+  ```Ruby
+  # bad
+  class Person
+    include Foo, Bar
+  end
+
+  # good
+  class Person
+    # multiple mixins go in separate statements
+    include Foo
+    include Bar
   end
   ```
 

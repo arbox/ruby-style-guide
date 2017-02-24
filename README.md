@@ -46,7 +46,7 @@
 
 * https://github.com/bestie/objective-ruby-style-guide
 * https://github.com/chneukirchen/styleguide/blob/master/RUBY-STYLE
-* https://github.com/styleguide/ruby
+* https://github.com/github/rubocop-github
 * https://github.com/airbnb/ruby
 * https://github.com/thoughtbot/guides/tree/master/style/ruby
 

@@ -83,6 +83,7 @@ Translations of the guide are available in the following languages:
 * [Naming](#naming)
 * [Comments](#comments)
   * [Comment Annotations](#comment-annotations)
+  * [Magic Comments](#magic-comments)
 * [Classes & Modules](#classes--modules)
 * [Exceptions](#exceptions)
 * [Collections](#collections)
@@ -398,6 +399,88 @@ Translations of the guide are available in the following languages:
 
   def some_method
     result
+  end
+  ```
+
+* <a name="two-or-more-empty-lines"></a>
+  Don't use several empty lines in a row.
+<sup>[[link](#two-or-more-empty-lines)]</sup>
+
+  ```Ruby
+  # bad - It has two empty lines.
+  some_method
+
+
+  some_method
+
+  # good
+  some_method
+
+  some_method
+  ```
+
+* <a name="empty-lines-around-access-modifier"></a>
+  Use empty lines around access modifiers.
+<sup>[[link](#empty-lines-around-access-modifier)]</sup>
+
+  ```Ruby
+  # bad
+  class Foo
+    attr_reader :foo
+    def foo
+      # do something...
+    end
+  end
+
+  # good
+  class Foo
+    attr_reader :foo
+
+    def foo
+      # do something...
+    end
+  end
+  ```
+
+* <a name="empty-lines-around-bodies"></a>
+  Don't use empty lines around method, class, module, block bodies.
+<sup>[[link](#empty-lines-around-bodies)]</sup>
+
+  ```Ruby
+  # bad
+  class Foo
+
+    def foo
+
+      begin
+
+        do_something do
+
+          something
+
+        end
+
+      rescue
+
+        something
+
+      end
+
+    end
+
+  end
+
+  # good
+  class Foo
+    def foo
+      begin
+        do_something do
+          something
+        end
+      rescue
+        something
+      end
+    end
   end
   ```
 
@@ -1028,7 +1111,7 @@ Translations of the guide are available in the following languages:
   ok = got_needed_arguments and arguments_are_valid
 
   # control flow
-  document.save or fail(RuntimError, "Failed to save document!")
+  document.save or fail(RuntimeError, "Failed to save document!")
 
   # good
   # boolean expression
@@ -2470,6 +2553,24 @@ no parameters.
   end
   ```
 
+* <a name="mixin-grouping"></a>
+  Split multiple mixins into separate statements.
+<sup>[[link](#mixin-grouping)]</sup>
+
+  ```Ruby
+  # bad
+  class Person
+    include Foo, Bar
+  end
+
+  # good
+  class Person
+    # multiple mixins go in separate statements
+    include Foo
+    include Bar
+  end
+  ```
+
 * <a name="file-classes"></a>
   Don't nest multi-line classes within classes. Try to have such nested
   classes each in their own file in a folder named like the containing class.
@@ -2934,7 +3035,7 @@ no parameters.
   leading `self` or own name followed by a `.` when calling other such methods.
   This is often seen in "service classes" or other similar concepts where a
   class is treated as though it were a function. This convention tends to reduce
-  repetitive boilerpate in such classes.
+  repetitive boilerplate in such classes.
   <sup>[[link](#class-and-self)]</sup>
 
   ```Ruby
@@ -3868,7 +3969,7 @@ resource cleanup when possible.
   ```
 
 * <a name="percent-q"></a>
-  Avoid %() or the equivlant %q() unless you have a string with both `'` and 
+  Avoid %() or the equivalent %q() unless you have a string with both `'` and
   `"` in it. Regular string literals are more readable and should be preferred
   unless a lot of characters would have to be escaped in them.
 <sup>[[link](#percent-q)]</sup>
@@ -3920,14 +4021,14 @@ resource cleanup when possible.
 <sup>[[link](#percent-s)]</sup>
 
 * <a name="percent-literal-braces"></a>
-  Use the braces that are the most appropriate for the various kinds of percent 
+  Use the braces that are the most appropriate for the various kinds of percent
   literals.
   <sup>[[link](#percent-literal-braces)]</sup>
   - `()` for string literals(`%q`, `%Q`).
-  - `[]` for array literals(`%w`, `%i`, `%W`, `%I`) as it is aligned with 
+  - `[]` for array literals(`%w`, `%i`, `%W`, `%I`) as it is aligned with
   the standard array literals.
-  - `{}` for regexp literals(`%r`) since parentheses often appear inside regular 
-  expressions. That's why a less common character with `{` is usually the best 
+  - `{}` for regexp literals(`%r`) since parentheses often appear inside regular
+  expressions. That's why a less common character with `{` is usually the best
   delimiter for `%r` literals.
   - `()` for all other literals (e.g. `%s`, `%x`)
 
@@ -3945,7 +4046,7 @@ resource cleanup when possible.
   # good
   %w[one two three]
   %i[one two three]
-  
+
   # bad
   %r((\w+)-(\d+))
   %r{\w{1,2}\d{2,5}}

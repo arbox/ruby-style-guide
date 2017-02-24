@@ -86,7 +86,7 @@
 * [Наименование](#Hаименование)
 * [Комментарии](#Комментарии)
   * [Пометки в комментариях](#Пометки-в-комментариях)
-  * [Magic Comments](#magic-comments)
+  * [Магические комментарии](#Магические-комментарии)
 * [Классы и модули](#Классы-и-модули)
 * [Исключения](#Исключения)
 * [Коллекции](#Коллекции)
@@ -401,53 +401,52 @@
   end
   ```
 
-<!--- @FIXME -->
 * <a name="two-or-more-empty-lines"></a>
-  Don't use several empty lines in a row.
+  Не используйте несколько пустых строк подряд.
   <sup>[[link](#two-or-more-empty-lines)]</sup>
 
   ```Ruby
-  # bad - It has two empty lines.
+  # плохо (две пустрые строки)
   some_method
 
 
   some_method
 
-  # good
+  # хорошо
   some_method
 
   some_method
   ```
 
 * <a name="empty-lines-around-access-modifier"></a>
-  Use empty lines around access modifiers.
+  Отделяйте макросы доступа к данным пустой строкой.
   <sup>[[link](#empty-lines-around-access-modifier)]</sup>
 
   ```Ruby
-  # bad
+  # плохо
   class Foo
     attr_reader :foo
     def foo
-      # do something...
+      # некоторый код
     end
   end
 
-  # good
+  # хорошо
   class Foo
     attr_reader :foo
 
     def foo
-      # do something...
+      # некоторый код
     end
   end
   ```
 
 * <a name="empty-lines-around-bodies"></a>
-  Don't use empty lines around method, class, module, block bodies.
+  Не оставляйте пустые строки вокруг тел методов, классов, модулей и блоков.
   <sup>[[link](#empty-lines-around-bodies)]</sup>
 
   ```Ruby
-  # bad
+  # хорошо
   class Foo
 
     def foo
@@ -470,7 +469,7 @@
 
   end
 
-  # good
+  # плохо
   class Foo
     def foo
       begin
@@ -484,10 +483,10 @@
   end
   ```
 
-* <a name="no-trailing-params-comma"></a>  Избегайте запятых после последнего
-  параметра в вызове метода, особенно когда параметры расположены в отдельных
-  строках.<sup>[[ссылка](#no-trailing-params-comma)]</sup>
-
+* <a name="no-trailing-params-comma"></a>
+  Избегайте запятых после последнего параметра в вызове метода, особенно когда
+  параметры расположены в отдельных строках.
+  <sup>[[ссылка](#no-trailing-params-comma)]</sup>
 
   ```Ruby
   # плохо (хотя перемещать/добавлять/удалять строки проще)
@@ -504,8 +503,9 @@
   some_method(size, count, color)
   ```
 
-* <a name="spaces-around-equals"></a> Вставляйте пробелы вокруг оператора
-  присваивания `=`, когда назначаете параметрам метода значения по умолчанию:
+* <a name="spaces-around-equals"></a>
+  Вставляйте пробелы вокруг оператора присваивания `=`, когда назначаете
+  параметрам метода значения по умолчанию:
   <sup>[[ссылка](#spaces-around-equals)]</sup>
 
 
@@ -2400,20 +2400,24 @@
   опишите их смысл в файле `README` (или похожем) для вашего проекта.
   <sup>[[ссылка](#document-annotations)]</sup>
 
-### Magic Comments
+### Магические комментарии
+<!--- See https://en.wikipedia.org/wiki/Magic_number_(programming) --->
+<!--- @FIXME: look for a better translation --->
 
 * <a name="magic-comments-first"></a>
-  Place magic comments above all code and documentation. Magic comments should only go below shebangs if they are needed in your source file.
-<sup>[[link](#magic-comments-first)]</sup>
+  Размещайте магические комментарии над всем кодом и документацией. Магический
+  комментарий может располагаться только под вызовом интерпретатора (Shebang),
+  если он нужен в конкретном файле.
+  <sup>[[link](#magic-comments-first)]</sup>
 
   ```Ruby
-  # good
+  # хорошо
   # frozen_string_literal: true
   # Some documentation about Person
   class Person
   end
 
-  # bad
+  # плохо
   # Some documentation about Person
   # frozen_string_literal: true
   class Person
@@ -2421,12 +2425,12 @@
   ```
 
   ```Ruby
-  # good
+  # хорошо
   #!/usr/bin/env ruby
   # frozen_string_literal: true
   App.parse(ARGV)
 
-  # bad
+  # плохо
   # frozen_string_literal: true
   #!/usr/bin/env ruby
   App.parse(ARGV)
@@ -2438,11 +2442,11 @@
   <sup>[[link](#one-magic-comment-per-line)]</sup>
 
   ```Ruby
-  # good
+  # хорошо
   # frozen_string_literal: true
   # encoding: ascii-8bit
 
-  # bad
+  # плохо
   # -*- frozen_string_literal: true; encoding: ascii-8bit -*-
   ```
 
@@ -2452,7 +2456,7 @@
   <sup>[[link](#separate-magic-comments-from-code)]</sup>
 
   ```Ruby
-  # good
+  # хорошо
   # frozen_string_literal: true
 
   # Some documentation for Person
@@ -2460,7 +2464,7 @@
     # Some code
   end
 
-  # bad
+  # плохо
   # frozen_string_literal: true
   # Some documentation for Person
   class Person

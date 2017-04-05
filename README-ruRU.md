@@ -446,7 +446,7 @@
   <sup>[[ссылка](#empty-lines-around-bodies)]</sup>
 
   ```Ruby
-  # плохо
+  # хорошо
   class Foo
 
     def foo
@@ -469,7 +469,7 @@
 
   end
 
-  # хорошо 
+  # плохо
   class Foo
     def foo
       begin

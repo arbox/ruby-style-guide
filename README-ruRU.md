@@ -469,7 +469,7 @@
 
   end
 
-  # хорошо 
+  # хорошо
   class Foo
     def foo
       begin

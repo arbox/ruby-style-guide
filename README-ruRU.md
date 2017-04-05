@@ -4255,7 +4255,7 @@
 Вы можете поддержать проект (и РубоКоп) денежным взносом при помощи
 [Gratipay][gratipay].
 
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](gratipay)
+[![Support via Gratipay](https://raw.githubusercontent.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](gratipay)
 
 ## Как сотрудничать в проекте?
 

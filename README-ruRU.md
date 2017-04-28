@@ -124,9 +124,11 @@
   end
   ```
 
-* <a name="crlf"></a> Используйте стиль Unix для строк (пользователи
-  \*BSD/Solaris/Linux/OS X используют их по умолчанию,  пользователям Windows
-  нужно обратить особое внимание).<sup>[[ссылка](#crlf)]</sup>
+* <a name="crlf"></a>
+  Используйте стиль Unix для строк (пользователи \*BSD/Solaris/Linux/macOS
+  используют его по умолчанию, пользователям Windows нужно обратить особое
+  внимание).
+  <sup>[[ссылка](#crlf)]</sup>
 
   * Если вы используете Git, вы можете добавить следующие настройки
     в вашу конфигурацию, чтобы предотвратить ненамеренное проникновение в ваш
@@ -1806,16 +1808,31 @@
   # => '20 10'
 
   # хорошо
-  sprintf('%{first} %{second}', first: 20, second: 10)
+  sprintf('%<first>d %<second>d', first: 20, second: 10)
   # => '20 10'
 
   format('%d %d', 20, 10)
   # => '20 10'
 
   # хорошо
-  format('%{first} %{second}', first: 20, second: 10)
+  format('%<first>d %<second>d', first: 20, second: 10)
   # => '20 10'
   ```
+
+* <a name="named-format-tokens"></a>
+  Используйте формат `%<name>s` вместо `%{name}` для поименованных
+  переменных в шаблонах, это даст информацию о типе используемого значения.
+  <sup>[[link](#named-format-tokens)</sup>
+
+  ```Ruby
+  # плохо
+  format('Hello, %{name}', name: 'John')
+
+  # хорошо
+  format('Hello, %<name>s', name: 'John')
+  ```
+
+
 
 * <a name="array-join"></a>
   Используйте `Array#join` вместо достаточно неочевидного `Array#*` со строковым
@@ -3289,7 +3306,9 @@
 
   # хорошо
   arr = []
+  arr = Array.new(10)
   hash = {}
+  hash = Hash.new(0)
   ```
 
 * <a name="percent-w"></a> Используйте нотацию `%w` для литералов массивов,

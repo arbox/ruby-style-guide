@@ -73,7 +73,6 @@
 * [китайский традиционный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [китайский упрощенный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [корейский](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
-* [немецкий](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
 * [французский](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
 * [португальский (бразильский)](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [русский (данный документ)](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)

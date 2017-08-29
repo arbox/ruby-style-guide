@@ -211,7 +211,7 @@
   точек с запятыми.  Пробелы (по большей части) игнорируются
   интерпретатором Руби, но их правильное использование является ключом
   к написанию легко читаемого кода.
- <sup>[[ссылка](#spaces-operators)]</sup>
+  <sup>[[ссылка](#spaces-operators)]</sup>
 
   ```Ruby
   sum = 1 + 2
@@ -219,7 +219,7 @@
   class FooError < StandardError; end
   ```
 
-  Единственным исключением для операторов является оператор возведения в степень:
+  Из этого правила есть несколько исключений. Одним из них является оператор возведения в степень:
 
   ```Ruby
   # плохо
@@ -227,6 +227,16 @@
 
   # хорошо
   e = M * c**2
+  ```
+
+  Другим ислючением является косая черта в литералах дробей:
+
+  ```ruby
+  # плохо
+  o_scale = 1 / 48r
+
+  # хорошо
+  o_scale = 1/48r
   ```
 
 * <a name="spaces-braces"></a>
@@ -775,7 +785,7 @@
   temperance = Person.new('Temperance', 30)
   ```
 
-  Скобки можно опустить только в следующих случаях:
+  Всегда опускайте скобки в случаях,
 
   * когда метод вызывается без аргументов:
 
@@ -813,11 +823,19 @@
 
       # некоторый код
     end
+    ```
 
-    # плохо
-    puts(temperance.age)
+  Скобки можно опускать,
+
+  * когда методы имеют в Руби статус ключевого слова, но не являются декларативными:
+
+    ```Ruby
     # хорошо
+    puts(temperance.age)
+    system('ls')
+    # тоже хорошо
     puts temperance.age
+    system 'ls'
     ```
 
 * <a name="optional-arguments"></a>
@@ -1821,7 +1839,7 @@
 * <a name="named-format-tokens"></a>
   Используйте формат `%<name>s` вместо `%{name}` для поименованных
   переменных в шаблонах, это даст информацию о типе используемого значения.
-  <sup>[[link](#named-format-tokens)</sup>
+  <sup>[[ссылка](#named-format-tokens)</sup>
 
   ```Ruby
   # плохо
@@ -2600,9 +2618,47 @@
   end
   ```
 
-* <a name="modules-vs-classes"></a> Если класс определяет только методы класса,
-  то трансформируйте такой класс в модуль. Использовать классы логично в тех
-  ситуациях, когда нужно создавать экземпляры класса.
+* <a name="namespace-definition"></a>
+  Определяейте (и открывайте заново) классы и модули, определенные в некотором
+  пространстве имен, с помощью явного вложения. Оператор разрешения пространства
+  (scope resolution) может создать трудные для понимания ситуации из-за
+  [лексического определения пространств имен](https://cirw.in/blog/constant-lookup.html)
+  в Руби. Пространство имен зависит для модуля от места его определения.
+  <sup>[[ссылка](#namespace-definition)]</sup>
+
+  ```Ruby
+  module Utilities
+    class Queue
+    end
+  end
+
+  # плохо
+  class Utilities::Store
+    Module.nesting # => [Utilities::Store]
+
+    def initialize
+      # Refers to the top level ::Queue class because Utilities isn't in the
+      # current nesting chain.
+      @queue = Queue.new
+    end
+  end
+
+  # хорошо
+  module Utilities
+    class WaitingList
+      Module.nesting # => [Utilities::WaitingList, Utilities]
+
+      def initialize
+        @queue = Queue.new # Refers to Utilities::Queue
+      end
+    end
+  end
+  ```
+
+* <a name="modules-vs-classes"></a>
+  Если класс определяет только методы класса, то трансформируйте такой класс
+  в модуль. Использовать классы логично в тех ситуациях, когда нужно создавать
+  экземпляры класса.
   <sup>[[ссылка](#modules-vs-classes)]</sup>
 
   ```Ruby
@@ -3615,9 +3671,11 @@
     ```Ruby
     # плохо
     name = "Bozhidar"
+    name = 'De\'Andre'
 
     # хорошо
     name = 'Bozhidar'
+    name = "De'Andre"
     ```
 
   * **Стиль B:** Используйте двойные кавычки в ваших строчных литералах, если они не
@@ -3626,9 +3684,11 @@
     ```Ruby
     # плохо
     name = 'Bozhidar'
+    sarcasm = "I \"like\" it."
 
     # хорошо
     name = "Bozhidar"
+    sarcasm = 'I "like" it.'
     ```
 
   Второй стиль, по некоторым мнениям, более распространен среди разработчиков на
@@ -3759,28 +3819,58 @@
 
   ```Ruby
   # плохо (используется `String#strip_margin` из Powerpack)
-  code = <<-END.strip_margin('|')
+  code = <<-RUBY.strip_margin('|')
     |def test
     |  some_method
     |  other_method
     |end
-  END
+  RUBY
 
   # все еще плохо
-  code = <<-END
+  code = <<-RUBY
   def test
     some_method
     other_method
   end
-  END
+  RUBY
 
   # хорошо
-  code = <<~END
+  code = <<~RUBY
     def test
       some_method
       other_method
     end
+  RUBY
+  ```
+
+* <a name="heredoc-delimiters"></a>
+  Используйте говорящие разделители для HEREDOC. Разделители дают ценную
+  информацию о содержании документа. В качестве бонуса вы можете
+  получить подсветку кода внутри документа HEREDOC в некоторых редакторах,
+  если разделители заданы корректно.
+  <sup>[[ссылка](#heredoc-delimiters)]</sup>
+
+  ```ruby
+  # плохо
+  code = <<~END
+    def foo
+      bar
+    end
   END
+
+  # хорошо
+  code = <<~RUBY
+    def foo
+      bar
+    end
+  RUBY
+
+  # хорошо
+  code = <<~SUMMARY
+    An imposing black structure provides a connection between the past and
+    the future in this enigmatic adaptation of a short story by revered
+    sci-fi author Arthur C. Clarke.
+  SUMMARY
   ```
 
 ## Даты и время
@@ -4098,7 +4188,7 @@
 
     ```Ruby
     # плохо
-    def method_missing?(meth, *params, &block)
+    def method_missing(meth, *params, &block)
       if /^find_by_(?<prop>.*)/ =~ meth
         # много кода, чтобы сделать аналог find_by
       else
@@ -4107,7 +4197,7 @@
     end
 
     # хорошо
-    def method_missing?(meth, *params, &block)
+    def method_missing(meth, *params, &block)
       if /^find_by_(?<prop>.*)/ =~ meth
         find_by(prop, *params, &block)
       else

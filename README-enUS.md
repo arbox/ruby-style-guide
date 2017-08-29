@@ -68,7 +68,6 @@ Translations of the guide are available in the following languages:
 * [Chinese Simplified](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [Chinese Traditional](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [French](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
-* [German](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
 * [Japanese](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 * [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [Portuguese (pt-BR)](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
@@ -217,7 +216,7 @@ Translations of the guide are available in the following languages:
   class FooError < StandardError; end
   ```
 
-  The only exception, regarding operators, is the exponent operator:
+  There are a few exceptions. One is the exponent operator:
 
   ```ruby
   # bad
@@ -225,6 +224,16 @@ Translations of the guide are available in the following languages:
 
   # good
   e = M * c**2
+  ```
+
+  Another exception is the slash in rational literals:
+
+  ```ruby
+  # bad
+  o_scale = 1 / 48r
+
+  # good
+  o_scale = 1/48r
   ```
 
 * <a name="spaces-braces"></a>
@@ -778,7 +787,7 @@ Translations of the guide are available in the following languages:
   temperance = Person.new('Temperance', 30)
   ```
 
-  Only omit parentheses for
+  Always omit parentheses for
 
   * Method calls with no arguments:
 
@@ -816,13 +825,20 @@ Translations of the guide are available in the following languages:
 
       # body omitted
     end
-
-    # bad
-    puts(temperance.age)
-    # good
-    puts temperance.age
     ```
 
+  Can omit parentheses for
+
+  * Methods that have "keyword" status in Ruby, but are not declarative:
+
+    ```Ruby
+    # good
+    puts(temperance.age)
+    system('ls')
+    # also good
+    puts temperance.age
+    system 'ls'
+    ```
 * <a name="optional-arguments"></a>
     Define optional arguments at the end of the list of arguments.
     Ruby has some unexpected results when calling methods that have
@@ -1852,6 +1868,7 @@ no parameters.
 
 * <a name="named-format-tokens"></a>
   When using named format string tokens, favor `%<name>s` over `%{name}` because it encodes information about the type of the value.
+<sup>[[link]](#named-format-tokens)</sup>
 
   ```ruby
   # bad
@@ -1860,7 +1877,6 @@ no parameters.
   # good
   format('Hello, %<name>s', name: 'John')
   ```
-<sup>[[link](#named-format-tokens)</sup>
 
 * <a name="array-join"></a>
   Favor the use of `Array#join` over the fairly cryptic `Array#*` with
@@ -2622,6 +2638,42 @@ no parameters.
   class Foo
     class Car
       # 20 methods inside
+    end
+  end
+  ```
+
+* <a name="namespace-definition"></a>
+  Define (and reopen) namespaced classes and modules using explicit nesting.
+  Using the scope resolution operator can lead to surprising constant lookups
+  due to Ruby's [lexical scoping](https://cirw.in/blog/constant-lookup.html),
+  which depends on the module nesting at the point of definition.
+  <sup>[[link](#namespace-definition)]</sup>
+
+  ```Ruby
+  module Utilities
+    class Queue
+    end
+  end
+
+  # bad
+  class Utilities::Store
+    Module.nesting # => [Utilities::Store]
+
+    def initialize
+      # Refers to the top level ::Queue class because Utilities isn't in the
+      # current nesting chain.
+      @queue = Queue.new
+    end
+  end
+
+  # good
+  module Utilities
+    class WaitingList
+      Module.nesting # => [Utilities::WaitingList, Utilities]
+
+      def initialize
+        @queue = Queue.new # Refers to Utilities::Queue
+      end
     end
   end
   ```
@@ -3655,8 +3707,12 @@ resource cleanup when possible.
     # bad
     name = "Bozhidar"
 
+    name = 'De\'Andre'
+
     # good
     name = 'Bozhidar'
+
+    name = "De'Andre"
     ```
 
   * **(Option B)** Prefer double-quotes unless your string literal
@@ -3666,8 +3722,12 @@ resource cleanup when possible.
     # bad
     name = 'Bozhidar'
 
+    sarcasm = "I \"like\" it."
+
     # good
     name = "Bozhidar"
+
+    sarcasm = 'I "like" it.'
     ```
 
   The string literals in this guide are aligned with the first style.
@@ -3796,28 +3856,57 @@ resource cleanup when possible.
 
   ```ruby
   # bad - using Powerpack String#strip_margin
-  code = <<-END.strip_margin('|')
+  code = <<-RUBY.strip_margin('|')
     |def test
     |  some_method
     |  other_method
     |end
-  END
+  RUBY
 
   # also bad
-  code = <<-END
+  code = <<-RUBY
   def test
     some_method
     other_method
   end
-  END
+  RUBY
 
   # good
-  code = <<~END
+  code = <<~RUBY
     def test
       some_method
       other_method
     end
+  RUBY
+  ```
+
+* <a name="heredoc-delimiters"></a>
+  Use descriptive delimiters for heredocs. Delimiters add valuable information
+  about the heredoc content, and as an added bonus some editors can highlight
+  code within heredocs if the correct delimiter is used.
+<sup>[[link](#heredoc-delimiters)]</sup>
+
+  ```ruby
+  # bad
+  code = <<~END
+    def foo
+      bar
+    end
   END
+
+  # good
+  code = <<~RUBY
+    def foo
+      bar
+    end
+  RUBY
+
+  # good
+  code = <<~SUMMARY
+    An imposing black structure provides a connection between the past and
+    the future in this enigmatic adaptation of a short story by revered
+    sci-fi author Arthur C. Clarke.
+  SUMMARY
   ```
 
 ## Date & Time
@@ -4134,7 +4223,7 @@ resource cleanup when possible.
 
     ```ruby
     # bad
-    def method_missing?(meth, *params, &block)
+    def method_missing(meth, *params, &block)
       if /^find_by_(?<prop>.*)/ =~ meth
         # ... lots of code to do a find_by
       else
@@ -4143,7 +4232,7 @@ resource cleanup when possible.
     end
 
     # good
-    def method_missing?(meth, *params, &block)
+    def method_missing(meth, *params, &block)
       if /^find_by_(?<prop>.*)/ =~ meth
         find_by(prop, *params, &block)
       else

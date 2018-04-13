@@ -112,7 +112,7 @@
   отступа (т.е. мягкую табуляцию). Никаких знаков табуляции.
   <sup>[[ссылка](#spaces-indentation)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (четыре пробела)
   def some_method
       do_something
@@ -142,7 +142,7 @@
   выражений. Отсюда непосредственно следует, что каждая директива должна занимать
   свою отдельную строку.<sup>[[ссылка](#no-semicolon)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (точка с запятой избыточна)
   puts 'foobar';
 
@@ -161,7 +161,7 @@
   формат для определений классов с пустым телом.
   <sup>[[ссылка](#single-line-classes)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class FooError < StandardError
   end
@@ -182,7 +182,7 @@
   <sup>[[ссылка](#no-single-line-methods)]</sup>
 
 
-  ```Ruby
+  ```ruby
   # плохо
   def too_much; something; something_else; end
 
@@ -203,7 +203,7 @@
 
   Одним исключением в этом правиле являются методы с пустым телом.
 
-  ```Ruby
+  ```ruby
   # хорошо
   def no_op; end
   ```
@@ -215,7 +215,7 @@
   к написанию легко читаемого кода.
   <sup>[[ссылка](#spaces-operators)]</sup>
 
-  ```Ruby
+  ```ruby
   sum = 1 + 2
   a, b = 1, 2
   class FooError < StandardError; end
@@ -223,7 +223,7 @@
 
   Из этого правила есть несколько исключений. Одним из них является оператор возведения в степень:
 
-  ```Ruby
+  ```ruby
   # плохо
   e = M * c ** 2
 
@@ -259,7 +259,7 @@
   пробелы вокруг `{` и перед `}`.
   <sup>[[ссылка](#spaces-braces)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   some( arg ).other
   [ 1, 2, 3 ].each{|e| puts e}
@@ -280,7 +280,7 @@
   между блоками и литералами хешей. Какой бы стиль вы ни выбрали,
   применяйте его единообразно.
 
-  ```Ruby
+  ```ruby
   # хорошо (пробел после { и до })
   { one: 1, two: 2 }
 
@@ -290,7 +290,7 @@
 
   В выражениях с интерполяцией избегайте лишних пробелов внутри скобок.
 
-  ```Ruby
+  ```ruby
   # плохо
   "From: #{ user.first_name }, #{ user.last_name }"
 
@@ -301,7 +301,7 @@
 * <a name="no-space-bang"></a> Не используйте пробел после `!`.
   <sup>[[ссылка](#no-space-bang)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   ! something
 
@@ -311,7 +311,7 @@
 * <a name="no-space-inside-range-literals"></a>  Записывайте литералы диапазонов
   без пробелов.<sup>[[ссылка](#no-space-inside-range-literals)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   1 .. 3
   'a' ... 'z'
@@ -326,7 +326,7 @@
   предписывается как ["Языком программирования Ruby"][trpl], так и ["Programming Ruby"][pickaxe].
   <sup>[[ссылка](#indent-when-to-case)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   case
     when song.name == 'Misty'
@@ -356,7 +356,7 @@
   выражения переменной, сохраняйте соответствие уровней отступа.
   <sup>[[ссылка](#indent-conditional-assignment)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (слишком запутано)
   kind = case year
   when 1850..1889 then 'Blues'
@@ -413,7 +413,7 @@
   логических частей определений внутри них.
   <sup>[[ссылка](#empty-lines-between-methods)]</sup>
 
-  ```Ruby
+  ```ruby
   def some_method
     data = initialize(options)
 
@@ -431,7 +431,7 @@
   Не используйте несколько пустых строк подряд.
   <sup>[[ссылка](#two-or-more-empty-lines)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (две пустрые строки)
   some_method
 
@@ -448,7 +448,7 @@
   Отделяйте макросы доступа к данным пустой строкой.
   <sup>[[ссылка](#empty-lines-around-access-modifier)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Foo
     attr_reader :foo
@@ -471,7 +471,7 @@
   Не оставляйте пустые строки вокруг тел методов, классов, модулей и блоков.
   <sup>[[ссылка](#empty-lines-around-bodies)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Foo
 
@@ -514,7 +514,7 @@
   параметры расположены в отдельных строках.
   <sup>[[ссылка](#no-trailing-params-comma)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (хотя перемещать/добавлять/удалять строки проще)
   some_method(
     size,
@@ -535,7 +535,7 @@
   <sup>[[ссылка](#spaces-around-equals)]</sup>
 
 
-  ```Ruby
+  ```ruby
   # плохо
   def some_method(arg1=:default, arg2=nil, arg3=[])
     # некоторый код
@@ -555,7 +555,7 @@
   кроме как при конкатенации строк.<sup>[[ссылка](#no-trailing-backslash)]</sup>
 
 
-  ```Ruby
+  ```ruby
   # плохо
   result = 1 - \
            2
@@ -577,7 +577,7 @@
   * **A** Когда продолжаете цепочку вызовов методов на
   следующую строку, начинайте её с точки.
 
-    ```Ruby
+    ```ruby
     # плохо (нужно посмотреть на предыдущую строку, чтобы понять
     # смысл последующей
     one.two.three.
@@ -592,7 +592,7 @@
   вызовов на следующей строке, завершайте строку точкой `.`, давая
   понять, что продолжение выражения следует
 
-    ```Ruby
+    ```ruby
     # плохо (чтобы понять, что выражение не окончено, необходимо
     # посмотреть на следующую строку)
     one.two.three
@@ -612,7 +612,7 @@
   ограничений на длину строки, то используйте одинарный отступ.
   <sup>[[ссылка](#no-double-indent)]</sup>
 
-  ```Ruby
+  ```ruby
   # первоначальный вариант (строка слишком длинная)
   def send_mail(source)
     Mailer.deliver(to: 'bob@example.com', from: 'us@example.com', subject: 'Important message', body: source.text)
@@ -650,7 +650,7 @@
   Выравнивайте элементы литералов массива, если они занимают несколько строк.
   <sup>[[ссылка](#align-multiline-arrays)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   menu_item = %w[Spam Spam Spam Spam Spam Spam Spam Spam
     Baked beans Spam Spam Spam Spam Spam]
@@ -671,7 +671,7 @@
   в большие числовые константы для улучшения их восприятия.
   <sup>[[ссылка](#underscores-in-numerics)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (Сколько тут нолей?)
   num = 1000000
 
@@ -685,7 +685,7 @@
   Не используйте `0d` префикс для десятичных литералов.
   <sup>[[ссылка](#numeric-literal-prefixes)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   num = 01234
   num = 0O1234
@@ -719,7 +719,7 @@
   нельзя разместить на необходимом уровне отступа. К тому же их сложнее
   воспринимать, чем обычные комментарии.<sup>[[ссылка](#no-block-comments)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   =begin
   строка комментария
@@ -739,7 +739,7 @@
   `Nokogiri::HTML()`). Никогда не используйте `::` для обычного вызова методов.
   <sup>[[ссылка](#double-colons)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   SomeClass::some_method
   some_object::some_method
@@ -775,7 +775,7 @@
   скобки, когда метод не принимает параметров.
   <sup>[[ссылка](#method-parens)]</sup>
 
-   ```Ruby
+   ```ruby
    # плохо
    def some_method()
      # некоторый код
@@ -803,7 +803,7 @@
   (как например тут: `f((3 + 2) + 1)`)
   <sup>[[ссылка](#method-invocation-parens)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   x = Math.sin y
   # хорошо
@@ -824,7 +824,7 @@
 
   * когда метод вызывается без аргументов:
 
-    ```Ruby
+    ```ruby
     # плохо
     Kernel.exit!()
     2.even?()
@@ -840,7 +840,7 @@
 
   * когда методы являются частью внутреннего DSL (т.е. `Rake`, `Rails`, `RSpec`):
 
-    ```Ruby
+    ```ruby
     # плохо
     validates(:name, presence: true)
     # хорошо
@@ -849,7 +849,7 @@
 
   * когда методы имеют статусы ключевых слов в Руби:
 
-    ```Ruby
+    ```ruby
     class Person
       # плохо
       attr_reader(:name, :age)
@@ -864,7 +864,7 @@
 
   * когда методы имеют в Руби статус ключевого слова, но не являются декларативными:
 
-    ```Ruby
+    ```ruby
     # хорошо
     puts(temperance.age)
     system('ls')
@@ -879,7 +879,7 @@
   может показаться вам неоднозначным, если они заданы в начале списка.
   <sup>[[ссылка](#optional-arguments)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def some_method(a = 1, b = 2, c, d)
     puts "#{a}, #{b}, #{c}, #{d}"
@@ -907,7 +907,7 @@
   обычная его форма записи.
   <sup>[[ссылка](#parallel-assignment)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   a, b, c, d = 'foo', 'bar', 'baz', 'foobar'
 
@@ -953,7 +953,7 @@
   и хотите исключить какие-то значения.
   <sup>[[ссылка]](#trailing-underscore-variables)</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   foo = 'one,two,three,four,five'
   # Ненужное присваивание, не несущее к тому же полезной информации.
@@ -986,7 +986,7 @@
   объявленные в теле `for`, будут видны за пределами блока.
   <sup>[[ссылка](#no-for-loops)]</sup>
 
-  ```Ruby
+  ```ruby
   arr = [1, 2, 3]
 
   # плохо
@@ -1009,7 +1009,7 @@
   объявленных на нескольких строках.
   <sup>[[ссылка](#no-then)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if some_condition then
     # некоторое действие
@@ -1026,7 +1026,7 @@
   на той же строке, что содержит `if/then` в многострочном условии.
   <sup>[[ссылка](#same-line-condition)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if
     x > 1
@@ -1043,7 +1043,7 @@
   конструкциям с `if/then/else/end`. Он используется чаще и по определению
   более краток.<sup>[[ссылка](#ternary-operator)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   result = if some_condition then something else something_else end
 
@@ -1056,7 +1056,7 @@
   тернарных операторов. При возникновении такой необходимости применяйте
   конструкции с `if/else`.<sup>[[ссылка](#no-nested-ternary)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   some_condition ? (nested_condition ? nested_something : nested_something_else) : something_else
 
@@ -1073,7 +1073,7 @@
   используйте вместо нее тернарные операторы.
   <sup>[[ссылка](#no-1.8-if-syntax)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   result = if some_condition: something else something_else end
 
@@ -1090,7 +1090,7 @@
   возвращающими результирующие значения.
   <sup>[[ссылка](#use-if-case-returns)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if a == 1
     result = x
@@ -1117,7 +1117,7 @@
 * <a name="bang-not-not"></a> Используйте `!` вместо `not`.
   <sup>[[ссылка](#bang-not-not)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (необходимы скобки из-за неоднозначности приоритетов операторов)
   x = (not something)
 
@@ -1134,7 +1134,7 @@
   выражения, его использование делает ваше намерение неявным.
   Если вы хотите сделать проверку на `nil`, лучше используйте `nil?`.
 
-  ```Ruby
+  ```ruby
   # плохо
   x = 'test'
   # неявная проверка на nil
@@ -1157,7 +1157,7 @@
   также допустимы, хотя и менее понятны.
   <sup>[[ссылка](#no-and-or-or)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   # булево выражение
   ok = got_needed_arguments and arguments_are_valid
@@ -1188,7 +1188,7 @@
   потоком исполнения `&&`/`||`.
   <sup>[[ссылка](#if-as-a-modifier)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if some_condition
     do_something
@@ -1205,7 +1205,7 @@
   Избегайте `if`/`unless` в конце нетривиального многострочного блока.
   <sup>[[ссылка](#no-multiline-if-modifiers)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   10.times do
     # некоторый код в несколько строк
@@ -1224,7 +1224,7 @@
   Используйте `&&`/`||` по необходимости.
   <sup>[[ссылка](#no-nested-modifiers)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   do_something if other_condition if some_condition
 
@@ -1235,7 +1235,7 @@
   для отрицательных условий (или `||` для управления потоком исполнения).
   <sup>[[ссылка](#unless-for-negatives)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   do_something if !some_condition
 
@@ -1253,7 +1253,7 @@
   Перепишите такие выражение с положительной проверкой.
   <sup>[[ссылка](#no-else-with-unless)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   unless success?
     puts 'failure'
@@ -1273,7 +1273,7 @@
   Не используйте скобки вокруг условных выражений в управляющих конструкциях.
   <sup>[[ссылка](#no-parens-around-condition)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if (x > 10)
     # код опущен для краткости
@@ -1291,7 +1291,7 @@
   для многострочных циклов с `while/until`.
   <sup>[[ссылка](#no-multiline-while-do)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   while x > 5 do
     # код опущен для краткости
@@ -1315,7 +1315,7 @@
   Используйте `while`/`until` для однострочных выражений.
   <sup>[[ссылка](#while-as-a-modifier)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   while some_condition
     do_something
@@ -1327,7 +1327,7 @@
 * <a name="until-for-negatives"></a> Используйте `until` вместо `while`
   для условий на отрицания.<sup>[[ссылка](#until-for-negatives)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   do_something while !some_condition
 
@@ -1337,7 +1337,7 @@
 * <a name="infinite-loop"></a> Используйте `Kernel#loop` вместо `while/until`
   для бесконечного цикла.<sup>[[ссылка](#infinite-loop)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   while true
     do_something
@@ -1357,7 +1357,7 @@
   `begin/end/until` или `begin/end/while` для циклов с постусловием.
   <sup>[[ссылка](#loop-with-break)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   begin
     puts val
@@ -1376,7 +1376,7 @@
   ограничения хешей, передаваемых методу.
   <sup>[[ссылка](#no-braces-opts-hash)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   user.set({ name: 'John', age: 45, permissions: { read: true } })
 
@@ -1389,7 +1389,7 @@
   методов, являющихся частью DSL.
   <sup>[[ссылка](#no-dsl-decorating)]</sup>
 
-  ```Ruby
+  ```ruby
   class Person < ActiveRecord::Base
     # плохо
     validates(:name, { presence: true, length: { within: 1..10 } })
@@ -1404,7 +1404,7 @@
   единственным в блоке.
   <sup>[[ссылка](#single-action-blocks)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   names.map { |name| name.upcase }
 
@@ -1421,7 +1421,7 @@
   используйте `do...end` в цепочках вызовов.
   <sup>[[ссылка](#single-line-blocks)]</sup>
 
-  ```Ruby
+  ```ruby
   names = %w[Bozhidar Steve Sarah]
 
   # плохо
@@ -1452,7 +1452,7 @@
   аргументы будут преобразованы в объект класс `Proc`.
   <sup>[[ссылка](#block-argument)]</sup>
 
-  ```Ruby
+  ```ruby
   require 'tempfile'
 
   # плохо
@@ -1479,7 +1479,7 @@
   где это не нужно для управления ветвлением.
   <sup>[[ссылка](#no-explicit-return)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def some_method(some_arr)
     return some_arr.size
@@ -1497,7 +1497,7 @@
   словами, и перегружаемых операторов.
   <sup>[[ссылка](#no-self-unless-required)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def ready?
     if self.last_reviewed_at > self.last_updated_at
@@ -1522,7 +1522,7 @@
   эквивалентны.
   <sup>[[ссылка](#no-shadowing)]</sup>
 
-  ```Ruby
+  ```ruby
   class Foo
     attr_accessor :options
 
@@ -1556,7 +1556,7 @@
   <sup>[[ссылка](#safe-assignment-in-condition)]</sup>
 
 
-  ```Ruby
+  ```ruby
   # плохо (к тому же вызывает предупреждение)
   if v = array.grep(/foo/)
     do_something(v)
@@ -1581,7 +1581,7 @@
   По возможности используйте сокращенные операторы присваивания.
   <sup>[[ссылка](#self-assignment)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   x = x + y
   x = x * y
@@ -1604,7 +1604,7 @@
   переменная еще не инициализирована.
   <sup>[[ссылка](#double-pipe-for-uninit)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   name = name ? name : 'Bozhidar'
 
@@ -1621,7 +1621,7 @@
   Это вызовет проблемы, если текущим значением переменной будет `false`.
   <sup>[[ссылка](#no-double-pipes-for-bools)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (назначит переменной enabled значение true, даже если оно было false)
   enabled ||= true
 
@@ -1636,7 +1636,7 @@
   необходимость в проверке с `if`.
   <sup>[[ссылка](#double-amper-preprocess)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if something
     something = something.downcase
@@ -1662,7 +1662,7 @@
   разночтениям в коде.
   <sup>[[ссылка](#no-case-equality)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   Array === something
   (1..100) === 7
@@ -1678,7 +1678,7 @@
   сравнения, реализованная в `eql?`, достаточно редко нужна на практике.
   <sup>[[ссылка](#eql)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (`eql?` работает для строк, как и  `==`)
   'ruby'.eql? some_str
 
@@ -1694,7 +1694,7 @@
   восприятия варианты этих переменных из библиотеки `English`.
   <sup>[[ссылка](#no-cryptic-perlisms)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   $:.unshift File.dirname(__FILE__)
 
@@ -1707,7 +1707,7 @@
   Не оставляйте пробел между именем метода и открывающей скобкой.
   <sup>[[ссылка](#parens-no-spaces)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   f (3 + 2) + 1
 
@@ -1725,7 +1725,7 @@
   метод `lambda` для многострочных блоков.
   <sup>[[ссылка](#lambda-multi-line)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   l = lambda { |a, b| a + b }
   l.call(1, 2)
@@ -1749,7 +1749,7 @@
   Используйте скобки при определении `lambda` с аргументами.
   <sup>[[ссылка](#stabby-lambda-with-args)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   l = ->x, y { something(x, y) }
 
@@ -1760,7 +1760,7 @@
   Не используйте скобки при определении `lambda` без аргументов.
   <sup>[[ссылка](#stabby-lambda-no-args)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   l = ->() { something }
 
@@ -1772,7 +1772,7 @@
   Используйте `proc` вместо `Proc.new`.
   <sup>[[ссылка](#proc)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   p = Proc.new { |n| puts n }
 
@@ -1785,7 +1785,7 @@
   лямбда-выражений и блоков.
   <sup>[[ссылка](#proc-call)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (выглядит как доступ к энумератору)
   l = ->(v) { puts v }
   l[1]
@@ -1806,7 +1806,7 @@
   предупреждения о неиспользуемых переменных.
   <sup>[[ссылка](#underscore-unused-vars)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   result = hash.map { |k, v| v + 1 }
 
@@ -1850,7 +1850,7 @@
   `String#%`.
   <sup>[[ссылка](#sprintf)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   '%d %d' % [20, 10]
   # => '20 10'
@@ -1876,7 +1876,7 @@
   переменных в шаблонах, это даст информацию о типе используемого значения.
   <sup>[[ссылка](#named-format-tokens)</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   format('Hello, %{name}', name: 'John')
 
@@ -1891,7 +1891,7 @@
   аргументом.
   <sup>[[ссылка](#array-join)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   %w[one two three] * ', '
   # => 'one, two, three'
@@ -1908,7 +1908,7 @@
   массивом, но вы в этом не полностью уверены.
   <sup>[[ссылка](#array-coertion)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   paths = [paths] unless paths.is_a? Array
   paths.each { |path| do_something(path) }
@@ -1925,7 +1925,7 @@
   для сравнения, когда это возможно.
   <sup>[[ссылка](#ranges-or-between)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   do_something if x >= 1000 && x <= 2000
 
@@ -1941,7 +1941,7 @@
   `==`. Сравнение чисел можно проводить явно.
   <sup>[[ссылка](#predicate-methods)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   if x % 2 == 0
   end
@@ -1974,7 +1974,7 @@
   с логическими значениями.
   <sup>[[ссылка](#no-non-nil-checks)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   do_something if !something.nil?
   do_something if something != nil
@@ -1996,7 +1996,7 @@
   Никогда не используйте блоки `END`. Используйте метод `Kernel#at_exit`.
   <sup>[[ссылка](#no-END-blocks)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   END { puts 'Goodbye!' }
 
@@ -2014,7 +2014,7 @@
   в самом начале функции, которые срабатывают при первой же возможности.
   <sup>[[ссылка](#no-nested-conditionals)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def compute_thing(thing)
     if thing[:foo]
@@ -2038,7 +2038,7 @@
 
   В циклах используйте `next` вместо блоков с условием.
 
-  ```Ruby
+  ```ruby
   # плохо
   [0, 1, 2, 3].each do |item|
     if item > 1
@@ -2062,7 +2062,7 @@
 * <a name="english-identifiers"></a> Используйте английский язык, называя
   идентификаторы.<sup>[[ссылка](#english-identifiers)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (идентификатор использует символы вне ASCII)
   зарплата = 1_000
 
@@ -2078,7 +2078,7 @@
   Используйте `snake_case` при наименовании символов, методов и переменных.
   <sup>[[ссылка](#snake-case-symbols-methods-vars)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   :'some symbol'
   :SomeSymbol
@@ -2110,7 +2110,7 @@
   Не разделяйте числа и буквы в именах символов, методов и переменных.
   <sup>[[ссылка](#snake-case-symbols-methods-vars-with-numbers)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   :some_sym_1
 
@@ -2135,7 +2135,7 @@
   `RFC`, `XML` набирайте заглавными буквами.
   <sup>[[ссылка](#camelcase-classes)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Someclass
     # некоторый код
@@ -2184,7 +2184,7 @@
   всех других констант кроме имен классов и модулей.
   <sup>[[ссылка](#screaming-snake-case)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   SomeConst = 5
 
@@ -2205,7 +2205,7 @@
   `#include?`, например).
   <sup>[[ссылка](#bool-methods-prefix)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Person
     def is_tall?
@@ -2244,7 +2244,7 @@
   завершающий скрипт в отличии от `exit`, выполняющего финализацию.
   <sup>[[ссылка](#dangerous-method-bang)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (нет соответствующего безопасного аналога)
   class Person
     def update!
@@ -2272,7 +2272,7 @@
   восклицательным знаком), если это возможно.
   <sup>[[ссылка](#safe-because-unsafe)]</sup>
 
-  ```Ruby
+  ```ruby
   class Array
     def flatten_once!
       res = []
@@ -2295,7 +2295,7 @@
   составляют методы `#<<` и  `#[]`, так как их семантика сильно отличается.
   <sup>[[ссылка](#other-arg)]</sup>
 
-  ```Ruby
+  ```ruby
   def +(other)
     # некоторый код
   end
@@ -2316,7 +2316,7 @@
   это приведет к затратному полному обходу всех элементов для определения
   размера.<sup>[[ссылка](#count-vs-size)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   some_hash.count
 
@@ -2331,7 +2331,7 @@
   `#flatten` сглаживает вложенность любого уровня.
   <sup>[[ссылка](#flat-map)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   all_songs = users.map(&:songs).flatten.uniq
 
@@ -2347,7 +2347,7 @@
   такой же эффективной, как и для `#reverse.each`.
   <sup>[[ссылка](#reverse-each)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   array.reverse.each { ... }
 
@@ -2386,7 +2386,7 @@
 * <a name="no-superfluous-comments"></a> Избегайте избыточного комментирования.
   <sup>[[ссылка](#no-superfluous-comments)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   counter += 1 # Увеличивает счетчик на единицу.
   ```
@@ -2420,7 +2420,7 @@
   последующей строке следует сделать отступ в три пробела после символа `#`.
   <sup>[[ссылка](#indent-annotations)]</sup>
 
-  ```Ruby
+  ```ruby
   def bar
     # FIXME: This has crashed occasionally since v3.2.1. It may
     #   be related to the BarBazUtil upgrade.
@@ -2433,7 +2433,7 @@
   в конце вызывающей проблему строки. Однако такое применение должно быть
   исключением, а не правилом.<sup>[[ссылка](#rare-eol-annotations)]</sup>
 
-  ```Ruby
+  ```ruby
   def bar
     sleep 100 # OPTIMIZE
   end
@@ -2479,7 +2479,7 @@
   является только строка вызовом интерпретатора (Shebang), о чем речь пойдет далее.
   <sup>[[ссылка](#magic-comments-first)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   # Some documentation about Person
 
@@ -2499,7 +2499,7 @@
   если она есть в тексте.
   <sup>[[ссылка](#below-shebang)]</sup>
 
-  ```Ruby
+  ```ruby
   # хорошо
   #!/usr/bin/env ruby
   # frozen_string_literal: true
@@ -2518,7 +2518,7 @@
   Use one magic comment per line if you need multiple.
   <sup>[[ссылка](#one-magic-comment-per-line)]</sup>
 
-  ```Ruby
+  ```ruby
   # хорошо
   # frozen_string_literal: true
   # encoding: ascii-8bit
@@ -2532,7 +2532,7 @@
   Separate magic comments from code and documentation with a blank line.
   <sup>[[ссылка](#separate-magic-comments-from-code)]</sup>
 
-  ```Ruby
+  ```ruby
   # хорошо
   # frozen_string_literal: true
 
@@ -2554,7 +2554,7 @@
 * <a name="consistent-classes"></a> Придерживайтесь единообразной структуры
   классов.<sup>[[ссылка](#consistent-classes)]</sup>
 
-  ```Ruby
+  ```ruby
   class Person
     # extend и include в начале
     extend SomeModule
@@ -2602,7 +2602,7 @@
   Split multiple mixins into separate statements.
   <sup>[[ссылка](#mixin-grouping)]</sup>
 
-  ```Ruby
+  ```ruby
   # bad
   class Person
     include Foo, Bar
@@ -2623,7 +2623,7 @@
   вложенный класс.
   <sup>[[ссылка](#file-classes)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
 
   # foo.rb
@@ -2669,7 +2669,7 @@
   в Руби. Пространство имен зависит для модуля от места его определения.
   <sup>[[ссылка](#namespace-definition)]</sup>
 
-  ```Ruby
+  ```ruby
   module Utilities
     class Queue
     end
@@ -2704,7 +2704,7 @@
   экземпляры класса.
   <sup>[[ссылка](#modules-vs-classes)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class SomeClass
     def self.some_method
@@ -2735,7 +2735,7 @@
   методы модуля.
   <sup>[[ссылка](#module-function)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   module Utilities
     extend self
@@ -2776,7 +2776,7 @@
   определяйте метод `#to_s`.
   <sup>[[ссылка](#define-to-s)]</sup>
 
-  ```Ruby
+  ```ruby
   class Person
     attr_reader :first_name, :last_name
 
@@ -2795,7 +2795,7 @@
   тривиальных методов доступа к объекту.
   <sup>[[ссылка](#attr_family)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Person
     def initialize(first_name, last_name)
@@ -2830,7 +2830,7 @@
   использованием `=`, например `attr_name=`.
   <sup>[[ссылка](#accessor_mutator_method_names)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Person
     def get_name
@@ -2859,7 +2859,7 @@
   `attr_accessor` вместо нее.
   <sup>[[ссылка](#attr)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (создает единый метод доступа атрибуту, объявлено нежелательным в Руби >= 1.9)
   attr :something, true
   attr :one, :two, :three # ведет себя как attr_reader
@@ -2874,7 +2874,7 @@
   простейшие методы доступа к объекту, метод инициализации и методы сравнения.
   <sup>[[ссылка](#struct-new)]</sup>
 
-  ```Ruby
+  ```ruby
   # хорошо
   class Person
     attr_accessor :first_name, :last_name
@@ -2896,7 +2896,7 @@
   может привести к странным ошибкам при многократной загрузке кода из файла.
   <sup>[[ссылка](#no-extend-struct-new)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Person < Struct.new(:first_name, :last_name)
   end
@@ -2910,7 +2910,7 @@
   возможности создавать экземпляры конкретного класса.
   <sup>[[ссылка](#factory-methods)]</sup>
 
-  ```Ruby
+  ```ruby
   class Person
     def self.create(options_hash)
       # некоторый код
@@ -2923,7 +2923,7 @@
   наследования.
   <sup>[[ссылка](#duck-typing)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   class Animal
     # абстрактный метод
@@ -2963,7 +2963,7 @@
   "непристойного" поведения при наследовании.
   <sup>[[ссылка](#no-class-vars)]</sup>
 
-  ```Ruby
+  ```ruby
   class Parent
     @@class_var = 'parent'
 
@@ -2996,7 +2996,7 @@
   всем определяемым ниже методам.
   <sup>[[ссылка](#indent-public-private-protected)]</sup>
 
-  ```Ruby
+  ```ruby
   class SomeClass
     def public_method
       # некоторый код
@@ -3019,7 +3019,7 @@
   рефакторинг, так как имя класса будет использоваться только один раз.
   <sup>[[ссылка](#def-self-class-methods)]</sup>
 
-  ```Ruby
+  ```ruby
   class TestClass
     # плохо
     def TestClass.some_method
@@ -3052,7 +3052,7 @@
   того класса, в котором определен. Вызов не будет перенаправлен неявно.
   <sup>[[ссылка](#alias-method-lexically)]</sup>
 
-  ```Ruby
+  ```ruby
   class Westerner
     def first_name
       @names.first
@@ -3070,7 +3070,7 @@
   будет привязан к тому методу, который находится в области видимости в момент
   объявления. Динамическое перенаправление вызова не производится.
 
-  ```Ruby
+  ```ruby
   class Fugitive < Westerner
     def first_name
       'Nobody'
@@ -3082,7 +3082,7 @@
   `Westerner#first_name`, а не `Fugitive#first_name`. Чтобы переопределить
   поведение `Fugitive#given_name`, нужно объявить алиас в классе-наследнике.
 
-  ```Ruby
+  ```ruby
   class Fugitive < Westerner
     def first_name
       'Nobody'
@@ -3099,7 +3099,7 @@
   поведению в данном случае.
   <sup>[[ссылка](#alias-method)]</sup>
 
-  ```Ruby
+  ```ruby
   module Mononymous
     def self.included(other)
       other.class_eval { alias_method :full_name, :given_name }
@@ -3119,7 +3119,7 @@
   в таких классах
   <sup>[[ссылка](#class-and-self)]</sup>
 
-  ```Ruby
+  ```ruby
   class TestClass
     # плохо (слишком много работы при рефакторинге)
     def self.call(param1, param2)
@@ -3146,7 +3146,7 @@
   Используйте `raise` вместо `fail` при вызове исключений.
   <sup>[[ссылка](#prefer-raise-over-fail)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   fail SomeException, 'message'
 
@@ -3159,7 +3159,7 @@
   с двумя аргументами.
   <sup>[[ссылка](#no-explicit-runtimeerror)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   raise RuntimeError, 'message'
 
@@ -3172,7 +3172,7 @@
   вместо экземпляра класса исключения.
   <sup>[[ссылка](#exception-class-messages)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   fail SomeException.new('message')
   # Обратите внимание, что нет возможности вызвать
@@ -3190,7 +3190,7 @@
   исключение будет просто тихо проигнорировано.
   <sup>[[ссылка](#no-return-ensure)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def foo
     raise
@@ -3202,7 +3202,7 @@
 * <a name="begin-implicit"></a> Используйте *имплицитную форму* блока `begin`
   по возможности.<sup>[[ссылка](#begin-implicit)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def foo
     begin
@@ -3224,7 +3224,7 @@
   использование блоков `begin` при помощи *contingency methods* (термин введен
   Авди Гриммом).<sup>[[ссылка](#contingency-methods)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   begin
     # код, который может вызвать ошибку
@@ -3253,7 +3253,7 @@
 * <a name="dont-hide-exceptions"></a> Не подавляйте исключения без обработки.
   <sup>[[ссылка](#dont-hide-exceptions)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   begin
     # здесь образовалось исключение
@@ -3268,7 +3268,7 @@
 * <a name="no-rescue-modifiers"></a> Откажитесь от использования `rescue` в виде
   постмодификатора.<sup>[[ссылка](#no-rescue-modifiers)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (это перехватывает исключения класса `StandardError` и его наследников)
   read_file rescue handle_error($!)
 
@@ -3284,7 +3284,7 @@
   Управляйте ветвлением в программе без помощи исключений.
   <sup>[[ссылка](#no-exceptional-flows)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   begin
     n / d
@@ -3306,7 +3306,7 @@
   завершения процесса при помощи `kill -9`.
   <sup>[[ссылка](#no-blind-rescues)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   begin
     # сигналы выхода будет перехвачены (кроме kill -9)
@@ -3336,7 +3336,7 @@
   в иерархии проверки, иначе они никогда не будут отфильтрованы.
   <sup>[[ссылка](#exception-ordering)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   begin
     # код с ошибкой
@@ -3360,7 +3360,7 @@
   Освобождайте используемые вашей программой ресурсы в блоке `ensure`.
   <sup>[[ссылка](#release-resources)]</sup>
 
-  ```Ruby
+  ```ruby
   f = File.open('testfile')
   begin
     # некоторые действия над файлом
@@ -3376,7 +3376,7 @@
   возврат выделенных ресурсов, если есть такая возможность.
   <sup>[[ссылка](#auto-release-resources)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (нужно специально закрывать ранее открытый файл)
   f = File.open('testfile')
     # некоторые действия над файлом
@@ -3399,7 +3399,7 @@
   передать дополнительные параметры при создании коллекций.
   <sup>[[ссылка](#literal-array-hash)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   arr = Array.new
   hash = Hash.new
@@ -3416,7 +3416,7 @@
   метасимволов). Это правило касается лишь массивов с двумя и более
   элементами.<sup>[[ссылка](#percent-w)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   STATES = ['draft', 'open', 'closed']
 
@@ -3429,7 +3429,7 @@
   несовместима с синтаксисом Ruby 1.9 и старше. Это правило касается лишь
   массивов с двумя и более элементами.<sup>[[ссылка](#percent-i)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   STATES = [:draft, :open, :closed]
 
@@ -3441,7 +3441,7 @@
   элемента в литералах массивов и хешей, особенно если элементы находятся не на
   разных строках.<sup>[[ссылка](#no-trailing-array-commas)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (проще перемещать, добавлять и удалять элементы, но не идеально)
   VALUES = [
              1001,
@@ -3459,7 +3459,7 @@
 * <a name="no-gappy-arrays"></a> Не создавайте массивы с большими незанятыми
   промежутками адресов.<sup>[[ссылка](#no-gappy-arrays)]</sup>
 
-  ```Ruby
+  ```ruby
   arr = []
   arr[100] = 1 # Теперь у вас есть массив с кучей значений `nil`.
   ```
@@ -3477,7 +3477,7 @@
 * <a name="symbols-as-keys"></a> Используйте символы вместо строк в качестве
   ключей хешей.<sup>[[ссылка](#symbols-as-keys)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
 
@@ -3492,7 +3492,7 @@
   литералов хешей, когда ключами являются символы.
   <sup>[[ссылка](#hash-literals)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   hash = { :one => 1, :two => 2, :three => 3 }
 
@@ -3505,7 +3505,7 @@
   символы в качестве ключей, то применяйте только старую нотацию со стрелками.
   <sup>[[ссылка](#no-mixed-hash-syntaces)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   { a: 1, 'b' => 2 }
 
@@ -3518,7 +3518,7 @@
   `Hash#has_value?`.
   <sup>[[ссылка](#hash-key)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   hash.has_key?(:test)
   hash.has_value?(value)
@@ -3533,7 +3533,7 @@
   и `Hash#each_value` вместо `Hash#values.each`.
   <sup>[[ссылка](#hash-each)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   hash.keys.each { |k| p k }
   hash.values.each { |v| p v }
@@ -3550,7 +3550,7 @@
   известно, используйте `Hash#fetch`.
   <sup>[[ссылка](#hash-fetch)]</sup>
 
-  ```Ruby
+  ```ruby
   heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
 
   # плохо (закравшуюся ошибку можно и не заметить сразу)
@@ -3565,7 +3565,7 @@
   при помощи `Hash#fetch`, не реализуйте эту логику самостоятельно.
   <sup>[[ссылка](#hash-fetch-defaults)]</sup>
 
-  ```Ruby
+  ```ruby
   batman = { name: 'Bruce Wayne', is_evil: false }
 
   # плохо (например, при использование оператора `||` мы получим неожиданный
@@ -3581,7 +3581,7 @@
   код имеет сторонние эффекты или сложен для выполнения.
   <sup>[[ссылка](#use-hash-blocks)]</sup>
 
-  ```Ruby
+  ```ruby
   batman = { name: 'Bruce Wayne' }
 
   # плохо (при использовании значения по умолчанию метод его расчета будет
@@ -3599,7 +3599,7 @@
   за один раз.
   <sup>[[ссылка](#hash-values-at)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   email = data['email']
   username = data['nickname']
@@ -3620,7 +3620,7 @@
   Это обезопасит вас от вызова `[]` на `nil`.
   <sup>[[ссылка](#accessing-elements-directly)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   Regexp.last_match[1]
 
@@ -3634,7 +3634,7 @@
   к элементу коллекции.
   <sup>[[ссылка](#provide-alternate-accessor-to-collections)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   def awesome_things
     @awesome_things
@@ -3660,7 +3660,7 @@
   платформы.
   <sup>[[ссылка](#integer-type-checking)]</sup>
 
-  ```Ruby
+  ```ruby
   timestamp = Time.now.to_i
 
   # плохо
@@ -3677,7 +3677,7 @@
   Примером может быть симуляция броска кубика.
   <sup>[[ссылка](#random-numbers)]</sup>
 
-    ```Ruby
+    ```ruby
     # плохо
     rand(6) + 1
 
@@ -3691,7 +3691,7 @@
   шаблоны, а не конкатенацию строк.
   <sup>[[ссылка](#string-interpolation)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   email_with_name = user.name + ' <' + user.email + '>'
 
@@ -3711,7 +3711,7 @@
   * **Стиль A:** Используйте одинарные кавычки, если вам не нужна интерполяция строк
     или специальные символы вроде `\t`, `\n`, `'` и т.д.
 
-    ```Ruby
+    ```ruby
     # плохо
     name = "Bozhidar"
     name = 'De\'Andre'
@@ -3724,7 +3724,7 @@
   * **Стиль B:** Используйте двойные кавычки в ваших строчных литералах, если они не
     содержат `"` или экранируйте символы, которые не должны интерполироваться.
 
-    ```Ruby
+    ```ruby
     # плохо
     name = 'Bozhidar'
     sarcasm = "I \"like\" it."
@@ -3742,7 +3742,7 @@
   избыточен: `?x` будет интерпретироваться в виде `'x'` (строка
   с единственным символом в ней).<sup>[[ссылка](#no-character-literals)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   char = ?c
 
@@ -3754,7 +3754,7 @@
   вокруг глобальных переменных и переменных экземпляров класса при интерполяции
   строк.<sup>[[ссылка](#curlies-interpolate)]</sup>
 
-  ```Ruby
+  ```ruby
   class Person
     attr_reader :first_name, :last_name
 
@@ -3787,7 +3787,7 @@
   объектов, он вызывается автоматически при интерполяции.
   <sup>[[ссылка](#no-to-s)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   message = "This is the #{result.to_s}."
 
@@ -3801,7 +3801,7 @@
   который создает целую кучу новых строковых объектов.
   <sup>[[ссылка](#concat-strings)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   html = ''
   html += '<h1>Page title</h1>'
@@ -3824,7 +3824,7 @@
   быстрый и специализированный альтернативный метод.
   <sup>[[ссылка](#dont-abuse-gsub)]</sup>
 
-  ```Ruby
+  ```ruby
   url = 'http://example.com'
   str = 'lisp-case-rules'
 
@@ -3845,7 +3845,7 @@
   ненужных пробелов.
   <sup>[[ссылка](#heredocs)]</sup>
 
-  ```Ruby
+  ```ruby
   code = <<-END.gsub(/^\s+\|/, '')
     |def test
     |  some_method
@@ -3860,7 +3860,7 @@
   для задания аккуратного отступа перед несколькими строками.
   <sup>[[ссылка](#squiggly-heredocs)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (используется `String#strip_margin` из Powerpack)
   code = <<-RUBY.strip_margin('|')
     |def test
@@ -3928,7 +3928,7 @@
   аргумент `start` для четкого понимания ваших намерений.
   <sup>[[ссылка](#no-datetime)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (использует `DateTime` для текущего значения времени)
   DateTime.now
 
@@ -3961,7 +3961,7 @@
   В простейших случаях вы просто можете использовать индексирование строк.
   <sup>[[ссылка](#regexp-string-index)]</sup>
 
-  ```Ruby
+  ```ruby
   match = string[/regexp/]             # Возвращает найденные совпадения.
   first_group = string[/text(grp)/, 1] # Возвращает совпадения выделенной группы.
   string[/text (grp)/, 1] = 'replace'  # string => 'text replace'
@@ -3971,7 +3971,7 @@
   если вы не планируете использовать содержание выделенной скобками группы.
   <sup>[[ссылка](#non-capturing-regexp)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   /(first|second)/
 
@@ -3984,7 +3984,7 @@
   и т.д.). Вместо этого используйте `Regexp.last_match(n)`.
   <sup>[[ссылка](#no-perl-regexp-last-matchers)]</sup>
 
-  ```Ruby
+  ```ruby
   /(regexp)/ =~ string
   # некоторый код
 
@@ -3999,7 +3999,7 @@
   совпадений может быть сложной задачей. Вместо этого используйте поименованные
   группы с говорящими именами.<sup>[[ссылка](#no-numbered-regexes)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   /(regexp)/ =~ string
   # некоторый код
@@ -4022,7 +4022,7 @@
   Не путайте `\Z` и `\z`: `\Z` является эквивалентом `/\n?\z/`.
   <sup>[[ссылка](#caret-and-dollar-regexp)]</sup>
 
-  ```Ruby
+  ```ruby
   string = "some injection\nusername"
   string[/^username$/]   # есть совпадение
   string[/\Ausername\z/] # нет совпадения
@@ -4033,7 +4033,7 @@
   комментарии. Не забывайте при этом, что пробелы в данном случае игнорируются.
   <sup>[[ссылка](#comment-regexes)]</sup>
 
-  ```Ruby
+  ```ruby
   regexp = /
     start         # какой-то текст
     \s            # знак пробела
@@ -4048,7 +4048,7 @@
   с блоком или хешем параметров.
   <sup>[[ссылка](#gsub-blocks)]</sup>
 
-  ```Ruby
+  ```ruby
   words = 'foo bar'
   words.sub(/f/, 'f' => 'F') # => 'Foo bar'
   words.gsub(/\w+/) { |word| word.capitalize } # => 'Foo Bar'
@@ -4062,7 +4062,7 @@
   с переносами лучше используйте формат HERE Doc.
   <sup>[[ссылка](#percent-q-shorthand)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо (интерполяция не нужна)
   %(<div class="text">Some text</div>)
   # должно быть '<div class="text">Some text</div>'
@@ -4086,7 +4086,7 @@
   символов, которые нужно будет экранировать.
   <sup>[[ссылка](#percent-q)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   name = %q(Bruce Wayne)
   time = %q(8 o'clock)
@@ -4104,7 +4104,7 @@
   символ `/`, в остальных случаях используйте стандартный синтаксис.
   <sup>[[ссылка](#percent-r)]</sup>
 
- ```Ruby
+ ```ruby
   # плохо
   %r{\s+}
 
@@ -4118,7 +4118,7 @@
   внешнюю команду с обратными кавычками в теле (что само по себе маловероятно).
   <sup>[[ссылка](#percent-x)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   date = %x(date)
 
@@ -4145,7 +4145,7 @@
   с учетом смысла регулярного выражения).
   - `()` для записи оставшихся литералов, например, `%s`, `%x`.
 
-  ```Ruby
+  ```ruby
   # плохо
   %q{"Test's king!", John said.}
 
@@ -4186,7 +4186,7 @@
   - eсли вы используете интерполяцию, то всегда указывайте дополнительно
   `__FILE__` и `__LINE__`, чтобы информация о стеке вызова была осмысленной:
 
-  ```Ruby
+  ```ruby
   class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
   ```
 
@@ -4199,7 +4199,7 @@
   в исходном коде Rails).
   <sup>[[ссылка](#eval-comment-docs)]</sup>
 
-  ```Ruby
+  ```ruby
   # из activesupport/lib/active_support/core_ext/string/output_safety.rb
   UNSAFE_STRING_METHODS.each do |unsafe_method|
     if 'String'.respond_to?(unsafe_method)
@@ -4231,7 +4231,7 @@
   - вызывайте `#super` в конце ваших выражений;
   - делегируйте вызовы понятным, "немагическим" методам:
 
-    ```Ruby
+    ```ruby
     # плохо
     def method_missing(meth, *params, &block)
       if /^find_by_(?<prop>.*)/ =~ meth
@@ -4338,7 +4338,7 @@
 * <a name="instance-vars"></a> Используйте переменные модулей вместо глобальных
   переменных.<sup>[[ссылка](#instance-vars)]</sup>
 
-  ```Ruby
+  ```ruby
   # плохо
   $foo_bar = 1
 

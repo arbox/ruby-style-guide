@@ -68,6 +68,7 @@
 Переводы данного руководства доступны на следующих языках:
 
 * [английский (исходная версия)](https://github.com/bbatsov/ruby-style-guide/blob/master/README.md)
+* [арабский (египетский)](https://github.com/HassanTC/ruby-style-guide/blob/master/README-EgAr.md)
 * [вьетнамский](https://github.com/CQBinh/ruby-style-guide/blob/master/README-viVN.md)
 * [испанский](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [китайский традиционный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
@@ -172,11 +173,12 @@
   FooError = Class.new(StandardError)
   ```
 
-* <a name="no-single-line-methods"></a> Избегайте однострочных методов. И хотя
-  они достаточно популярны в среде программистов, существует множество
-  неприятных мелочей, связанных с синтаксисом их определения, которые делают
-  применение таких методов нежелательным. В любом случае однострочные методы не
-  должны содержать больше одного выражения.
+* <a name="no-single-line-methods"></a>
+  Избегайте однострочных методов. И хотя они достаточно популярны в среде
+  программистов, существует множество неприятных мелочей, связанных
+  с синтаксисом их определения, которые делают применение таких методов
+  нежелательным. В любом случае однострочные методы не должны содержать больше
+  одного выражения.
   <sup>[[ссылка](#no-single-line-methods)]</sup>
 
 
@@ -237,6 +239,19 @@
 
   # хорошо
   o_scale = 1/48r
+  ```
+
+  <!--- @FIXME: look for a better translation --->
+  Еще одним исключением является "safe navigation operator":
+
+  ```ruby
+  # плохо
+  foo &. bar
+  foo &.bar
+  foo&. bar
+
+  # хорошо
+  foo&.bar
   ```
 
 * <a name="spaces-braces"></a>
@@ -631,24 +646,25 @@
   end
   ```
 
-* <a name="align-multiline-arrays"></a> Выравнивайте элементы литералов массива,
-  если они занимают несколько строк.<sup>[[ссылка](#align-multiline-arrays)]</sup>
+* <a name="align-multiline-arrays"></a>
+  Выравнивайте элементы литералов массива, если они занимают несколько строк.
+  <sup>[[ссылка](#align-multiline-arrays)]</sup>
 
   ```Ruby
   # плохо
-  menu_item = ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-    'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
+  menu_item = %w[Spam Spam Spam Spam Spam Spam Spam Spam
+    Baked beans Spam Spam Spam Spam Spam]
 
   # хорошо
-  menu_item = [
-    'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-    'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam'
+  menu_item = %w[
+    Spam Spam Spam Spam Spam Spam Spam Spam
+    Baked beans Spam Spam Spam Spam Spam
   ]
 
   # хорошо
   menu_item =
-    ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-     'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
+    %w[Spam Spam Spam Spam Spam Spam Spam Spam
+       Baked beans Spam Spam Spam Spam Spam]
   ```
 
 * <a name="underscores-in-numerics"></a> Добавляйте символ подчеркивания
@@ -718,9 +734,9 @@
 ## Синтаксис
 
 * <a name="double-colons"></a>
-  Используйте `::` только для обращения к константам (в том числе к классам и
-  модулям)  и конструкторам класса (например, `Array()` или `Nokogiri::HTML()`).
-  Никогда не используйте `::` для обычного вызова методов.
+  Используйте `::` только для обращения к константам &mdash; в том числе к именам
+  классов и модулей &mdash; и конструкторам класса (например, `Array()` или
+  `Nokogiri::HTML()`). Никогда не используйте `::` для обычного вызова методов.
   <sup>[[ссылка](#double-colons)]</sup>
 
   ```Ruby
@@ -734,6 +750,25 @@
   SomeModule::SomeClass::SOME_CONST
   SomeModule::SomeClass()
   ```
+
+* <a name="colon-method-definition"></a>
+  Не используйте `::` при определении методов класса.
+  <sup>[[link](#colon-method-definition)]</sup>
+
+  ```ruby
+  # плохо
+  class Foo
+    def self::some_method
+    end
+  end
+
+  # хорошо
+  class Foo
+    def self.some_method
+    end
+  end
+  ```
+
 
 * <a name="method-parens"></a>
   Используйте `def` со скобками, когда у метода есть параметры. Опускайте
@@ -1128,18 +1163,18 @@
   ok = got_needed_arguments and arguments_are_valid
 
   # управление ветвлением
-  document.save or fail(RuntimeError, "Failed to save document!")
+  document.save or raise("Failed to save document!")
 
   # хорошо
   # булево выражение
   ok = got_needed_arguments && arguments_are_valid
 
   # управление ветвлением
-  fail(RuntimeError, 'Failed to save document!') unless document.save
+  raise("Failed to save document!") unless document.save
 
   # сойдет
   # управление ветвлением
-  document.save || fail(RuntimeError, 'Failed to save document!')
+  document.save || raise("Failed to save document!")
   ```
 
 * <a name="no-multiline-ternary"></a>
@@ -2139,9 +2174,10 @@
   например, `lib/hello_world/hello_world.rb`.
   <sup>[[ссылка](#snake-case-dirs)]</sup>
 
-* <a name="one-class-per-file"></a> Старайтесь создавать только один класс или
-  модуль в каждом файле исходного кода. Называйте эти файлы по имени класса или
-  модуля, изменив запись в форме `CamelCase` на `snake_case`.
+* <a name="one-class-per-file"></a>
+  Старайтесь сохранять только один класс или модуль в каждом файле исходного кода.
+  Называйте эти файлы по имени класса или модуля, изменив запись в форме
+  `CamelCase` на `snake_case`.
   <sup>[[ссылка](#one-class-per-file)]</sup>
 
 * <a name="screaming-snake-case"></a> Используйте `SCREAMING_SNAKE_CASE` для
@@ -2439,34 +2475,41 @@
 <!--- @FIXME: look for a better translation --->
 
 * <a name="magic-comments-first"></a>
-  Размещайте магические комментарии над всем кодом и документацией. Магический
-  комментарий может располагаться только под вызовом интерпретатора (Shebang),
-  если он нужен в конкретном файле.
+  Размещайте магические комментарии над всем кодом и документацией. Исключением
+  является только строка вызовом интерпретатора (Shebang), о чем речь пойдет далее.
   <sup>[[ссылка](#magic-comments-first)]</sup>
 
   ```Ruby
-  # хорошо
-  # frozen_string_literal: true
+  # плохо
   # Some documentation about Person
+
+  # frozen_string_literal: true
   class Person
   end
 
-  # плохо
-  # Some documentation about Person
+  # хорошо
   # frozen_string_literal: true
+
+  # Some documentation about Person
   class Person
   end
   ```
+* <a name="below-shebang"></a>
+  Размещайте магические комментарии под строкой вызова интерпретатора (Shebang),
+  если она есть в тексте.
+  <sup>[[ссылка](#below-shebang)]</sup>
 
   ```Ruby
   # хорошо
   #!/usr/bin/env ruby
   # frozen_string_literal: true
+
   App.parse(ARGV)
 
   # плохо
   # frozen_string_literal: true
   #!/usr/bin/env ruby
+
   App.parse(ARGV)
   ```
 
@@ -4014,7 +4057,7 @@
 ## Процентные литералы
 
 * <a name="percent-q-shorthand"></a>
-  Используйте `%()` (это сокращение от `%Q`) для строк без переносов, в которых
+  Используйте `%()` (это сокращение от `%Q()`) для строк без переносов, в которых
   реализуется интерполяция и присутствуют двойные кавычки. Для строк
   с переносами лучше используйте формат HERE Doc.
   <sup>[[ссылка](#percent-q-shorthand)]</sup>
@@ -4037,8 +4080,8 @@
   ```
 
 * <a name="percent-q"></a>
-  Избегайте `%()` или соответствующие формы `%q()` и `%Q(), если это не случай
-  строки с символами кавычек `'` и `"` одновременно  Обычные строки читаются
+  Избегайте `%()` или соответствующие формы `%q()` и `%Q()`, если это не строки
+  с символами кавычек `'` и `"` одновременно. Обычные строки читаются
   проще, и их следует использовать, если нет излишне большого количества
   символов, которые нужно будет экранировать.
   <sup>[[ссылка](#percent-q)]</sup>
@@ -4149,10 +4192,12 @@
 
   - `#define_method` предпочтительнее, чем `#class_eval { def ... }`
 
-* <a name="eval-comment-docs"></a> При использовании `#class_eval` (или других
-  `#eval`) с интерполяцией строк обязательно добавляйте комментарий, который
-  будет наглядно показывать, как интерполированные значения будут выглядеть
-  (примеры, используемые в исходном коде Rails):<sup>[[ссылка](#eval-comment-docs)]</sup>
+* <a name="eval-comment-docs"></a>
+  При использовании `#class_eval` (или других `#eval`) с интерполяцией строк
+  обязательно добавляйте комментарий, который будет наглядно показывать,
+  как интерполированные значения будут выглядеть (примеры, используемые
+  в исходном коде Rails).
+  <sup>[[ссылка](#eval-comment-docs)]</sup>
 
   ```Ruby
   # из activesupport/lib/active_support/core_ext/string/output_safety.rb

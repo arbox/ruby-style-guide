@@ -19,10 +19,11 @@
 ][bbatsov]. Переводы данного руководства доступны на следующих языках:
 
 * [английский (исходная версия)][english]
+* [арабский (египетский)](https://github.com/HassanTC/ruby-style-guide/blob/master/README-EgAr.md)
 * [вьетнамский](https://github.com/CQBinh/ruby-style-guide/blob/master/README-viVN.md)
 * [испанский](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
-* [китайский традиционный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
-* [китайский упрощенный](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
+* [китайский (традиционный)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
+* [китайский (упрощенный)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [корейский](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [французский](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
 * [португальский](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)

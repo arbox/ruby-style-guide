@@ -67,6 +67,7 @@ Translations of the guide are available in the following languages:
 
 * [Chinese Simplified](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [Chinese Traditional](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
+* [Egyptian Arabic](https://github.com/HassanTC/ruby-style-guide/blob/master/README-EgAr.md)
 * [French](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
 * [Japanese](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 * [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
@@ -234,6 +235,17 @@ Translations of the guide are available in the following languages:
 
   # good
   o_scale = 1/48r
+  ```
+
+  Another exception is the safe navigation operator:
+  ```ruby
+  # bad
+  foo &. bar
+  foo &.bar
+  foo&. bar
+
+  # good
+  foo&.bar
   ```
 
 * <a name="spaces-braces"></a>
@@ -634,19 +646,19 @@ Translations of the guide are available in the following languages:
 
   ```ruby
   # bad - single indent
-  menu_item = ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-    'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
+  menu_item = %w[Spam Spam Spam Spam Spam Spam Spam Spam
+    Baked beans Spam Spam Spam Spam Spam]
 
   # good
-  menu_item = [
-    'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-    'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam'
+  menu_item = %w[
+    Spam Spam Spam Spam Spam Spam Spam Spam
+    Baked beans Spam Spam Spam Spam Spam
   ]
 
   # good
   menu_item =
-    ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-     'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
+    %w[Spam Spam Spam Spam Spam Spam Spam Spam
+     Baked beans Spam Spam Spam Spam Spam]
   ```
 
 * <a name="underscores-in-numerics"></a>
@@ -720,9 +732,9 @@ Translations of the guide are available in the following languages:
 ## Syntax
 
 * <a name="double-colons"></a>
-    Use `::` only to reference constants(this includes classes and
+    Use `::` only to reference constants (this includes classes and
     modules) and constructors (like `Array()` or `Nokogiri::HTML()`).
-    Do not use `::` for regular method invocation.
+     * Do not use `::` for regular method invocation.
 <sup>[[link](#double-colons)]</sup>
 
   ```ruby
@@ -735,6 +747,24 @@ Translations of the guide are available in the following languages:
   some_object.some_method
   SomeModule::SomeClass::SOME_CONST
   SomeModule::SomeClass()
+  ```
+
+* <a name="colon-method-definition"></a>
+    Do not use `::` to define class methods.
+<sup>[[link](#colon-method-definition)]</sup>
+
+  ```ruby
+  # bad
+  class Foo
+    def self::some_method
+    end
+  end
+
+  # good
+  class Foo
+    def self.some_method
+    end
+  end
   ```
 
 * <a name="method-parens"></a>
@@ -839,6 +869,7 @@ Translations of the guide are available in the following languages:
     puts temperance.age
     system 'ls'
     ```
+
 * <a name="optional-arguments"></a>
     Define optional arguments at the end of the list of arguments.
     Ruby has some unexpected results when calling methods that have
@@ -1127,18 +1158,18 @@ Translations of the guide are available in the following languages:
   ok = got_needed_arguments and arguments_are_valid
 
   # control flow
-  document.save or fail(RuntimeError, "Failed to save document!")
+  document.save or raise("Failed to save document!")
 
   # good
   # boolean expression
   ok = got_needed_arguments && arguments_are_valid
 
   # control flow
-  fail(RuntimeError, "Failed to save document!") unless document.save
+  raise("Failed to save document!") unless document.save
 
   # ok
   # control flow
-  document.save || fail(RuntimeError, "Failed to save document!")
+  document.save || raise("Failed to save document!")
   ```
 
 * <a name="no-multiline-ternary"></a>
@@ -2227,7 +2258,7 @@ no parameters.
 
 * <a name="one-class-per-file"></a>
   Aim to have just a single class/module per source file. Name the file name
-  as the class/module, but replacing CamelCase with snake_case.
+  as the class/module, but replacing `CamelCase` with `snake_case`.
 <sup>[[link](#one-class-per-file)]</sup>
 
 * <a name="screaming-snake-case"></a>
@@ -2469,32 +2500,39 @@ no parameters.
 ### Magic Comments
 
 * <a name="magic-comments-first"></a>
-  Place magic comments above all code and documentation. Magic comments should only go below shebangs if they are needed in your source file.
-<sup>[[link](#magic-comments-first)]</sup>
+  Place magic comments above all code and documentation in a file (except shebangs, which are discussed next).
 
   ```ruby
   # good
   # frozen_string_literal: true
+
   # Some documentation about Person
   class Person
   end
 
   # bad
   # Some documentation about Person
+
   # frozen_string_literal: true
   class Person
   end
   ```
 
+* <a name="below-shebang"></a>
+  Place magic comments below shebangs when they are present in a file.
+<sup>[[link](#below-shebang)]</sup>
+
   ```ruby
   # good
   #!/usr/bin/env ruby
   # frozen_string_literal: true
+
   App.parse(ARGV)
 
   # bad
   # frozen_string_literal: true
   #!/usr/bin/env ruby
+
   App.parse(ARGV)
   ```
 
@@ -4072,7 +4110,7 @@ resource cleanup when possible.
   ```
 
 * <a name="percent-q"></a>
-  Avoid %() or the equivalent %q() unless you have a string with both `'` and
+  Avoid `%()` or the equivalent `%q()` unless you have a string with both `'` and
   `"` in it. Regular string literals are more readable and should be preferred
   unless a lot of characters would have to be escaped in them.
 <sup>[[link](#percent-q)]</sup>
@@ -4091,7 +4129,7 @@ resource cleanup when possible.
   ```
 
 * <a name="percent-r"></a>
-  Use `%r` only for regular expressions matching *at least* one '/'
+  Use `%r` only for regular expressions matching *at least* one `'/'`
   character.
 <sup>[[link](#percent-r)]</sup>
 
@@ -4197,12 +4235,12 @@ resource cleanup when possible.
       class_eval <<-EOT, __FILE__, __LINE__ + 1
         def #{unsafe_method}(*params, &block)       # def capitalize(*params, &block)
           to_str.#{unsafe_method}(*params, &block)  #   to_str.capitalize(*params, &block)
-        end                                       # end
+        end                                         # end
 
         def #{unsafe_method}!(*params)              # def capitalize!(*params)
-          @dirty = true                           #   @dirty = true
-          super                                   #   super
-        end                                       # end
+          @dirty = true                             #   @dirty = true
+          super                                     #   super
+        end                                         # end
       EOT
     end
   end

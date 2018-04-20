@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'awesome_bot', '~> 1.13', '>= 1.13.9'
+gem 'awesome_bot'
+gem 'rake'

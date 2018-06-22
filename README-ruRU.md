@@ -67,7 +67,7 @@
 
 Переводы данного руководства доступны на следующих языках:
 
-* [английский (исходная версия)](https://github.com/bbatsov/ruby-style-guide/blob/master/README.md)
+* [английский (исходная версия)](https://github.com/rubocop-hq/ruby-style-guide/blob/master/README.md)
 * [арабский (египетский)](https://github.com/HassanTC/ruby-style-guide/blob/master/README-EgAr.md)
 * [вьетнамский](https://github.com/CQBinh/ruby-style-guide/blob/master/README-viVN.md)
 * [испанский](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
@@ -612,7 +612,7 @@
     ```
 
   C аргументами за и против обоих стилей можно ознакомиться в дискуссии
-  [здесь](https://github.com/bbatsov/ruby-style-guide/pull/176).
+  [здесь](https://github.com/rubocop-hq/ruby-style-guide/pull/176).
 
 * <a name="no-double-indent"></a>
   Выравнивайте параметры вызова метода, если вызов занимает более одной строки.
@@ -4427,7 +4427,7 @@
 ### RubyMine
 
 Модуль проверки кода [RubyMine](http://www.jetbrains.com/ruby/)
-[частично основывается](http://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections)
+[частично основывается](https://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections)
 на этом руководстве.
 
 # Сотрудничество
@@ -4468,7 +4468,7 @@
 [trpl]: https://www.ozon.ru/context/detail/id/5704300/
 [entrpl]: https://www.amazon.com/Ruby-Programming-Language-Everything-Need/dp/0596516177
 [Pandoc]: http://pandoc.org
-[RuboCop]: https://github.com/bbatsov/rubocop
+[RuboCop]: https://github.com/rubocop-hq/rubocop
 [rdoc]: http://docs.seattlerb.org/rdoc/
 [Liskov]: https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8_%D0%91%D0%B0%D1%80%D0%B1%D0%B0%D1%80%D1%8B_%D0%9B%D0%B8%D1%81%D0%BA%D0%BE%D0%B2
 [duck-typing]: https://ru.wikipedia.org/wiki/%D0%A3%D1%82%D0%B8%D0%BD%D0%B0%D1%8F_%D1%82%D0%B8%D0%BF%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F

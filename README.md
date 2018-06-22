@@ -13,7 +13,7 @@
 Хотите писать _качественный_ код на Руби? Читайте [руководство][russian]
 на _русском_ языке!
 
-От монотонной проверки в ручном режиме вас спасет [RuboCop](https://github.com/bbatsov/rubocop)!
+От монотонной проверки в ручном режиме вас спасет [RuboCop](https://github.com/rubocop-hq/rubocop)!
 
 [Оригинал][english] этого руководства был составлен [Божидаром Бацовым
 ][bbatsov]. Переводы данного руководства доступны на следующих языках:
@@ -51,7 +51,7 @@
 * https://github.com/thoughtbot/guides/tree/master/style/ruby
 
 [russian]: https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md
-[english]: https://github.com/bbatsov/ruby-style-guide/blob/master/README.md
+[english]: https://github.com/rubocop-hq/ruby-style-guide/blob/master/README.md
 [bbatsov]: https://github.com/bbatsov
 [off-page-ru]: https://www.ruby-lang.org/ru/
 [nlp]: https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D0%B5%D1%81%D1%82%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%8F%D0%B7%D1%8B%D0%BA%D0%B0

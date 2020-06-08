@@ -1,13 +1,10 @@
-= :blue_book: Руби: руководство по стилю оформления
+= :blue_book: Руководство по стилю оформления кода на Руби
 
-> Коллективно создаваемое руководство по стилю оформления кода на [Руби][off-page-ru]
+> Коллективно создаваемое руководство по стилю оформления кода на https://www.ruby-lang.org/ru/[Руби]
 
-Это руководство по оформлению кода на [Руби][off-page-ru] дает передовые рекомендации.
+Это руководство по оформлению кода на https://www.ruby-lang.org/ru/[Руби] дает передовые рекомендации.
 С его помощью обычный программист на Руби будет создавать код, который
 с легкостью смогут поддерживать и развивать другие обычные разработчики.
-
-Хотите писать _качественный_ код на Руби? Читайте [руководство][russian]
-на _русском_ языке!
 
 От монотонной проверки в ручном режиме вас спасет [RuboCop](https://github.com/rubocop-hq/rubocop)!
 
@@ -27,7 +24,7 @@
 * [японский](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 
 В дополнение к настоящему сборнику вас может заинтересовать
-:green_book: [Rails: руководство по стилю оформления](https://github.com/arbox/rails-style-guide/blob/master/README-ruRU.md).
+:green_book: https://github.com/arbox/rails-style-guide/blob/master/README-ruRU.md[Rails: руководство по стилю оформления].
 
 Есть желание помочь в развитии проекта? [Здесь](CONTRIBUTING-ruRU.md) написано,
 как это сделать!
@@ -45,7 +42,7 @@
 [russian]: https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md
 [english]: https://github.com/rubocop-hq/ruby-style-guide/blob/master/README.md
 [bbatsov]: https://github.com/bbatsov
-[off-page-ru]: https://www.ruby-lang.org/ru/
+[off-page-ru]:
 
 = The Ruby Style Guide
 :idprefix:

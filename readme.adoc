@@ -1,4 +1,4 @@
-= The Ruby Style Guide
+= Руководство по стилю оформления кода на Руби
 :idprefix:
 :idseparator: -
 :sectanchors:
@@ -10,7 +10,7 @@ ifndef::backend-pdf[]
 endif::[]
 :source-highlighter: rouge
 
-== Introduction
+== Вступление
 
 [quote, Officer Alex J. Murphy / RoboCop]
 ____
@@ -108,26 +108,27 @@ Some other good reasons to ignore a particular guideline:
 * Because the code in question predates the introduction of the guideline and there is no other reason to be modifying that code.
 * When the code needs to remain compatible with older versions of Ruby that don't support the feature recommended by the style guide.
 
-=== Translations
+=== Переводы
 
-Translations of the guide are available in the following languages:
+Переводы данного руководства доступны на следующих языках:
 
-* https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md[Chinese Simplified]
-* https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md[Chinese Traditional]
-* https://github.com/HassanTC/ruby-style-guide/blob/master/README-EgAr.md[Egyptian Arabic]
-* https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md[French]
-* https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md[Japanese]
-* https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md[Korean]
-* https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md[Portuguese (pt-BR)]
-* https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md[Russian]
-* https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md[Spanish]
-* https://github.com/CQBinh/ruby-style-guide/blob/master/README-viVN.md[Vietnamese]
+* https://github.com/rubocop/ruby-style-guide/blob/master/README.adoc[английский (исходная версия)]
+* https://github.com/HassanTC/ruby-style-guide/blob/master/README-EgAr.md[арабский (египетский)]
+* https://github.com/CQBinh/ruby-style-guide/blob/master/README-viVN.md[вьетнамский]
+* https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md[испанский]
+* https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md[китайский традиционный]
+* https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md[китайский упрощенный]
+* https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md[корейский]
+* https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md[французкский]
+* https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md[португальский (бразильский)]
+* https://github.com/arbox/ruby-style-guide/blob/master/readme.adoc[русский (данный документ)]
+* https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md[японский]
 
 NOTE: These translations are not maintained by our editor team, so their quality
 and level of completeness may vary. The translated versions of the guide often
 lag behind the upstream English version.
 
-== Source Code Layout
+== Организация исходного кода
 
 [quote, Jerry Coffin (on indentation)]
 ____

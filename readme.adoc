@@ -1,4 +1,4 @@
-= Руководство по стилю оформления кода на Руби
+ = Руководство по стилю оформления кода на Руби
 :idprefix:
 :idseparator: -
 :sectanchors:
@@ -12,9 +12,9 @@ endif::[]
 
 == Вступление
 
-[quote, Officer Alex J. Murphy / RoboCop]
+[quote, Офицер Алекс Мёрфи / Робот-полицейский]
 ____
-Role models are important.
+Ролевые модели важны.
 ____
 
 ifdef::env-github[]
@@ -137,28 +137,28 @@ ugly and unreadable. Leave out the "but their own" and they're
 probably right...
 ____
 
-=== Source Encoding [[utf-8]]
+=== Кодировка [[utf-8]]
 
-Use `UTF-8` as the source file encoding.
+Используйте `UTF-8` в качестве кодировки для исходного кода.
 
-TIP: UTF-8 has been the default source file encoding since Ruby 2.0.
+TIP: UTF-8 стала стандартной кодировка для исходного кода с версии Руби 2.0.
 
-=== Tabs or Spaces? [[tabs-or-spaces]]
+=== Табуляция или пробелы? [[tabs-or-spaces]]
 
-Use only spaces for indentation. No hard tabs.
+Используйте пробелы для задания отступов. Никаких знаком табуляции!
 
-=== Indentation [[spaces-indentation]]
+=== Отступы [[spaces-indentation]]
 
-Use two *spaces* per indentation level (aka soft tabs).
+Используйте два *пробела* на  уроверь отступа (т.е. мягкую табуляцию).
 
 [source,ruby]
 ----
-# bad - four spaces
+# плохо (четыре пробела)
 def some_method
     do_something
 end
 
-# good
+# хорошо
 def some_method
   do_something
 end
@@ -5522,11 +5522,11 @@ config
 
 This is simpler and more efficient.
 
-== Tools
+== Инструментарий
 
 Here are some tools to help you automatically check Ruby code against this guide.
 
-=== RuboCop
+=== РубоКоп
 
 https://github.com/rubocop-hq/rubocop[RuboCop] is a Ruby static code analyzer and formatter, based on this style guide.
 RuboCop already covers a significant portion of the guide and has https://docs.rubocop.org/rubocop/integration_with_other_tools.html[plugins] for most popular Ruby editors and IDEs.
@@ -5535,7 +5535,7 @@ TIP: RuboCop's cops (code checks) have links to the guidelines that they are bas
 
 === RubyMine
 
-https://www.jetbrains.com/ruby/[RubyMine]'s code inspections are https://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections[partially based] on this guide.
+Модуль проверки кода https://www.jetbrains.com/ruby/[RubyMine] https://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections[частично основывается] на этом руководстве.
 
 == History
 
@@ -5602,11 +5602,14 @@ Originally the guide was written in Markdown, but was converted to AsciiDoc in 2
 
 == License
 
-image:https://i.creativecommons.org/l/by/3.0/88x31.png[Creative Commons License] This work is licensed under a https://creativecommons.org/licenses/by/3.0/deed.en_US[Creative Commons Attribution 3.0 Unported License]
+image:https://i.creativecommons.org/l/by/3.0/88x31.png[Creative Commons License]
+Данная работа опубликована на условиях лицензии
+https://creativecommons.org/licenses/by/3.0/deed.en_US[Creative Commons Attribution 3.0 Unported License]
 
-== Spread the Word
+== Расскажи другому
 
-A community-driven style guide is of little use to a community that doesn't know about its existence.
-Tweet about the guide, share it with your friends and colleagues.
-Every comment, suggestion or opinion we get makes the guide just a little bit better.
-And we want to have the best possible guide, don't we?
+Создаваемое сообществом руководство по стилю оформления будет малопригодным для
+сообщества, которое об этом руководстве ничего не знает. Делитесь ссылками на
+это руководство с вашими друзьями и коллегами доступными вам средствами. Каждый
+получаемый нами комментарий, предложение или мнение сделает это руководство еще
+чуточку лучше. А ведь мы хотим самое лучшее руководство из возможных, не так ли?

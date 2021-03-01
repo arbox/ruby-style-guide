@@ -1,4 +1,4 @@
- = Руководство по стилю оформления кода на Руби
+= Руководство по стилю оформления кода на Руби
 :idprefix:
 :idseparator: -
 :sectanchors:
@@ -130,11 +130,10 @@ lag behind the upstream English version.
 
 == Организация исходного кода
 
-[quote, Jerry Coffin (on indentation)]
+[quote, Jerry Coffin (on indentation]
 ____
-Nearly everybody is convinced that every style but their own is
-ugly and unreadable. Leave out the "but their own" and they're
-probably right...
+Почти все убеждены, что любой стиль кроме их собственного ужасен и нечитаем.
+Уберите отсюда "кроме их собственного" &mdash; и они будут, наверное, правы...
 ____
 
 === Кодировка [[utf-8]]

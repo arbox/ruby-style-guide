@@ -56,7 +56,7 @@ endif::[]
 
 [TIP]
 ====
-If you're into Rails or RSpec you might want to check out the complementary https://github.com/rubocop-hq/rails-style-guide[Ruby on Rails Style Guide] and https://github.com/rubocop-hq/rspec-style-guide[RSpec Style Guide].
+If you're into Rails or RSpec you might want to check out the complementary https://github.com/arbox/rails-style-guide[Ruby on Rails Style Guide] and https://github.com/rubocop-hq/rspec-style-guide[RSpec Style Guide].
 ====
 
 TIP: https://github.com/rubocop-hq/rubocop[RuboCop] is a static code analyzer (linter) and formatter, based on this style guide.
@@ -130,7 +130,7 @@ lag behind the upstream English version.
 
 == Организация исходного кода
 
-[quote, Jerry Coffin (on indentation]
+[quote, Джерри Коффин (Jerry Coffin) об отступах]
 ____
 Почти все убеждены, что любой стиль кроме их собственного ужасен и нечитаем.
 Уберите отсюда "кроме их собственного" &mdash; и они будут, наверное, правы...
@@ -201,7 +201,7 @@ to 120 characters. Please, restrain the urge to go beyond 120 characters.
 
 === No Trailing Whitespace [[no-trailing-whitespace]]
 
-Avoid trailing whitespace.
+Не оставляйте пробелы в конце строки.
 
 TIP: Most editors and IDEs have configuration options to visualize trailing whitespace and
 to remove it automatically on save.

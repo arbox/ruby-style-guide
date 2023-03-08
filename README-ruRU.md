@@ -2636,14 +2636,14 @@
   <sup>[[ссылка](#mixin-grouping)]</sup>
 
   ```ruby
-  # bad
+  # плохо
   class Person
     include Foo, Bar
   end
 
-  # good
+  # хорошо
   class Person
-    # multiple mixins go in separate statements
+    # каждый миксин включается отдельным выражением
     include Foo
     include Bar
   end
